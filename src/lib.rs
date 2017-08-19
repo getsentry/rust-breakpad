@@ -1,6 +1,8 @@
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn it_works() {
-    }
-}
+#[macro_use]
+extern crate error_chain;
+
+mod errors;
+mod minidump;
+
+pub use errors::*;
+pub use minidump::Minidump;

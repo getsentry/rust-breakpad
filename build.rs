@@ -68,4 +68,12 @@ fn main() {
         .file("breakpad/processor/minidump_processor.cc")
         .file("breakpad/processor/symbolic_constants_win.cc")
         .compile("libminidump.a");
+
+    // Our own library
+    gcc::Build::new()
+        .cpp(true)
+        .flag("-std=c++14")
+        .include("breakpad")
+        .file("cpp/bindings.cpp")
+        .compile("libbreakpad.a");
 }
