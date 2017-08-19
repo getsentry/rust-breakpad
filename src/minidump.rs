@@ -2,6 +2,7 @@ use std::ffi;
 use std::os::raw::{c_char, c_void};
 
 use errors::*;
+use process_state::ProcessState;
 
 type Internal = c_void;
 
@@ -9,6 +10,7 @@ extern "C" {
     fn minidump_read(file_path: *const c_char) -> *mut Internal;
     fn minidump_delete(dump: *mut Internal);
     fn minidump_print(dump: *mut Internal);
+    fn minidump_process(dump: *mut Internal) -> *mut Internal;
 }
 
 pub struct Minidump {
@@ -30,6 +32,17 @@ impl Minidump {
 
     pub fn print(&self) {
         unsafe { minidump_print(self.internal) }
+    }
+
+    pub fn process(&self) -> Result<ProcessState> {
+        let ptr = unsafe { minidump_process(self.internal) };
+
+        if ptr.is_null() {
+            let err = ErrorKind::MinidumpError("Could not process minidump".into());
+            Err(err.into())
+        } else {
+            Ok(ProcessState::new(ptr))
+        }
     }
 }
 

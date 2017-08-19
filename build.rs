@@ -74,6 +74,7 @@ fn main() {
         .cpp(true)
         .flag("-std=c++14")
         .include("breakpad")
+        .file("cpp/c_string.cpp")
         .file("cpp/bindings.cpp")
         .compile("libbreakpad.a");
 }
