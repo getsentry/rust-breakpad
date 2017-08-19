@@ -4,5 +4,10 @@ error_chain! {
             description("Minidump Error")
             display("Minidump Error: {}", &desc)
         }
+
+        ResolverError(desc: String) {
+            description("Resolver Error")
+            display("Resolver Error: {}", &desc)
+        }
     }
 }

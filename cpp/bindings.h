@@ -12,6 +12,7 @@ struct call_stack_t;
 struct code_module_t;
 struct minidump_t;
 struct process_state_t;
+struct resolver_t;
 struct stack_frame_t;
 
 minidump_t *minidump_read(const char *file_path);
@@ -36,6 +37,13 @@ int stack_frame_trust(const stack_frame_t *frame);
 
 char *code_module_debug_file(const code_module_t *module);
 char *code_module_debug_identifier(const code_module_t *module);
+
+resolver_t *resolver_new();
+void resolver_delete(resolver_t *resolver);
+bool resolver_load_symbols(resolver_t *resolver,
+                           const code_module_t *module,
+                           const char *symbol_file);
+void resolver_fill_frame(resolver_t *resolver, stack_frame_t *frame);
 
 #ifdef __cplusplus
 }

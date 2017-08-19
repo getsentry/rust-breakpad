@@ -1,3 +1,4 @@
+#include "google_breakpad/processor/fast_source_line_resolver.h"
 #include "google_breakpad/processor/call_stack.h"
 #include "google_breakpad/processor/minidump.h"
 #include "google_breakpad/processor/minidump_processor.h"
@@ -10,15 +11,23 @@
 
 using google_breakpad::CallStack;
 using google_breakpad::CodeModule;
+using google_breakpad::FastSourceLineResolver;
 using google_breakpad::Minidump;
 using google_breakpad::MinidumpProcessor;
 using google_breakpad::ProcessState;
 using google_breakpad::StackFrame;
 
+class Resolver : FastSourceLineResolver {
+public:
+    virtual bool LoadModule(const CodeModule *module, const string &map_file);
+    virtual void FillSourceLineInfo(StackFrame *frame);
+};
+
 typedef_extern_c(call_stack_t, CallStack);
 typedef_extern_c(code_module_t, CodeModule);
 typedef_extern_c(minidump_t, Minidump);
 typedef_extern_c(process_state_t, ProcessState);
+typedef_extern_c(resolver_t, Resolver);
 typedef_extern_c(stack_frame_t, StackFrame);
 
 minidump_t *minidump_read(const char *file_path) {
@@ -102,4 +111,20 @@ char *code_module_debug_file(const code_module_t *module) {
 
 char *code_module_debug_identifier(const code_module_t *module) {
     return string_from(code_module_t::cast(module)->debug_identifier());
+}
+
+resolver_t *resolver_new() {
+    return resolver_t::cast(new Resolver());
+}
+
+void resolver_delete(resolver_t *resolver) {
+    delete resolver_t::cast(resolver);
+}
+
+bool resolver_load_symbols(resolver_t *resolver, const code_module_t *module, const char *symbol_file) {
+    return resolver_t::cast(resolver)->LoadModule(code_module_t::cast(module), symbol_file);
+}
+
+void resolver_fill_frame(resolver_t *resolver, stack_frame_t *frame) {
+    resolver_t::cast(resolver)->FillSourceLineInfo(stack_frame_t::cast(frame));
 }
