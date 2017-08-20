@@ -44,7 +44,7 @@ fn assert_snapshot<S: AsRef<str>, T: std::fmt::Debug>(snapshot_name: S, val: &T)
 
 /// Creates a minidump object.
 fn load_minidump<S: AsRef<str>>(file_name: S) -> Minidump {
-    Minidump::new(fixture_path(file_name).to_string_lossy()).unwrap()
+    Minidump::new(fixture_path(file_name)).unwrap()
 }
 
 #[test]
@@ -76,7 +76,7 @@ fn resolve_electron_stack_frame() {
     let resolver = Resolver::new()
         .expect("Could not allocate the resolver.");
 
-    resolver.load_symbols(&module, fixture_path("Electron Framework.sym").to_string_lossy())
+    resolver.load_symbols(&module, fixture_path("Electron Framework.sym"))
         .expect("Could not load symbols for Electron Framework");
 
     let resolved_frame = resolver.resolve_frame(&frame);

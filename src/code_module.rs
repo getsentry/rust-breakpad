@@ -1,7 +1,7 @@
 use std::{cmp, fmt, hash};
 use std::os::raw::{c_char, c_void};
 
-use utils::ptr_to_owned_str;
+use utils::ptr_to_string;
 
 /// Carries information about a code module loaded into the process during the
 /// crash. The debug_identifier uniquely identifies this module.
@@ -20,7 +20,7 @@ impl CodeModule {
     pub fn debug_file(&self) -> String {
         unsafe {
             let ptr = code_module_debug_file(self);
-            ptr_to_owned_str(ptr)
+            ptr_to_string(ptr)
         }
     }
 
@@ -28,7 +28,7 @@ impl CodeModule {
     pub fn debug_identifier(&self) -> String {
         unsafe {
             let ptr = code_module_debug_identifier(self);
-            ptr_to_owned_str(ptr)
+            ptr_to_string(ptr)
         }
     }
 }

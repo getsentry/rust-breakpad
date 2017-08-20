@@ -1,8 +1,9 @@
-use std::ffi;
+use std::{ffi, path};
 use std::os::raw::{c_char, c_void};
 
 use errors::*;
 use process_state::ProcessState;
+use utils::path_to_bytes;
 
 type Internal = c_void;
 
@@ -22,8 +23,9 @@ pub struct Minidump {
 
 impl Minidump {
     /// Reads a minidump from the file system into memory.
-    pub fn new<S: AsRef<str>>(file_path: S) -> Result<Minidump> {
-        let cstr = ffi::CString::new(file_path.as_ref()).unwrap();
+    pub fn new<P: AsRef<path::Path>>(file_path: P) -> Result<Minidump> {
+        let bytes = path_to_bytes(file_path.as_ref());
+        let cstr = ffi::CString::new(bytes).unwrap();
         let internal = unsafe { minidump_read(cstr.as_ptr()) };
 
         if internal.is_null() {
