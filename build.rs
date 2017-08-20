@@ -1,7 +1,6 @@
 extern crate gcc;
 
 fn main() {
-    // Breakpad disASM
     gcc::Build::new()
         .warnings(false)
         .file("breakpad/third_party/libdisasm/ia32_implicit.c")
@@ -20,13 +19,14 @@ fn main() {
         .file("breakpad/third_party/libdisasm/x86_operand_list.c")
         .compile("libdisasm.a");
 
-    // Breakpad Processor Base
     gcc::Build::new()
         .cpp(true)
         .warnings(false)
         .flag("-std=c++14")
         .include("breakpad")
         .define("BPLOG_MINIMUM_SEVERITY", Some("SEVERITY_ERROR"))
+
+        // Breakpad Processor
         .file("breakpad/processor/basic_code_modules.cc")
         .file("breakpad/processor/basic_source_line_resolver.cc")
         .file("breakpad/processor/call_stack.cc")
@@ -52,29 +52,18 @@ fn main() {
         .file("breakpad/processor/stackwalker_sparc.cc")
         .file("breakpad/processor/stackwalker_x86.cc")
         .file("breakpad/processor/tokenize.cc")
-        .compile("libprocessor.a");
 
-    // Breakpad Minidump Processor
-    gcc::Build::new()
-        .cpp(true)
-        .warnings(false)
-        .flag("-std=c++14")
-        .include("breakpad")
-        .define("BPLOG_MINIMUM_SEVERITY", Some("SEVERITY_ERROR"))
+        // Minidump modules
         .file("breakpad/processor/exploitability.cc")
         .file("breakpad/processor/exploitability_linux.cc")
         .file("breakpad/processor/exploitability_win.cc")
         .file("breakpad/processor/minidump.cc")
         .file("breakpad/processor/minidump_processor.cc")
         .file("breakpad/processor/symbolic_constants_win.cc")
-        .compile("libminidump.a");
 
-    // Our own library
-    gcc::Build::new()
-        .cpp(true)
-        .flag("-std=c++14")
-        .include("breakpad")
+        // Our own bindings
         .file("cpp/c_string.cpp")
         .file("cpp/bindings.cpp")
-        .compile("libbreakpad.a");
+
+        .compile("libprocessor.a");
 }
