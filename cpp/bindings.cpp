@@ -17,6 +17,15 @@ using google_breakpad::MinidumpProcessor;
 using google_breakpad::ProcessState;
 using google_breakpad::StackFrame;
 
+/**
+ * Source Line Resolver based on Breakpad's FastSourceLineResolver. This class
+ * handles Breakpad symbol files and resolves source code locations for stack
+ * frames.
+ *
+ * This class does not provide any additional functionality, but exports some
+ * internal functions so they can be called directly by the library client.
+ * This allows us to separate minidump processing from symbol resolution.
+ */
 class Resolver : FastSourceLineResolver {
 public:
     virtual bool LoadModule(const CodeModule *module, const string &map_file);

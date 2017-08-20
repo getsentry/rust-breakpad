@@ -23,7 +23,19 @@ struct c_mapping {
     }
 };
 
-#define typedef_extern_c(c_type, cpp_type) \
+/**
+ * Defines type-safe static casts between mapped aliases from C to C++ types.
+ * The C alias is defined as empty struct.
+ *
+ * Example:
+ *
+ *   typedef_extern_c(string_t, std::string);
+ *
+ *   size_t string_length(const string_t *str) {
+ *     return string_t::cast(str)->length();
+ *   }
+ */
+ #define typedef_extern_c(c_type, cpp_type) \
   struct c_type : c_mapping<c_type, cpp_type> {}
 
 #endif
