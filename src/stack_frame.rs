@@ -8,6 +8,7 @@ use code_module::CodeModule;
 /// stack scanning, it can wind up with dubious frames.
 /// In rough order of "trust metric".
 #[repr(C)]
+#[derive(Debug)]
 pub enum FrameTrust {
     /// Unknown trust.
     None,
@@ -121,6 +122,7 @@ impl fmt::Debug for StackFrame {
             .field("function_name", &self.function_name())
             .field("source_file_name", &self.source_file_name())
             .field("source_line", &self.source_line())
+            .field("trust", &self.trust())
             .field("module", &self.module())
             .finish()
     }

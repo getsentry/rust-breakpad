@@ -8,6 +8,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Context,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -20,6 +21,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -32,6 +34,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -44,6 +47,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -56,6 +60,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -68,6 +73,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -80,6 +86,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -92,6 +99,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -104,6 +112,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libnode.dylib",
@@ -116,6 +125,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libnode.dylib",
@@ -128,6 +138,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libnode.dylib",
@@ -140,6 +151,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: None
                 },
                 StackFrame {
@@ -147,6 +159,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: None
                 },
                 StackFrame {
@@ -154,6 +167,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: None
                 },
                 StackFrame {
@@ -161,6 +175,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: None
                 },
                 StackFrame {
@@ -168,6 +183,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: None
                 },
                 StackFrame {
@@ -175,6 +191,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: None
                 },
                 StackFrame {
@@ -182,6 +199,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: None
                 },
                 StackFrame {
@@ -189,6 +207,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: None
                 },
                 StackFrame {
@@ -196,6 +215,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libnode.dylib",
@@ -208,6 +228,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libnode.dylib",
@@ -220,6 +241,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libnode.dylib",
@@ -232,6 +254,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libnode.dylib",
@@ -244,6 +267,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libnode.dylib",
@@ -256,6 +280,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libnode.dylib",
@@ -268,6 +293,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libnode.dylib",
@@ -280,6 +306,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libnode.dylib",
@@ -292,6 +319,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -304,6 +332,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -316,6 +345,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -328,6 +358,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -340,6 +371,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -352,6 +384,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -364,6 +397,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -376,6 +410,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -388,6 +423,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -400,6 +436,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -412,6 +449,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -424,6 +462,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -436,6 +475,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "CoreFoundation",
@@ -448,6 +488,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "CoreFoundation",
@@ -460,6 +501,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "CoreFoundation",
@@ -472,6 +514,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "CoreFoundation",
@@ -484,6 +527,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "HIToolbox",
@@ -496,6 +540,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "HIToolbox",
@@ -508,6 +553,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "HIToolbox",
@@ -520,6 +566,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "AppKit",
@@ -532,6 +579,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "AppKit",
@@ -544,6 +592,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "AppKit",
@@ -556,6 +605,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -568,6 +618,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -580,6 +631,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -592,6 +644,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -604,6 +657,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -616,6 +670,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -628,6 +683,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -640,6 +696,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -652,6 +709,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -664,6 +722,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -676,6 +735,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -688,6 +748,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron",
@@ -700,6 +761,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libdyld.dylib",
@@ -717,6 +779,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Context,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_kernel.dylib",
@@ -729,6 +792,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -741,6 +805,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Scan,
                     module: Some(
                         CodeModule {
                             debug_file: "libdispatch.dylib",
@@ -758,6 +823,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Context,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_kernel.dylib",
@@ -770,6 +836,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -782,6 +849,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Scan,
                     module: Some(
                         CodeModule {
                             debug_file: "libdispatch.dylib",
@@ -799,6 +867,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Context,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_kernel.dylib",
@@ -811,6 +880,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -823,6 +893,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Scan,
                     module: Some(
                         CodeModule {
                             debug_file: "libdispatch.dylib",
@@ -840,6 +911,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Context,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_kernel.dylib",
@@ -852,6 +924,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -864,6 +937,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -876,6 +950,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -888,6 +963,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -900,6 +976,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -912,6 +989,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -924,6 +1002,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -936,6 +1015,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Scan,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -953,6 +1033,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Context,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_kernel.dylib",
@@ -965,6 +1046,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -977,6 +1059,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -989,6 +1072,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -1001,6 +1085,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -1013,6 +1098,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -1025,6 +1111,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -1037,6 +1124,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -1049,6 +1137,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Scan,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -1066,6 +1155,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Context,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_kernel.dylib",
@@ -1078,6 +1168,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -1090,6 +1181,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -1102,6 +1194,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -1114,6 +1207,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -1126,6 +1220,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -1138,6 +1233,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -1150,6 +1246,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -1162,6 +1259,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Scan,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -1179,6 +1277,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Context,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_kernel.dylib",
@@ -1191,6 +1290,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -1203,6 +1303,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -1215,6 +1316,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -1227,6 +1329,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -1239,6 +1342,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -1251,6 +1355,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -1263,6 +1368,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -1275,6 +1381,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -1287,6 +1394,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Scan,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -1304,6 +1412,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Context,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_kernel.dylib",
@@ -1316,6 +1425,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "CoreFoundation",
@@ -1328,6 +1438,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "CoreFoundation",
@@ -1340,6 +1451,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "CoreFoundation",
@@ -1352,6 +1464,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Foundation",
@@ -1364,6 +1477,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -1376,6 +1490,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -1388,6 +1503,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -1400,6 +1516,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -1412,6 +1529,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -1424,6 +1542,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -1436,6 +1555,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -1448,6 +1568,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -1460,6 +1581,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -1472,6 +1594,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Scan,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -1489,6 +1612,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Context,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_kernel.dylib",
@@ -1501,6 +1625,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -1513,6 +1638,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -1525,6 +1651,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -1537,6 +1664,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -1549,6 +1677,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -1561,6 +1690,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -1573,6 +1703,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -1585,6 +1716,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -1597,6 +1729,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -1609,6 +1742,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Scan,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -1626,6 +1760,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Context,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_kernel.dylib",
@@ -1638,6 +1773,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -1650,6 +1786,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -1662,6 +1799,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -1674,6 +1812,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -1686,6 +1825,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Scan,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -1703,6 +1843,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Context,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_kernel.dylib",
@@ -1715,6 +1856,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "CoreFoundation",
@@ -1727,6 +1869,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "CoreFoundation",
@@ -1739,6 +1882,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "CoreFoundation",
@@ -1751,6 +1895,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -1763,6 +1908,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -1775,6 +1921,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -1787,6 +1934,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -1799,6 +1947,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -1811,6 +1960,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -1823,6 +1973,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -1835,6 +1986,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -1847,6 +1999,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -1859,6 +2012,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -1871,6 +2025,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -1883,6 +2038,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Scan,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -1900,6 +2056,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Context,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_kernel.dylib",
@@ -1912,6 +2069,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -1924,6 +2082,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -1936,6 +2095,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -1948,6 +2108,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -1960,6 +2121,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -1972,6 +2134,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -1984,6 +2147,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -1996,6 +2160,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -2008,6 +2173,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -2020,6 +2186,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -2032,6 +2199,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -2044,6 +2212,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Scan,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -2061,6 +2230,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Context,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_kernel.dylib",
@@ -2073,6 +2243,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "CoreFoundation",
@@ -2085,6 +2256,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "CoreFoundation",
@@ -2097,6 +2269,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "CoreFoundation",
@@ -2109,6 +2282,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -2121,6 +2295,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -2133,6 +2308,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -2145,6 +2321,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -2157,6 +2334,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -2169,6 +2347,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -2181,6 +2360,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -2193,6 +2373,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -2205,6 +2386,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -2217,6 +2399,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -2229,6 +2412,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -2241,6 +2425,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Scan,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -2258,6 +2443,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Context,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_kernel.dylib",
@@ -2270,6 +2456,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "CoreFoundation",
@@ -2282,6 +2469,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "CoreFoundation",
@@ -2294,6 +2482,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "CoreFoundation",
@@ -2306,6 +2495,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -2318,6 +2508,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -2330,6 +2521,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -2342,6 +2534,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -2354,6 +2547,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -2366,6 +2560,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -2378,6 +2573,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -2390,6 +2586,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -2402,6 +2599,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -2414,6 +2612,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -2426,6 +2625,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -2438,6 +2638,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Scan,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -2455,6 +2656,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Context,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_kernel.dylib",
@@ -2467,6 +2669,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "CoreFoundation",
@@ -2479,6 +2682,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "CoreFoundation",
@@ -2491,6 +2695,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "CoreFoundation",
@@ -2503,6 +2708,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -2515,6 +2721,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -2527,6 +2734,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -2539,6 +2747,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -2551,6 +2760,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -2563,6 +2773,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -2575,6 +2786,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -2587,6 +2799,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -2599,6 +2812,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -2611,6 +2825,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -2623,6 +2838,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -2635,6 +2851,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Scan,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -2652,6 +2869,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Context,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_kernel.dylib",
@@ -2664,6 +2882,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -2676,6 +2895,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -2688,6 +2908,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -2700,6 +2921,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -2712,6 +2934,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -2724,6 +2947,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -2736,6 +2960,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -2748,6 +2973,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -2760,6 +2986,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -2772,6 +2999,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -2784,6 +3012,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -2796,6 +3025,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Scan,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -2813,6 +3043,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Context,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_kernel.dylib",
@@ -2825,6 +3056,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "CoreFoundation",
@@ -2837,6 +3069,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "CoreFoundation",
@@ -2849,6 +3082,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "CoreFoundation",
@@ -2861,6 +3095,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -2873,6 +3108,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -2885,6 +3121,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -2897,6 +3134,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -2909,6 +3147,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -2921,6 +3160,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -2933,6 +3173,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -2945,6 +3186,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -2957,6 +3199,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -2969,6 +3212,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Scan,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -2986,6 +3230,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Context,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_kernel.dylib",
@@ -2998,6 +3243,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -3010,6 +3256,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -3022,6 +3269,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -3034,6 +3282,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -3046,6 +3295,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -3058,6 +3308,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -3070,6 +3321,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -3082,6 +3334,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Scan,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -3099,6 +3352,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Context,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_kernel.dylib",
@@ -3111,6 +3365,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -3123,6 +3378,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -3135,6 +3391,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -3147,6 +3404,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -3159,6 +3417,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -3171,6 +3430,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -3183,6 +3443,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Scan,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -3200,6 +3461,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Context,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_kernel.dylib",
@@ -3212,6 +3474,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "CoreFoundation",
@@ -3224,6 +3487,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "CoreFoundation",
@@ -3236,6 +3500,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "CoreFoundation",
@@ -3248,6 +3513,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -3260,6 +3526,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -3272,6 +3539,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -3284,6 +3552,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -3296,6 +3565,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -3308,6 +3578,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -3320,6 +3591,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -3332,6 +3604,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -3344,6 +3617,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -3356,6 +3630,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Scan,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -3373,6 +3648,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Context,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_kernel.dylib",
@@ -3385,6 +3661,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -3397,6 +3674,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -3409,6 +3687,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -3421,6 +3700,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -3433,6 +3713,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Scan,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -3450,6 +3731,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Context,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_kernel.dylib",
@@ -3462,6 +3744,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "CoreFoundation",
@@ -3474,6 +3757,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "CoreFoundation",
@@ -3486,6 +3770,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "CoreFoundation",
@@ -3498,6 +3783,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Foundation",
@@ -3510,6 +3796,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -3522,6 +3809,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -3534,6 +3822,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -3546,6 +3835,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -3558,6 +3848,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -3570,6 +3861,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -3582,6 +3874,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -3594,6 +3887,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -3606,6 +3900,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -3618,6 +3913,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Scan,
                     module: Some(
                         CodeModule {
                             debug_file: "Electron Framework",
@@ -3635,6 +3931,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Context,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_kernel.dylib",
@@ -3647,6 +3944,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "CoreFoundation",
@@ -3659,6 +3957,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "CoreFoundation",
@@ -3671,6 +3970,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "CoreFoundation",
@@ -3683,6 +3983,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "AppKit",
@@ -3695,6 +3996,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -3707,6 +4009,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -3719,6 +4022,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -3731,6 +4035,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Scan,
                     module: Some(
                         CodeModule {
                             debug_file: "AppKit",
@@ -3748,6 +4053,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Context,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_kernel.dylib",
@@ -3760,6 +4066,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -3772,6 +4079,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Scan,
                     module: Some(
                         CodeModule {
                             debug_file: "libdispatch.dylib",
@@ -3789,6 +4097,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Context,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_kernel.dylib",
@@ -3801,6 +4110,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -3813,6 +4123,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Scan,
                     module: Some(
                         CodeModule {
                             debug_file: "libdispatch.dylib",
@@ -3830,6 +4141,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Context,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_kernel.dylib",
@@ -3842,6 +4154,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -3854,6 +4167,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Scan,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_malloc.dylib",
@@ -3866,6 +4180,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Scan,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_malloc.dylib",
@@ -3878,6 +4193,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Scan,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_malloc.dylib",
@@ -3890,6 +4206,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Scan,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_malloc.dylib",
@@ -3902,6 +4219,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Scan,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_malloc.dylib",
@@ -3914,6 +4232,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Scan,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_malloc.dylib",
@@ -3926,6 +4245,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Scan,
                     module: Some(
                         CodeModule {
                             debug_file: "libdispatch.dylib",
@@ -3938,6 +4258,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Scan,
                     module: Some(
                         CodeModule {
                             debug_file: "libdispatch.dylib",
@@ -3950,6 +4271,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Scan,
                     module: Some(
                         CodeModule {
                             debug_file: "libdispatch.dylib",
@@ -3962,6 +4284,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Scan,
                     module: Some(
                         CodeModule {
                             debug_file: "libdispatch.dylib",
@@ -3974,6 +4297,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Scan,
                     module: Some(
                         CodeModule {
                             debug_file: "libdispatch.dylib",
@@ -3986,6 +4310,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Scan,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -3998,6 +4323,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Scan,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -4010,6 +4336,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Scan,
                     module: Some(
                         CodeModule {
                             debug_file: "libdispatch.dylib",
@@ -4027,6 +4354,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Context,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_kernel.dylib",
@@ -4039,6 +4367,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -4051,6 +4380,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Scan,
                     module: Some(
                         CodeModule {
                             debug_file: "libdispatch.dylib",
@@ -4068,6 +4398,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Context,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_kernel.dylib",
@@ -4080,6 +4411,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: FP,
                     module: Some(
                         CodeModule {
                             debug_file: "libsystem_pthread.dylib",
@@ -4092,6 +4424,7 @@ ProcessState {
                     function_name: "",
                     source_file_name: "",
                     source_line: 0,
+                    trust: Scan,
                     module: Some(
                         CodeModule {
                             debug_file: "libdispatch.dylib",
