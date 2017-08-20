@@ -9,13 +9,26 @@ use code_module::CodeModule;
 /// In rough order of "trust metric".
 #[repr(C)]
 pub enum FrameTrust {
-    None,        // Unknown
-    Scan,        // Scanned the stack, found this
-    CFIScan,     // Found while scanning stack using call frame info
-    FP,          // Derived from frame pointer
-    CFI,         // Derived from call frame info
-    Prewalked,   // Explicitly provided by some external stack walker.
-    Context,     // Given as instruction pointer in a context
+    /// Unknown trust.
+    None,
+
+    /// Scanned the stack, found this (lowest precision).
+    Scan,
+
+    /// Found while scanning stack using call frame info.
+    CFIScan,
+
+    /// Derived from frame pointer.
+    FP,
+
+    /// Derived from call frame info.
+    CFI,
+
+    /// Explicitly provided by some external stack walker.
+    Prewalked,
+
+    /// Given as instruction pointer in a context (highest precision).
+    Context,
 }
 
 /// Contains information from the stackdump, especially the frame's instruction
