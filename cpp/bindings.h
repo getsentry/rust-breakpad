@@ -38,7 +38,7 @@ struct minidump_t;
 struct process_state_t;
 
 /**
- * Source Line Resolver based on Breakpad's FastSourceLineResolver. This class
+ * Source Line Resolver based on Breakpad's BasicSourceLineResolver. This class
  * handles Breakpad symbol files and resolves source code locations for stack
  * frames.
  *
@@ -106,6 +106,11 @@ uint32_t call_stack_thread_id(const call_stack_t *stack);
  */
 stack_frame_t *const *call_stack_frames(const call_stack_t *stack,
                                         size_t *size_out);
+
+/**
+ * Releases memory of a stack frame. Assumes ownership of the pointer.
+ */
+void stack_frame_delete(stack_frame_t *frame);
 
 /**
  * Returns the program counter location as an absolute virtual address.
@@ -208,13 +213,14 @@ bool resolver_load_symbols(resolver_t *resolver,
                            const char *symbol_file);
 
 /**
- * Tries to locate the frame's instruction in the loaded code modules and sets
- * its source code fields. If no symbols can be found for the frame, it is not
- * touched.
+ * Tries to locate the frame's instruction in the loaded code modules. Returns
+ * an owning pointer to a new resolved stack frame instance. If no  symbols can
+ * be found for the frame, a clone of the input is returned.
  *
- * This method expects a weak pointer to a mutble frame.
+ * This method expects a weak pointer to a frame. Release memory of this frame
+ * with the stack_frame_delete function.
  */
-void resolver_fill_frame(resolver_t *resolver, stack_frame_t *frame);
+stack_frame_t *resolver_resolve_frame(resolver_t *resolver, const stack_frame_t *frame);
 
 #ifdef __cplusplus
 }

@@ -3,6 +3,7 @@ use std::os::raw::{c_char, c_void};
 
 use code_module::CodeModule;
 use errors::*;
+use resolved_stack_frame::ResolvedStackFrame;
 use stack_frame::StackFrame;
 
 pub type Internal = c_void;
@@ -15,7 +16,8 @@ extern "C" {
         module: *const CodeModule,
         symbol_file: *const c_char,
     ) -> bool;
-    fn resolver_fill_frame(resolver: *mut Internal, frame: *mut StackFrame);
+    fn resolver_resolve_frame(resolver: *mut Internal, frame: *const StackFrame)
+        -> *mut StackFrame;
 }
 
 /// Source line resolver for stack frames. Handles Breakpad symbol files and
@@ -46,8 +48,12 @@ impl Resolver {
 
     /// Adds symbols for the given code module from a Breakpad symbol file in
     /// the file system.
-    pub fn load_symbols<S: Into<Vec<u8>>>(&mut self, module: &CodeModule, symbol_file: S) -> Result<()> {
-        let cstr = ffi::CString::new(symbol_file).unwrap();
+    pub fn load_symbols<S: AsRef<str>>(
+        &self,
+        module: &CodeModule,
+        symbol_file: S,
+    ) -> Result<()> {
+        let cstr = ffi::CString::new(symbol_file.as_ref()).unwrap();
         if unsafe { resolver_load_symbols(self.internal, module, cstr.as_ptr()) } {
             Ok(())
         } else {
@@ -56,12 +62,12 @@ impl Resolver {
         }
     }
 
-    /// Tries to locate the frame's instruction in the loaded code modules. On
-    /// success, it writes all source line information to the frame. If no
-    /// symbols for the referenced code module have been loaded, the frame
-    /// remains untouched.
-    pub fn fill_frame(&mut self, frame: &mut StackFrame) {
-        unsafe { resolver_fill_frame(self.internal, frame) }
+    /// Tries to locate the frame's instruction in the loaded code modules.
+    /// Returns a resolved stack frame instance. If no  symbols can be found
+    /// for the frame, a clone of the input is returned.
+    pub fn resolve_frame(&self, frame: &StackFrame) -> ResolvedStackFrame {
+        let ptr = unsafe { resolver_resolve_frame(self.internal, frame) };
+        ResolvedStackFrame::from_ptr(ptr)
     }
 }
 

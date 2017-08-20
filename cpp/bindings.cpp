@@ -1,4 +1,4 @@
-#include "google_breakpad/processor/fast_source_line_resolver.h"
+#include "google_breakpad/processor/basic_source_line_resolver.h"
 #include "google_breakpad/processor/call_stack.h"
 #include "google_breakpad/processor/minidump.h"
 #include "google_breakpad/processor/minidump_processor.h"
@@ -11,32 +11,17 @@
 
 using google_breakpad::CallStack;
 using google_breakpad::CodeModule;
-using google_breakpad::FastSourceLineResolver;
+using google_breakpad::BasicSourceLineResolver;
 using google_breakpad::Minidump;
 using google_breakpad::MinidumpProcessor;
 using google_breakpad::ProcessState;
 using google_breakpad::StackFrame;
 
-/**
- * Source Line Resolver based on Breakpad's FastSourceLineResolver. This class
- * handles Breakpad symbol files and resolves source code locations for stack
- * frames.
- *
- * This class does not provide any additional functionality, but exports some
- * internal functions so they can be called directly by the library client.
- * This allows us to separate minidump processing from symbol resolution.
- */
-class Resolver : FastSourceLineResolver {
-public:
-    virtual bool LoadModule(const CodeModule *module, const string &map_file);
-    virtual void FillSourceLineInfo(StackFrame *frame);
-};
-
 typedef_extern_c(call_stack_t, CallStack);
 typedef_extern_c(code_module_t, CodeModule);
 typedef_extern_c(minidump_t, Minidump);
 typedef_extern_c(process_state_t, ProcessState);
-typedef_extern_c(resolver_t, Resolver);
+typedef_extern_c(resolver_t, BasicSourceLineResolver);
 typedef_extern_c(stack_frame_t, StackFrame);
 
 minidump_t *minidump_read(const char *file_path) {
@@ -90,6 +75,10 @@ stack_frame_t *const *call_stack_frames(const call_stack_t *stack, size_t *size_
     return reinterpret_cast<stack_frame_t *const *>(frames->data());
 }
 
+void stack_frame_delete(stack_frame_t *frame) {
+    delete stack_frame_t::cast(frame);
+}
+
 uint64_t stack_frame_instruction(const stack_frame_t *frame) {
     return stack_frame_t::cast(frame)->instruction;
 }
@@ -123,7 +112,7 @@ char *code_module_debug_identifier(const code_module_t *module) {
 }
 
 resolver_t *resolver_new() {
-    return resolver_t::cast(new Resolver());
+    return resolver_t::cast(new BasicSourceLineResolver());
 }
 
 void resolver_delete(resolver_t *resolver) {
@@ -136,4 +125,22 @@ bool resolver_load_symbols(resolver_t *resolver, const code_module_t *module, co
 
 void resolver_fill_frame(resolver_t *resolver, stack_frame_t *frame) {
     resolver_t::cast(resolver)->FillSourceLineInfo(stack_frame_t::cast(frame));
+}
+
+static StackFrame *clone_stack_frame(const StackFrame *frame) {
+    auto *clone = new StackFrame();
+
+    // We only need to clone instructions that are not later overwritten by
+    // the resolver. Therefore, we assume this is a pristine unresolved frame.
+    clone->instruction = frame->instruction;
+    clone->module = frame->module;
+    clone->trust = frame->trust;
+
+    return clone;
+}
+
+stack_frame_t *resolver_resolve_frame(resolver_t *resolver, const stack_frame_t *frame) {
+    auto *clone = clone_stack_frame(stack_frame_t::cast(frame));
+    resolver_t::cast(resolver)->FillSourceLineInfo(clone);
+    return stack_frame_t::cast(clone);
 }
