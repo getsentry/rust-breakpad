@@ -3,6 +3,8 @@ use std::os::raw::{c_char, c_void};
 
 use utils::ptr_to_owned_str;
 
+/// Carries information about a code module loaded into the process during the
+/// crash. The debug_identifier uniquely identifies this module.
 #[repr(C)]
 pub struct CodeModule(c_void);
 
@@ -12,6 +14,9 @@ extern "C" {
 }
 
 impl CodeModule {
+    /// Returns the unique identifier of the code module. Usually, it consist
+    /// of the library's UUID and an age field. On Windows, the age field is a
+    /// generation counter, on all other platforms it always zero.
     pub fn debug_file(&self) -> String {
         unsafe {
             let ptr = code_module_debug_file(self);
@@ -19,6 +24,7 @@ impl CodeModule {
         }
     }
 
+    /// Returns the name of the library or framework.
     pub fn debug_identifier(&self) -> String {
         unsafe {
             let ptr = code_module_debug_identifier(self);

@@ -31,7 +31,7 @@ struct code_module_t;
 struct minidump_t;
 
 /**
- * Result of processing a minidump. This structure is a snapshot, that can be
+ * Result of processing a minidump. This structure is a snapshot that can be
  * passed to a resolver for code location lookups. Use the process_state_*
  * family of functions to interact with a process state.
  */
@@ -154,8 +154,8 @@ const char *stack_frame_function_name(const stack_frame_t *frame);
 const char *stack_frame_source_file_name(const stack_frame_t *frame);
 
 /**
- * Returns the source code line at which the instruction was declared. Can be
- * empty before running the resolver or if debug symbols are missing.
+ * Returns the source code line at which the instruction was declared. Can
+ * be empty before running the resolver or if debug symbols are missing.
  */
 int stack_frame_source_line(const stack_frame_t *frame);
 
@@ -209,7 +209,7 @@ bool resolver_load_symbols(resolver_t *resolver,
 
 /**
  * Tries to locate the frame's instruction in the loaded code modules and sets
- * its source code fields. If no symbosl can be found for the frame, it is not
+ * its source code fields. If no symbols can be found for the frame, it is not
  * touched.
  *
  * This method expects a weak pointer to a mutble frame.

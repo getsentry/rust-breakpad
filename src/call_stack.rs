@@ -3,6 +3,7 @@ use std::os::raw::c_void;
 
 use stack_frame::StackFrame;
 
+/// Represents a thread in the crash report holding a list of stack frames.
 #[repr(C)]
 pub struct CallStack(c_void);
 
@@ -13,10 +14,12 @@ extern "C" {
 }
 
 impl CallStack {
+    /// Returns the thread identifier of this callstack.
     pub fn thread_id(&self) -> u32 {
         unsafe { call_stack_thread_id(self) }
     }
 
+    /// Returns the list of frames in the call stack.
     pub fn frames(&self) -> &[&StackFrame] {
         unsafe {
             let mut size = 0 as usize;

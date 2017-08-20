@@ -14,15 +14,23 @@ extern "C" {
     ) -> *const *const CallStack;
 }
 
+/// Result of processing a minidump. This structure is a snapshot that can be
+/// passed to a resolver for code location lookups.
+///
+/// To get source code information for stack frames, create a Resolver and
+/// load all referenced modules.
 pub struct ProcessState {
     internal: *mut Internal,
 }
 
 impl ProcessState {
-    pub fn new(internal: *mut Internal) -> ProcessState {
+    /// Initializes a process state from its internal data pointer. Used by
+    /// Minidump.process.
+    pub(crate) fn new(internal: *mut Internal) -> ProcessState {
         ProcessState { internal }
     }
 
+    /// Returns a list of threads in the minidump.
     pub fn threads(&self) -> &[&CallStack] {
         unsafe {
             let mut size = 0 as usize;
@@ -32,6 +40,7 @@ impl ProcessState {
         }
     }
 
+    /// Returns a list of all modules referenced in one of the call stacks.
     pub fn referenced_modules(&self) -> collections::HashSet<&CodeModule> {
         self.threads()
             .iter()
