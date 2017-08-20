@@ -22,18 +22,9 @@ struct call_stack_t;
 struct code_module_t;
 
 /**
- * The primary interface to minidump files. Use the minidump_* family of
- * functions to interact with a minidump.
- *
- * To analyze this minidump, call minidump_process. This will return metadata
- * about the dump's threads containing all call stacks (see process_state_t).
- */
-struct minidump_t;
-
-/**
- * Result of processing a minidump. This structure is a snapshot that can be
- * passed to a resolver for code location lookups. Use the process_state_*
- * family of functions to interact with a process state.
+ * Snapshot of the state of a process during its crash. This object is obtained
+ * by processing Minidumps using the process_* family of functions. To interact
+ * with ProcessStates use the process_state_* family of functions.
  */
 struct process_state_t;
 
@@ -54,32 +45,16 @@ struct process_state_t;
 struct stack_frame_t;
 
 /**
- * Reads a minidump from the file system into memory. Returns an owning pointer
- * to the allocated minidump struct, if successful. If the minidump is invalid
- * or the file cannot be read, it returns a null pointer.
+ * Reads a minidump from the file system into memory and processes it. Returns
+ * an owning pointer to a process_state_t struct that contains loaded code
+ * modules and call stacks of all threads of the process during the crash.
  *
- * Release memory of this minidump with the minidump_delete function.
- */
-minidump_t *minidump_read(const char *file_path);
-
-/**
- * Releases memory of a minidump struct. Assumes ownership of the pointer.
- */
-void minidump_delete(minidump_t *dump);
-
-/**
- * Prints debug information of the minidump to standard output.
- */
-void minidump_print(minidump_t *dump);
-
-/**
- * Analyzes the minidump and returns an owning pointer to a process_state_t
- * struct that contains loaded code modules and call stacks of all threads in
- * the minidump.
+ * Processing the minidump can fail if the file is corrupted or does not exit.
+ * The function will return NULL and an error code in result_out.
  *
  * Release memory of the process state with process_state_delete.
  */
-process_state_t *minidump_process(minidump_t *dump);
+process_state_t *process_minidump(const char *file_path, int *result_out);
 
 /**
  * Releases memory of a process state struct. Assumes ownership of the pointer.

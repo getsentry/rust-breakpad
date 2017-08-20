@@ -5,7 +5,7 @@ use difference::Changeset;
 use std::{collections, fs, io, path};
 use std::io::prelude::*;
 
-use breakpad::{CodeModule, Minidump, Resolver};
+use breakpad::{CodeModule, ProcessState, Resolver};
 
 /// Resolves the full path to a fixture file.
 fn fixture_path<S: AsRef<str>>(file_name: S) -> path::PathBuf {
@@ -42,22 +42,20 @@ fn assert_snapshot<S: AsRef<str>, T: std::fmt::Debug>(snapshot_name: S, val: &T)
     assert_eq!(snapshot, output, "{}", Changeset::new(&snapshot, &output, "\n"));
 }
 
-/// Creates a minidump object.
-fn load_minidump<S: AsRef<str>>(file_name: S) -> Minidump {
-    Minidump::new(fixture_path(file_name)).unwrap()
+/// Process a minidump file
+fn process_minidump<S: AsRef<str>>(file_name: S) -> ProcessState {
+    ProcessState::from_minidump(fixture_path(file_name)).unwrap()
 }
 
 #[test]
-fn process_minidump() {
-    let dump = load_minidump("electron.dmp");
-    let state = dump.process().unwrap();
+fn get_minidump_process_state() {
+    let state = process_minidump("electron.dmp");
     assert_snapshot("process_state.txt", &state);
 }
 
 #[test]
 fn obtain_referenced_modules() {
-    let dump = load_minidump("electron.dmp");
-    let state = dump.process().unwrap();
+    let state = process_minidump("electron.dmp");
     let modules: collections::BTreeSet<&CodeModule> =
         state.referenced_modules().iter().cloned().collect();
 
@@ -66,9 +64,7 @@ fn obtain_referenced_modules() {
 
 #[test]
 fn resolve_electron_stack_frame() {
-    let dump = load_minidump("electron.dmp");
-    let state = dump.process().unwrap();
-
+    let state = process_minidump("electron.dmp");
     let thread = state.threads().first().unwrap();
     let frame = thread.frames()[1];
     let module = frame.module().unwrap();

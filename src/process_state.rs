@@ -1,12 +1,59 @@
-use std::{collections, fmt, mem, slice};
-use std::os::raw::c_void;
+use std::{collections, ffi, fmt, mem, path, slice};
+use std::os::raw::{c_char, c_void};
 
 use call_stack::CallStack;
+use errors::*;
 use code_module::CodeModule;
+use utils::path_to_bytes;
+
+/// Return type for Minidump or Microdump processors
+#[repr(C)]
+#[derive(Debug, Eq, PartialEq)]
+pub enum ProcessResult {
+    /// The dump was processed successfully.
+    Ok,
+
+    /// The minidump file was not found.
+    MinidumpNotFound,
+
+    /// The minidump file had no header.
+    NoMinidumpHeader,
+
+    /// The minidump file has no thread list.
+    ErrorNoThreadList,
+
+    /// There was an error getting one thread's data from the dump.
+    ErrorGettingThread,
+
+    /// There was an error getting a thread id from the thread's data.
+    ErrorGettingThreadId,
+
+    /// There was more than one requesting thread.
+    DuplicateRequestingThreads,
+
+    /// The dump processing was interrupted by the SymbolSupplier(not fatal).
+    SymbolSupplierInterrupted,
+}
+
+impl fmt::Display for ProcessResult {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "{}", match self {
+            &ProcessResult::Ok => "Dump processed successfully",
+            &ProcessResult::MinidumpNotFound => "Minidump file was not found",
+            &ProcessResult::NoMinidumpHeader => "Minidump file had no header",
+            &ProcessResult::ErrorNoThreadList => "Minidump file has no thread list",
+            &ProcessResult::ErrorGettingThread => "Error getting one thread's data",
+            &ProcessResult::ErrorGettingThreadId => "Error getting a thread id",
+            &ProcessResult::DuplicateRequestingThreads => "There was more than one requesting thread",
+            &ProcessResult::SymbolSupplierInterrupted => "Processing was interrupted (not fatal)",
+        })
+    }
+}
 
 type Internal = c_void;
 
 extern "C" {
+    fn process_minidump(file_path: *const c_char, result: *mut ProcessResult) -> *mut Internal;
     fn process_state_delete(state: *mut Internal);
     fn process_state_threads(
         state: *const Internal,
@@ -14,8 +61,8 @@ extern "C" {
     ) -> *const *const CallStack;
 }
 
-/// Result of processing a minidump. This structure is a snapshot that can be
-/// passed to a resolver for code location lookups.
+/// Snapshot of the state of a processes during its crash. The object can be
+/// obtained by processing Minidump or Microdump files.
 ///
 /// To get source code information for stack frames, create a Resolver and
 /// load all referenced modules.
@@ -24,10 +71,21 @@ pub struct ProcessState {
 }
 
 impl ProcessState {
-    /// Initializes a process state from its internal data pointer. Used by
-    /// Minidump.process.
-    pub(crate) fn new(internal: *mut Internal) -> ProcessState {
-        ProcessState { internal }
+    /// Reads a minidump from the filesystem into memory and processes it.
+    /// Returns a ProcessState that contains information about the crashed
+    /// process.
+    pub fn from_minidump<P: AsRef<path::Path>>(file_path: P) -> Result<ProcessState> {
+        let bytes = path_to_bytes(file_path.as_ref());
+        let cstr = ffi::CString::new(bytes).unwrap();
+
+        let mut result: ProcessResult = ProcessResult::Ok;
+        let internal = unsafe { process_minidump(cstr.as_ptr(), &mut result) };
+
+        if result == ProcessResult::Ok && !internal.is_null() {
+            Ok(ProcessState { internal })
+        } else {
+            Err(ErrorKind::ProcessError(result).into())
+        }
     }
 
     /// Returns a list of threads in the minidump.

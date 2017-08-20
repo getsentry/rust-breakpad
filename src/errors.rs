@@ -1,9 +1,11 @@
+use process_state::ProcessResult;
+
 error_chain! {
     errors {
         /// An error raised during minidump processing.
-        MinidumpError(desc: String) {
-            description("Minidump Error")
-            display("Minidump Error: {}", &desc)
+        ProcessError(result: ProcessResult) {
+            description("Process Error")
+            display("Minidump Error: {}", &result)
         }
 
         /// An error raised during source line resolution.

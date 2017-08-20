@@ -1,6 +1,5 @@
 #include "google_breakpad/processor/basic_source_line_resolver.h"
 #include "google_breakpad/processor/call_stack.h"
-#include "google_breakpad/processor/minidump.h"
 #include "google_breakpad/processor/minidump_processor.h"
 #include "google_breakpad/processor/process_state.h"
 #include "google_breakpad/processor/stack_frame.h"
@@ -12,43 +11,23 @@
 using google_breakpad::CallStack;
 using google_breakpad::CodeModule;
 using google_breakpad::BasicSourceLineResolver;
-using google_breakpad::Minidump;
 using google_breakpad::MinidumpProcessor;
 using google_breakpad::ProcessState;
 using google_breakpad::StackFrame;
 
 typedef_extern_c(call_stack_t, CallStack);
 typedef_extern_c(code_module_t, CodeModule);
-typedef_extern_c(minidump_t, Minidump);
 typedef_extern_c(process_state_t, ProcessState);
 typedef_extern_c(resolver_t, BasicSourceLineResolver);
 typedef_extern_c(stack_frame_t, StackFrame);
 
-minidump_t *minidump_read(const char *file_path) {
-    auto dump = new Minidump(file_path);
-
-    if (!dump->Read()) {
-        delete dump;
-        return nullptr;
-    }
-
-    return minidump_t::cast(dump);
-}
-
-void minidump_delete(minidump_t *dump) {
-    delete minidump_t::cast(dump);
-}
-
-void minidump_print(minidump_t *dump) {
-    minidump_t::cast(dump)->Print();
-}
-
-process_state_t *minidump_process(minidump_t *dump) {
+process_state_t *process_minidump(const char *file_path, int *result_out) {
     MinidumpProcessor processor(nullptr, nullptr);
     ProcessState *state = new ProcessState();
+    *result_out = processor.Process(file_path, state);
 
-    auto result = processor.Process(minidump_t::cast(dump), state);
-    if (result != google_breakpad::PROCESS_OK) {
+    if (*result_out != google_breakpad::PROCESS_OK) {
+        delete state;
         return nullptr;
     }
 
