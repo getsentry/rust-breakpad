@@ -18,8 +18,8 @@ pub struct Minidump {
 }
 
 impl Minidump {
-    pub fn new<S: Into<Vec<u8>>>(file_path: S) -> Result<Minidump> {
-        let cstr = ffi::CString::new(file_path).unwrap();
+    pub fn new<S: AsRef<str>>(file_path: S) -> Result<Minidump> {
+        let cstr = ffi::CString::new(file_path.as_ref()).unwrap();
         let internal = unsafe { minidump_read(cstr.as_ptr()) };
 
         if internal.is_null() {

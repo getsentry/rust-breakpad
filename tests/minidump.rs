@@ -7,8 +7,8 @@ use std::io::prelude::*;
 
 use breakpad::{CodeModule, Minidump};
 
-fn fixture_path<S: AsRef<str>>(file_name: S) -> String {
-    format!("tests/fixtures/{}", file_name.as_ref())
+fn fixture_path<S: AsRef<str>>(file_name: S) -> path::PathBuf {
+    path::Path::new("tests").join("fixtures").join(file_name.as_ref())
 }
 
 fn load_file<P: AsRef<path::Path>>(path: P) -> io::Result<String> {
@@ -28,25 +28,29 @@ fn assert_snapshot<S: AsRef<str>, T: std::fmt::Debug>(snapshot_name: S, obj: &T)
     let name = snapshot_name.as_ref();
 
     let output = format!("{:#?}", obj);
-    save_file(format!("tests/outputs/{}.txt", name), &output).unwrap_or_default();
+    save_file(path::Path::new("tests").join("outputs").join(name), &output).unwrap_or_default();
 
-    let snapshot = load_file(format!("tests/snapshots/{}.txt", name)).unwrap();
+    let snapshot = load_file(path::Path::new("tests").join("snapshots").join(name)).unwrap();
     assert_eq!(snapshot, output, "{}", Changeset::new(&snapshot, &output, "\n"));
+}
+
+fn load_minidump<S: AsRef<str>>(file_name: S) -> Minidump {
+    Minidump::new(fixture_path(file_name).to_string_lossy()).unwrap()
 }
 
 #[test]
 fn process_minidump() {
-    let dump = Minidump::new(fixture_path("minidump.dmp")).unwrap();
+    let dump = load_minidump("minidump.dmp");
     let state = dump.process().unwrap();
-    assert_snapshot("process_state", &state);
+    assert_snapshot("process_state.txt", &state);
 }
 
 #[test]
 fn obtain_referenced_modules() {
-    let dump = Minidump::new(fixture_path("minidump.dmp")).unwrap();
+    let dump = load_minidump("minidump.dmp");
     let state = dump.process().unwrap();
     let modules: collections::BTreeSet<&CodeModule> =
         state.referenced_modules().iter().cloned().collect();
 
-    assert_snapshot("referenced_modules", &modules);
+    assert_snapshot("referenced_modules.txt", &modules);
 }
