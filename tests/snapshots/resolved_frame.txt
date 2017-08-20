@@ -1,0 +1,13 @@
+ResolvedStackFrame {
+    instruction: 4415005541,
+    function_name: "void base::internal::FunctorTraits<void (*)(), void>::Invoke<>(void (*)())",
+    source_file_name: "/Users/jenkins/Home/workspace/electron-osx-x64/vendor/brightray/vendor/download/libchromiumcontent/src/base/bind_internal.h",
+    source_line: 164,
+    trust: FP,
+    module: Some(
+        CodeModule {
+            debug_file: "Electron Framework",
+            debug_identifier: "35D48131F39F30CA8BD9BA5A8CF775300"
+        }
+    )
+}

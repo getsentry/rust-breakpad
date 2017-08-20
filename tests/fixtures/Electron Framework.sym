@@ -1,0 +1,7 @@
+MODULE mac x86_64 35D48131F39F30CA8BD9BA5A8CF775300 Electron Framework
+FILE 28 /Users/electron/workspace/libchromiumcontent-osx/src/out-x64/static_library/../../base/bind_internal.h
+FILE 19460 /Users/jenkins/Home/workspace/electron-osx-x64/vendor/brightray/vendor/download/libchromiumcontent/src/base/bind_internal.h
+FUNC a360 8 0 void base::internal::FunctorTraits<void (*)(), void>::Invoke<>(void (*)())
+a360 4 163 19460
+a364 2 164 19460
+a366 2 164 19460
