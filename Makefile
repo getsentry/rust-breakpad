@@ -78,7 +78,7 @@ $(LIBRARIES): %: $(BUILD_DIR)/lib%.a
 	@echo cargo:rustc-link-lib=static=$@
 
 .SECONDEXPANSION:
-$(BUILD_DIR)/%.a: $(addprefix $(BUILD_DIR)/,$$($$*_OBJ))
+$(LIBRARIES:%=$(BUILD_DIR)/lib%.a): %.a: $$(addprefix $(BUILD_DIR)/,$$($$(*F)_OBJ))
 	$(AR) $(ARFLAGS) $@ $(filter %.o,$^)
 
 $(BUILD_DIR)/%.o: %.c
