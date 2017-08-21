@@ -1,5 +1,14 @@
-BUILD_DIR = target/debug/libraries
+# Defaults if not run from cargo
+OUT_DIR ?= .
+TARGET ?= Linux
+NUM_JOBS ?= 1
+DEBUG ?= false
+OPT_LEVEL ?= 0
 
+# Add parallel builds
+MAKEFLAGS := --jobs=$(NUM_JOBS) $(MAKEFLAGS)
+
+# Get the operating system name for system dependent flags
 ifneq (, $(findstring darwin, $(TARGET)))
 	LIBSTD = c++
 else ifneq (, $(findstring freebsd, $(TARGET)))
@@ -8,12 +17,14 @@ else
 	LIBSTD = stdc++
 endif
 
-FLAGS = -fPIC
+# Flags for both C and C++
+FLAGS += \
+	-fPIC \
+	-O$(OPT_LEVEL) \
+	$(NULL)
 
-ifeq ($(DEBUG), false)
-	FLAGS += -O3
-else
-	FLAGS += -O0 -g
+ifneq ($(DEBUG), false)
+	FLAGS += -g
 endif
 
 CFLAGS += \
@@ -87,28 +98,28 @@ libprocessor_OBJ = \
 
 cargo: $(LIBRARIES)
 	@echo cargo:rustc-link-lib=$(LIBSTD)
-	@echo cargo:rustc-link-search=native=$(BUILD_DIR)
+	@echo cargo:rustc-link-search=native=$(OUT_DIR)
 
-$(LIBRARIES): %: $(BUILD_DIR)/lib%.a
+$(LIBRARIES): %: $(OUT_DIR)/lib%.a
 	@echo cargo:rustc-link-lib=static=$@
 
 .SECONDEXPANSION:
-$(LIBRARIES:%=$(BUILD_DIR)/lib%.a): %.a: $$(addprefix $(BUILD_DIR)/,$$($$(*F)_OBJ))
+$(LIBRARIES:%=$(OUT_DIR)/lib%.a): %.a: $$(addprefix $(OUT_DIR)/,$$($$(*F)_OBJ))
 	$(AR) $(ARFLAGS) $@ $(filter %.o,$^)
 
-$(BUILD_DIR)/%.o: %.c
+$(OUT_DIR)/%.o: %.c
 	@mkdir -p $(@D)
 	$(COMPILE.c) $(OUTPUT_OPTION) $<
 
-$(BUILD_DIR)/%.o: %.cc
+$(OUT_DIR)/%.o: %.cc
 	@mkdir -p $(@D)
 	$(COMPILE.cc) $(OUTPUT_OPTION) $<
 
-$(BUILD_DIR)/%.o: %.cpp
+$(OUT_DIR)/%.o: %.cpp
 	@mkdir -p $(@D)
 	$(COMPILE.cpp) $(OUTPUT_OPTION) $<
 
 clean:
-	$(RM) -r $(BUILD_DIR)
+	$(RM) -r $(OUT_DIR)
 
 .PHONY: all $(LIBRARIES) clean
