@@ -1,5 +1,5 @@
 language: rust
-dist: xenial
+dist: trusty
 
 rust:
   - stable
@@ -9,3 +9,13 @@ rust:
 matrix:
   allow_failures:
     - rust: nightly
+
+env:
+  - CXX=g++-7
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-7
