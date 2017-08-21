@@ -6,7 +6,7 @@
 
 #include "c_mapping.h"
 #include "c_string.h"
-#include "bindings.h"
+#include "processor.h"
 
 using google_breakpad::CallStack;
 using google_breakpad::CodeModule;

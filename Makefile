@@ -82,7 +82,7 @@ libprocessor_OBJ = \
  	breakpad/processor/minidump_processor.o \
  	breakpad/processor/symbolic_constants_win.o \
  	cpp/c_string.o \
- 	cpp/bindings.o \
+ 	cpp/processor.o \
  	$(NULL)
 
 cargo: $(LIBRARIES)
