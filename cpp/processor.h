@@ -35,7 +35,7 @@ struct process_state_t;
  *
  * To interact with the resolver, use the resolver_* family of functions.
  */
- struct resolver_t;
+struct resolver_t;
 
 /**
  * Contains information from the stackdump, especially the frame's instruction
@@ -148,20 +148,45 @@ int stack_frame_source_line(const stack_frame_t *frame);
 int stack_frame_trust(const stack_frame_t *frame);
 
 /**
- * Returns an owning pointer to the name of the library or framework that
- * declares this code module.
+ * Returns the path or file name that the code module was loaded from.
  *
- * Release memory of this value with the string_delete function.
+ * The return value is an owning pointer. Release memory with string_delete.
+ */
+char *code_module_code_file(const code_module_t *module);
+
+/**
+ * An identifying string used to discriminate between multiple versions and
+ * builds of the same code module.  This may contain a uuid, timestamp,
+ * version number, or any combination of this or other information, in an
+ * implementation-defined format.
+ *
+ * The return value is an owning pointer. Release memory with string_delete.
+ */
+char *code_module_code_identifier(const code_module_t *module);
+
+/**
+ * Returns the filename containing debugging information of this code
+ * module.  If debugging information is stored in a file separate from the
+ * code module itself (as is the case when .pdb or .dSYM files are used),
+ * this will be different from code_file.  If debugging information is
+ * stored in the code module itself (possibly prior to stripping), this
+ * will be the same as code_file.
+ *
+ * The return value is an owning pointer. Release memory with string_delete.
  */
 char *code_module_debug_file(const code_module_t *module);
 
 /**
- * Returns an owning pointer to the unique identifier of this code module.
- * Usually consists of the library's UUID and an age field. On Windows, the
- * age field is a generation counter, on all other platforms it is always
+ * Returns a string identifying the specific version and build of the
+ * associated debug file.  This may be the same as code_identifier when
+ * the debug_file and code_file are identical or when the same identifier
+ * is used to identify distinct debug and code files.
+ *
+ * It usually comprises the library's UUID and an age field. On Windows, the
+ * age field is a generation counter, on all other platforms it is mostly
  * zero.
  *
- * Release memory of this value with the string_delete function.
+ * The return value is an owning pointer. Release memory with string_delete.
  */
 char *code_module_debug_identifier(const code_module_t *module);
 

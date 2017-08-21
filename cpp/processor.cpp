@@ -133,6 +133,22 @@ int stack_frame_trust(const stack_frame_t *frame) {
     return stack_frame_t::cast(frame)->trust;
 }
 
+char *code_module_code_file(const code_module_t *module) {
+    if (module == nullptr) {
+        return nullptr;
+    }
+
+    return string_from(code_module_t::cast(module)->code_file());
+}
+
+char *code_module_code_identifier(const code_module_t *module) {
+    if (module == nullptr) {
+        return nullptr;
+    }
+
+    return string_from(code_module_t::cast(module)->code_identifier());
+}
+
 char *code_module_debug_file(const code_module_t *module) {
     if (module == nullptr) {
         return nullptr;
