@@ -13,7 +13,7 @@ mod utils;
 pub use call_stack::CallStack;
 pub use code_module::CodeModule;
 pub use errors::*;
-pub use process_state::ProcessState;
+pub use process_state::{ProcessState, ProcessResult};
 pub use resolved_stack_frame::ResolvedStackFrame;
 pub use resolver::Resolver;
 pub use stack_frame::{StackFrame, FrameTrust};

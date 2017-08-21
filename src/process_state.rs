@@ -6,7 +6,8 @@ use errors::*;
 use code_module::CodeModule;
 use utils::path_to_bytes;
 
-/// Return type for Minidump or Microdump processors
+/// Result of processing a Minidump or Microdump file.
+/// Usually included in the error thrown when the file cannot be processed.
 #[repr(C)]
 #[derive(Debug, Eq, PartialEq)]
 pub enum ProcessResult {
