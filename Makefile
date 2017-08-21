@@ -1,11 +1,27 @@
 BUILD_DIR = target/debug/libraries
 
-CFLAGS = \
-	-fPIC \
+ifneq (, $(findstring darwin, $(TARGET)))
+	LIBSTD = c++
+else ifneq (, $(findstring freebsd, $(TARGET)))
+	LIBSTD = c++
+else
+	LIBSTD = stdc++
+endif
+
+FLAGS = -fPIC
+
+ifeq ($(DEBUG), false)
+	FLAGS += -O3
+else
+	FLAGS += -O0 -g
+endif
+
+CFLAGS += \
+	$(FLAGS) \
 	$(NULL)
 
-CXXFLAGS = \
-	-fPIC \
+CXXFLAGS += \
+	$(FLAGS) \
 	-Ibreakpad \
 	-std=c++11 \
 	-DBPLOG_MINIMUM_SEVERITY=SEVERITY_ERROR \
@@ -69,11 +85,8 @@ libprocessor_OBJ = \
  	cpp/bindings.o \
  	$(NULL)
 
-# TODO: Add -g when DEBUG is set
-# TODO: Set -O0 in DEBUG and -O3 for production
-
 cargo: $(LIBRARIES)
-	@echo cargo:rustc-link-lib=c++
+	@echo cargo:rustc-link-lib=$(LIBSTD)
 	@echo cargo:rustc-link-search=native=$(BUILD_DIR)
 
 $(LIBRARIES): %: $(BUILD_DIR)/lib%.a
