@@ -5,7 +5,7 @@ CFLAGS = \
 
 CXXFLAGS = \
 	-Ibreakpad \
-	-std=c++14 \
+	-std=c++11 \
 	-DBPLOG_MINIMUM_SEVERITY=SEVERITY_ERROR \
 	$(NULL)
 
