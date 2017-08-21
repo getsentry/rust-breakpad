@@ -1,9 +1,11 @@
 BUILD_DIR = target/debug/libraries
 
 CFLAGS = \
+	-fPIC \
 	$(NULL)
 
 CXXFLAGS = \
+	-fPIC \
 	-Ibreakpad \
 	-std=c++11 \
 	-DBPLOG_MINIMUM_SEVERITY=SEVERITY_ERROR \
