@@ -4,7 +4,6 @@ version = "0.1.0"
 dependencies = [
  "difference 1.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "error-chain 0.10.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "gcc 0.3.52 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
