@@ -31,8 +31,10 @@ pub fn assert_snapshot<S: AsRef<str>, T: fmt::Debug>(snapshot_name: S, val: &T) 
     let name = snapshot_name.as_ref();
 
     let output = format!("{:#?}", val);
-    save_file(path::Path::new("tests").join("outputs").join(name), &output).unwrap_or_default();
+    let output_path = path::Path::new("tests").join("outputs").join(name);
+    save_file(output_path, &output).unwrap_or_default();
 
-    let snapshot = load_file(path::Path::new("tests").join("snapshots").join(name)).unwrap();
+    let snapshot_path = path::Path::new("tests").join("snapshots").join(name);
+    let snapshot = load_file(snapshot_path).unwrap_or("".into());
     assert_eq!(snapshot, output, "{}", Changeset::new(&snapshot, &output, "\n"));
 }
