@@ -2,5 +2,10 @@
 name = "breakpad"
 version = "0.1.0"
 authors = ["Jan Michael Auer"]
+build = "build.rs"
 
 [dependencies]
+error-chain = "0.10"
+
+[dev-dependencies]
+difference = "1.0"
