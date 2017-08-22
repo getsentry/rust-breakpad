@@ -1,5 +1,5 @@
-#ifndef SENTRY_STACKWALK_H
-#define SENTRY_STACKWALK_H
+#ifndef SENTRY_PROCESSOR_H
+#define SENTRY_PROCESSOR_H
 
 #include <cstddef>
 #include <cstdint>
