@@ -6,6 +6,7 @@ use code_module::CodeModule;
 /// Indicates how well the instruction pointer derived during
 /// stack walking is trusted. Since the stack walker can resort to
 /// stack scanning, it can wind up with dubious frames.
+///
 /// In rough order of "trust metric".
 #[repr(C)]
 #[derive(Debug)]
@@ -32,12 +33,12 @@ pub enum FrameTrust {
     Context,
 }
 
-/// Contains information from the stackdump, especially the frame's instruction
-/// pointer. Also references an optional code module that contains the
+/// Contains information from the memorydump, especially the frame's instruction
+/// pointer. Also references an optional `CodeModule` that contains the
 /// instruction of this stack frame.
 ///
-/// Use a Resolver o fill a stack frame with source code information. The
-/// resolver needs symbols for this frame's the code module in order to provide
+/// Use a `Resolver` to fill a stack frame with source code information. The
+/// resolver needs symbols for this frame's `CodeModule` in order to provide
 /// debug information.
 #[repr(C)]
 pub struct StackFrame(c_void);
@@ -71,12 +72,12 @@ impl StackFrame {
     /// requires adjustment. ReturnAddress returns the address as saved by the
     /// machine.
     ///
-    /// Use stack_frame_trust to obtain how trustworthy this instruction is.
+    /// Use `trust` to obtain how trustworthy this instruction is.
     pub fn instruction(&self) -> u64 {
         unsafe { stack_frame_instruction(self) }
     }
 
-    /// Returns the code module that contains this frame's instruction.
+    /// Returns the `CodeModule` that contains this frame's instruction.
     pub fn module(&self) -> Option<&CodeModule> {
         unsafe { stack_frame_module(self).as_ref() }
     }

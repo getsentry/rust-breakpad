@@ -10,18 +10,18 @@ extern "C" {
     fn stack_frame_delete(frame: *mut StackFrame);
 }
 
-/// A resolved version of StackFrame. Contains source code locations and code
+/// A resolved version of `StackFrame`. Contains source code locations and code
 /// offsets, if the resolver was able to locate symbols for this frame.
 /// Otherwise, the additional attributes are empty.
 ///
-/// ResolvedStackFrame implements Deref for StackFrame, so that it can be used
-/// interchangibly. See StackFrame for additional accessors.
+/// `ResolvedStackFrame` implements `Deref` for `StackFrame`, so that it can be used
+/// interchangibly. See `StackFrame` for additional accessors.
 pub struct ResolvedStackFrame {
     internal: *mut StackFrame,
 }
 
 impl ResolvedStackFrame {
-    /// Creates a ResolvedStackFrame instance from a raw stack frame pointer.
+    /// Creates a `ResolvedStackFrame` instance from a raw stack frame pointer.
     /// The pointer is assumed to be owned, and the underlying memory will be
     /// freed when this struct is dropped.
     pub(crate) fn from_ptr(internal: *mut StackFrame) -> ResolvedStackFrame {
@@ -29,7 +29,7 @@ impl ResolvedStackFrame {
     }
 
     /// Returns the function name that contains the instruction. Can be empty
-    /// before running the resolver or if debug symbols are missing.
+    /// before running the `Resolver` or if debug symbols are missing.
     pub fn function_name(&self) -> borrow::Cow<str> {
         unsafe {
             let ptr = stack_frame_function_name(self.internal);
@@ -38,7 +38,7 @@ impl ResolvedStackFrame {
     }
 
     /// Returns the source code line at which the instruction was declared.
-    /// Can be empty before running the resolver or if debug symbols are
+    /// Can be empty before running the `Resolver` or if debug symbols are
     /// missing.
     pub fn source_file_name(&self) -> borrow::Cow<str> {
         unsafe {
@@ -48,7 +48,7 @@ impl ResolvedStackFrame {
     }
 
     /// Returns the source code line at which the instruction was declared. Can
-    /// be empty before running the resolver or if debug symbols are missing.
+    /// be empty before running the `Resolver` or if debug symbols are missing.
     pub fn source_line(&self) -> c_int {
         unsafe { stack_frame_source_line(self.internal) }
     }

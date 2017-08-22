@@ -26,16 +26,16 @@ extern "C" {
 ///
 /// To use this resolver, obtain a list of referenced modules from a
 /// ProcessState and load all of them into the resolver. Once symbols have
-/// been loaded for a code module, the resolver can fill frames with source
+/// been loaded for a `CodeModule`, the resolver can fill frames with source
 /// line information.
 ///
-/// See StackFrame for all available information.
+/// See `ResolvedStackFrame` for all available information.
 pub struct Resolver {
     internal: *mut Internal,
 }
 
 impl Resolver {
-    /// Creates a new resolver.
+    /// Creates a new `Resolver` instance.
     pub fn new() -> Result<Resolver> {
         let internal = unsafe { resolver_new() };
 
@@ -47,7 +47,7 @@ impl Resolver {
         }
     }
 
-    /// Adds symbols for the given code module from a Breakpad symbol file in
+    /// Adds symbols for the given `CodeModule` from a Breakpad symbol file in
     /// the file system.
     pub fn load_symbols<P: AsRef<path::Path>>(&self, module: &CodeModule, file_path: P) -> Result<()> {
         let bytes = path_to_bytes(file_path.as_ref());

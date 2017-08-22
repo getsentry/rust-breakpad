@@ -2,13 +2,13 @@ use process_state::ProcessResult;
 
 error_chain! {
     errors {
-        /// An error raised during minidump processing.
+        /// An error raised when processing a dump by `ProcessState`.
         ProcessError(result: ProcessResult) {
             description("Process Error")
             display("Minidump Error: {}", &result)
         }
 
-        /// An error raised during source line resolution.
+        /// An error raised by the `Resolver` during source line resolution.
         ResolverError(desc: String) {
             description("Resolver Error")
             display("Resolver Error: {}", &desc)

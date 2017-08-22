@@ -7,7 +7,7 @@ use code_module::CodeModule;
 use utils::path_to_bytes;
 
 /// Result of processing a Minidump or Microdump file.
-/// Usually included in the error thrown when the file cannot be processed.
+/// Usually included in `ProcessError` when the file cannot be processed.
 #[repr(C)]
 #[derive(Debug, Eq, PartialEq)]
 pub enum ProcessResult {
@@ -32,7 +32,7 @@ pub enum ProcessResult {
     /// There was more than one requesting thread.
     DuplicateRequestingThreads,
 
-    /// The dump processing was interrupted by the SymbolSupplier(not fatal).
+    /// The dump processing was interrupted (not fatal).
     SymbolSupplierInterrupted,
 }
 
@@ -65,15 +65,16 @@ extern "C" {
 /// Snapshot of the state of a processes during its crash. The object can be
 /// obtained by processing Minidump or Microdump files.
 ///
-/// To get source code information for stack frames, create a Resolver and
-/// load all referenced modules.
+/// To get source code information for `StackFrame`s, create a `Resolver` and
+/// load all `CodeModules` included in one of the frames. To get a list of all
+/// these modules use `referenced_modules`.
 pub struct ProcessState {
     internal: *mut Internal,
 }
 
 impl ProcessState {
     /// Reads a minidump from the filesystem into memory and processes it.
-    /// Returns a ProcessState that contains information about the crashed
+    /// Returns a `ProcessState` that contains information about the crashed
     /// process.
     pub fn from_minidump<P: AsRef<path::Path>>(file_path: P) -> Result<ProcessState> {
         let bytes = path_to_bytes(file_path.as_ref());
@@ -89,7 +90,7 @@ impl ProcessState {
         }
     }
 
-    /// Returns a list of threads in the minidump.
+    /// Returns a list of `CallStack`s in the minidump.
     pub fn threads(&self) -> &[&CallStack] {
         unsafe {
             let mut size = 0 as usize;
@@ -99,7 +100,7 @@ impl ProcessState {
         }
     }
 
-    /// Returns a list of all modules referenced in one of the call stacks.
+    /// Returns a list of all `CodeModule`s referenced in one of the `CallStack`s.
     pub fn referenced_modules(&self) -> collections::HashSet<&CodeModule> {
         self.threads()
             .iter()

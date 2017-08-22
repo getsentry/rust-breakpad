@@ -4,7 +4,7 @@ use std::os::raw::{c_char, c_void};
 use utils::ptr_to_string;
 
 /// Carries information about a code module loaded into the process during the
-/// crash. The debug_identifier uniquely identifies this module.
+/// crash. The `debug_identifier` uniquely identifies this module.
 #[repr(C)]
 pub struct CodeModule(c_void);
 
@@ -25,7 +25,7 @@ impl CodeModule {
     }
 
     // An identifying string used to discriminate between multiple versions and
-    // builds of the same code module.  This may contain a uuid, timestamp,
+    // builds of the same code module.  This may contain a UUID, timestamp,
     // version number, or any combination of this or other information, in an
     // implementation-defined format.
     pub fn code_identifier(&self) -> String {
@@ -38,7 +38,7 @@ impl CodeModule {
     /// Returns the filename containing debugging information of this code
     /// module.  If debugging information is stored in a file separate from the
     /// code module itself (as is the case when .pdb or .dSYM files are used),
-    /// this will be different from code_file.  If debugging information is
+    /// this will be different from `code_file`.  If debugging information is
     /// stored in the code module itself (possibly prior to stripping), this
     /// will be the same as code_file.
     pub fn debug_file(&self) -> String {
@@ -49,8 +49,8 @@ impl CodeModule {
     }
 
     /// Returns a string identifying the specific version and build of the
-    /// associated debug file.  This may be the same as code_identifier when
-    /// the debug_file and code_file are identical or when the same identifier
+    /// associated debug file.  This may be the same as `code_identifier` when
+    /// the `debug_file` and `code_file` are identical or when the same identifier
     /// is used to identify distinct debug and code files.
     ///
     /// It usually comprises the library's UUID and an age field. On Windows, the
