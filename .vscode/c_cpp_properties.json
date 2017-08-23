@@ -10,7 +10,7 @@
                 "/usr/include",
                 "/usr/include/machine",
                 "${workspaceRoot}",
-                "${workspaceRoot}/breakpad"
+                "${workspaceRoot}/third_party/breakpad"
             ],
             "defines": [],
             "intelliSenseMode": "clang-x64",
@@ -22,8 +22,7 @@
                     "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include",
                     "/usr/include",
                     "/usr/include/machine",
-                    "${workspaceRoot}",
-                    "${workspaceRoot}/breakpad"
+                    "${workspaceRoot}/third_party/breakpad"
                 ],
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": ""
@@ -43,8 +42,7 @@
                 "path": [
                     "/usr/include",
                     "/usr/local/include",
-                    "${workspaceRoot}",
-                    "${workspaceRoot}/breakpad"
+                    "${workspaceRoot}/third_party/breakpad"
                 ],
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": ""
@@ -55,7 +53,7 @@
             "includePath": [
                 "C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/include",
                 "${workspaceRoot}",
-                "${workspaceRoot}/breakpad"
+                "${workspaceRoot}/third_party/breakpad"
             ],
             "defines": [
                 "_DEBUG",
@@ -66,7 +64,7 @@
                 "path": [
                     "C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/include/*",
                     "${workspaceRoot}",
-                    "${workspaceRoot}/breakpad"
+                    "${workspaceRoot}/third_party/breakpad"
                 ],
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": ""

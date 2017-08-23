@@ -6,8 +6,8 @@ const bool handle_inter_cu_refs = true;
 
 #include "common/linux/dump_symbols.h"
 
-#include "../cpp/c_string.h"
-#include "../cpp/symbols.h"
+#include "cpp/c_string.h"
+#include "cpp/symbols.h"
 
 using google_breakpad::WriteSymbolFile;
 using google_breakpad::DumpOptions;

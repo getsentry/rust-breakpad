@@ -5,8 +5,8 @@
 #include "common/mac/macho_utilities.h"
 #include "common/scoped_ptr.h"
 
-#include "../cpp/c_string.h"
-#include "../cpp/symbols.h"
+#include "cpp/c_string.h"
+#include "cpp/symbols.h"
 
 using google_breakpad::DumpSymbols;
 using google_breakpad::Module;
