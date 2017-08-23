@@ -19,7 +19,9 @@ fn save_file<P: AsRef<path::Path>, S: AsRef<str>>(path: P, contents: S) -> io::R
 
 /// Resolves the full path to a fixture file.
 pub fn fixture_path<S: AsRef<str>>(file_name: S) -> path::PathBuf {
-    path::Path::new("tests").join("fixtures").join(file_name.as_ref())
+    path::Path::new("tests")
+        .join("fixtures")
+        .join(file_name.as_ref())
 }
 
 /// Assets that the given object matches the snapshot saved in the snapshot
@@ -36,5 +38,10 @@ pub fn assert_snapshot<S: AsRef<str>, T: fmt::Debug>(snapshot_name: S, val: &T) 
 
     let snapshot_path = path::Path::new("tests").join("snapshots").join(name);
     let snapshot = load_file(snapshot_path).unwrap_or("".into());
-    assert_eq!(snapshot, output, "{}", Changeset::new(&snapshot, &output, "\n"));
+    assert!(
+        snapshot == output,
+        "Value does not match stored snapshot {}:\n\n{}",
+        name,
+        Changeset::new(&snapshot, &output, "\n")
+    );
 }
