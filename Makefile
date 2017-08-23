@@ -8,24 +8,11 @@ OPT_LEVEL ?= 0
 # Add parallel builds
 MAKEFLAGS := --jobs=$(NUM_JOBS) $(MAKEFLAGS)
 
-# Get the operating system name for system dependent flags
-ifneq (, $(findstring darwin, $(TARGET)))
-	LIBSTD = c++
-else ifneq (, $(findstring freebsd, $(TARGET)))
-	LIBSTD = c++
-else
-	LIBSTD = stdc++
-endif
-
 # Flags for both C and C++
 FLAGS += \
 	-fPIC \
 	-O$(OPT_LEVEL) \
 	$(NULL)
-
-ifneq ($(DEBUG), false)
-	FLAGS += -g
-endif
 
 CFLAGS += \
 	$(FLAGS) \
@@ -38,9 +25,38 @@ CXXFLAGS += \
 	-DBPLOG_MINIMUM_SEVERITY=SEVERITY_ERROR \
 	$(NULL)
 
+# Get the operating system name for system dependent flags
+#  - PLATFORM: resembles the output of uname -s
+#  - LIBSTD:   the C++ standard library with C++11 support
+#  - CXXFLAGS: platform dependent flags
+ifneq (, $(findstring darwin, $(TARGET)))
+	PLATFORM = Darwin
+	LIBSTD = c++
+	CXXFLAGS += -DHAVE_MACH_O_NLIST_H
+else ifneq (, $(findstring freebsd, $(TARGET)))
+	PLATFORM = FreeBSD
+	LIBSTD = c++
+else ifneq (, $(findstring linux, $(TARGET)))
+	PLATFORM = Linux
+	LIBSTD = stdc++
+else
+	PLATFORM = Windows
+	LIBSTD = ""
+endif
+
+ifneq ($(DEBUG), false)
+	FLAGS += -g
+endif
+
 LIBRARIES = \
+	common \
 	disasm \
 	processor \
+	symbols \
+	$(NULL)
+
+libcommon_OBJ = \
+	cpp/c_string.o \
 	$(NULL)
 
 libdisasm_OBJ = \
@@ -92,9 +108,31 @@ libprocessor_OBJ = \
  	breakpad/processor/minidump.o \
  	breakpad/processor/minidump_processor.o \
  	breakpad/processor/symbolic_constants_win.o \
- 	cpp/c_string.o \
  	cpp/processor.o \
  	$(NULL)
+
+libsymbols_Darwin_OBJ = \
+	breakpad/common/dwarf_cfi_to_module.o \
+	breakpad/common/dwarf_cu_to_module.o \
+	breakpad/common/dwarf_line_to_module.o \
+	breakpad/common/language.o \
+	breakpad/common/md5.o \
+	breakpad/common/module.o \
+	breakpad/common/stabs_reader.o \
+	breakpad/common/stabs_to_module.o \
+	breakpad/common/dwarf/bytereader.o \
+	breakpad/common/dwarf/dwarf2diehandler.o \
+	breakpad/common/dwarf/dwarf2reader.o \
+	breakpad/common/dwarf/elf_reader.o \
+	breakpad/common/mac/arch_utilities.o \
+	breakpad/common/mac/dump_syms.o \
+	breakpad/common/mac/file_id.o \
+	breakpad/common/mac/macho_id.o \
+	breakpad/common/mac/macho_reader.o \
+	breakpad/common/mac/macho_utilities.o \
+	breakpad/common/mac/macho_walker.o \
+	cpp/mac/symbols.o \
+	$(NULL)
 
 cargo: $(LIBRARIES)
 	@echo cargo:rustc-link-lib=$(LIBSTD)
@@ -104,7 +142,7 @@ $(LIBRARIES): %: $(OUT_DIR)/lib%.a
 	@echo cargo:rustc-link-lib=static=$@
 
 .SECONDEXPANSION:
-$(LIBRARIES:%=$(OUT_DIR)/lib%.a): %.a: $$(addprefix $(OUT_DIR)/,$$($$(*F)_OBJ))
+$(LIBRARIES:%=$(OUT_DIR)/lib%.a): %.a: $$(addprefix $(OUT_DIR)/,$$($$(*F)_OBJ)) $$(addprefix $(OUT_DIR)/,$$($$(*F)_$$(PLATFORM)_OBJ))
 	$(AR) $(ARFLAGS) $@ $(filter %.o,$^)
 
 $(OUT_DIR)/%.o: %.c
