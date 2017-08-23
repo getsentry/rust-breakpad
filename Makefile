@@ -20,8 +20,8 @@ CFLAGS += \
 
 CXXFLAGS += \
 	$(FLAGS) \
-	-Ibreakpad \
-	-Iexternal \
+	-I. \
+	-Ithird_party/breakpad \
 	-std=c++11 \
 	-DBPLOG_MINIMUM_SEVERITY=SEVERITY_ERROR \
 	$(NULL)
@@ -62,100 +62,100 @@ libcommon_OBJ = \
 	$(NULL)
 
 libdisasm_OBJ = \
-	breakpad/third_party/libdisasm/ia32_implicit.o \
-	breakpad/third_party/libdisasm/ia32_insn.o \
-	breakpad/third_party/libdisasm/ia32_invariant.o \
-	breakpad/third_party/libdisasm/ia32_modrm.o \
-	breakpad/third_party/libdisasm/ia32_opcode_tables.o \
-	breakpad/third_party/libdisasm/ia32_operand.o \
-	breakpad/third_party/libdisasm/ia32_reg.o \
-	breakpad/third_party/libdisasm/ia32_settings.o \
-	breakpad/third_party/libdisasm/x86_disasm.o \
-	breakpad/third_party/libdisasm/x86_format.o \
-	breakpad/third_party/libdisasm/x86_imm.o \
-	breakpad/third_party/libdisasm/x86_insn.o \
-	breakpad/third_party/libdisasm/x86_misc.o \
-	breakpad/third_party/libdisasm/x86_operand_list.o \
+	third_party/breakpad/third_party/libdisasm/ia32_implicit.o \
+	third_party/breakpad/third_party/libdisasm/ia32_insn.o \
+	third_party/breakpad/third_party/libdisasm/ia32_invariant.o \
+	third_party/breakpad/third_party/libdisasm/ia32_modrm.o \
+	third_party/breakpad/third_party/libdisasm/ia32_opcode_tables.o \
+	third_party/breakpad/third_party/libdisasm/ia32_operand.o \
+	third_party/breakpad/third_party/libdisasm/ia32_reg.o \
+	third_party/breakpad/third_party/libdisasm/ia32_settings.o \
+	third_party/breakpad/third_party/libdisasm/x86_disasm.o \
+	third_party/breakpad/third_party/libdisasm/x86_format.o \
+	third_party/breakpad/third_party/libdisasm/x86_imm.o \
+	third_party/breakpad/third_party/libdisasm/x86_insn.o \
+	third_party/breakpad/third_party/libdisasm/x86_misc.o \
+	third_party/breakpad/third_party/libdisasm/x86_operand_list.o \
 	$(NULL)
 
 libprocessor_OBJ = \
- 	breakpad/processor/basic_code_modules.o \
- 	breakpad/processor/basic_source_line_resolver.o \
- 	breakpad/processor/call_stack.o \
- 	breakpad/processor/cfi_frame_info.o \
- 	breakpad/processor/disassembler_x86.o \
- 	breakpad/processor/dump_context.o \
- 	breakpad/processor/dump_object.o \
- 	breakpad/processor/logging.o \
- 	breakpad/processor/pathname_stripper.o \
- 	breakpad/processor/process_state.o \
- 	breakpad/processor/proc_maps_linux.o \
- 	breakpad/processor/simple_symbol_supplier.o \
- 	breakpad/processor/source_line_resolver_base.o \
- 	breakpad/processor/stack_frame_cpu.o \
- 	breakpad/processor/stack_frame_symbolizer.o \
- 	breakpad/processor/stackwalker.o \
- 	breakpad/processor/stackwalker_amd64.o \
- 	breakpad/processor/stackwalker_arm.o \
- 	breakpad/processor/stackwalker_arm64.o \
- 	breakpad/processor/stackwalker_mips.o \
- 	breakpad/processor/stackwalker_ppc.o \
- 	breakpad/processor/stackwalker_ppc64.o \
- 	breakpad/processor/stackwalker_sparc.o \
- 	breakpad/processor/stackwalker_x86.o \
- 	breakpad/processor/tokenize.o \
- 	breakpad/processor/exploitability.o \
- 	breakpad/processor/exploitability_linux.o \
- 	breakpad/processor/exploitability_win.o \
- 	breakpad/processor/minidump.o \
- 	breakpad/processor/minidump_processor.o \
- 	breakpad/processor/symbolic_constants_win.o \
- 	cpp/processor.o \
- 	$(NULL)
+	third_party/breakpad/processor/basic_code_modules.o \
+	third_party/breakpad/processor/basic_source_line_resolver.o \
+	third_party/breakpad/processor/call_stack.o \
+	third_party/breakpad/processor/cfi_frame_info.o \
+	third_party/breakpad/processor/disassembler_x86.o \
+	third_party/breakpad/processor/dump_context.o \
+	third_party/breakpad/processor/dump_object.o \
+	third_party/breakpad/processor/logging.o \
+	third_party/breakpad/processor/pathname_stripper.o \
+	third_party/breakpad/processor/process_state.o \
+	third_party/breakpad/processor/proc_maps_linux.o \
+	third_party/breakpad/processor/simple_symbol_supplier.o \
+	third_party/breakpad/processor/source_line_resolver_base.o \
+	third_party/breakpad/processor/stack_frame_cpu.o \
+	third_party/breakpad/processor/stack_frame_symbolizer.o \
+	third_party/breakpad/processor/stackwalker.o \
+	third_party/breakpad/processor/stackwalker_amd64.o \
+	third_party/breakpad/processor/stackwalker_arm.o \
+	third_party/breakpad/processor/stackwalker_arm64.o \
+	third_party/breakpad/processor/stackwalker_mips.o \
+	third_party/breakpad/processor/stackwalker_ppc.o \
+	third_party/breakpad/processor/stackwalker_ppc64.o \
+	third_party/breakpad/processor/stackwalker_sparc.o \
+	third_party/breakpad/processor/stackwalker_x86.o \
+	third_party/breakpad/processor/tokenize.o \
+	third_party/breakpad/processor/exploitability.o \
+	third_party/breakpad/processor/exploitability_linux.o \
+	third_party/breakpad/processor/exploitability_win.o \
+	third_party/breakpad/processor/minidump.o \
+	third_party/breakpad/processor/minidump_processor.o \
+	third_party/breakpad/processor/symbolic_constants_win.o \
+	cpp/processor.o \
+	$(NULL)
 
 libsymbols_Darwin_OBJ = \
-	breakpad/common/dwarf_cfi_to_module.o \
-	breakpad/common/dwarf_cu_to_module.o \
-	breakpad/common/dwarf_line_to_module.o \
-	breakpad/common/language.o \
-	breakpad/common/md5.o \
-	breakpad/common/module.o \
-	breakpad/common/stabs_reader.o \
-	breakpad/common/stabs_to_module.o \
-	breakpad/common/dwarf/bytereader.o \
-	breakpad/common/dwarf/dwarf2diehandler.o \
-	breakpad/common/dwarf/dwarf2reader.o \
-	breakpad/common/dwarf/elf_reader.o \
-	breakpad/common/mac/arch_utilities.o \
-	breakpad/common/mac/dump_syms.o \
-	breakpad/common/mac/file_id.o \
-	breakpad/common/mac/macho_id.o \
-	breakpad/common/mac/macho_reader.o \
-	breakpad/common/mac/macho_utilities.o \
-	breakpad/common/mac/macho_walker.o \
+	third_party/breakpad/common/dwarf_cfi_to_module.o \
+	third_party/breakpad/common/dwarf_cu_to_module.o \
+	third_party/breakpad/common/dwarf_line_to_module.o \
+	third_party/breakpad/common/language.o \
+	third_party/breakpad/common/md5.o \
+	third_party/breakpad/common/module.o \
+	third_party/breakpad/common/stabs_reader.o \
+	third_party/breakpad/common/stabs_to_module.o \
+	third_party/breakpad/common/dwarf/bytereader.o \
+	third_party/breakpad/common/dwarf/dwarf2diehandler.o \
+	third_party/breakpad/common/dwarf/dwarf2reader.o \
+	third_party/breakpad/common/dwarf/elf_reader.o \
+	third_party/breakpad/common/mac/arch_utilities.o \
+	third_party/breakpad/common/mac/dump_syms.o \
+	third_party/breakpad/common/mac/file_id.o \
+	third_party/breakpad/common/mac/macho_id.o \
+	third_party/breakpad/common/mac/macho_reader.o \
+	third_party/breakpad/common/mac/macho_utilities.o \
+	third_party/breakpad/common/mac/macho_walker.o \
 	cpp/mac/symbols.o \
 	$(NULL)
 
 libsymbols_Linux_OBJ = \
-	breakpad/common/dwarf_cfi_to_module.o \
-	breakpad/common/dwarf_cu_to_module.o \
-	breakpad/common/dwarf_line_to_module.o \
-	breakpad/common/language.o \
-	breakpad/common/module.o \
-	breakpad/common/stabs_reader.o \
-	breakpad/common/stabs_to_module.o \
-	breakpad/common/dwarf/bytereader.o \
-	breakpad/common/dwarf/dwarf2diehandler.o \
-	breakpad/common/dwarf/dwarf2reader.o \
-	breakpad/common/dwarf/elf_reader.o \
-	breakpad/common/linux/crc32.o \
-	breakpad/common/linux/dump_symbols.o \
-	breakpad/common/linux/elf_symbols_to_module.o \
-	breakpad/common/linux/elfutils.o \
-	breakpad/common/linux/file_id.o \
-	breakpad/common/linux/linux_libc_support.o \
-	breakpad/common/linux/memory_mapped_file.o \
-	breakpad/common/linux/safe_readlink.o \
+	third_party/breakpad/common/dwarf_cfi_to_module.o \
+	third_party/breakpad/common/dwarf_cu_to_module.o \
+	third_party/breakpad/common/dwarf_line_to_module.o \
+	third_party/breakpad/common/language.o \
+	third_party/breakpad/common/module.o \
+	third_party/breakpad/common/stabs_reader.o \
+	third_party/breakpad/common/stabs_to_module.o \
+	third_party/breakpad/common/dwarf/bytereader.o \
+	third_party/breakpad/common/dwarf/dwarf2diehandler.o \
+	third_party/breakpad/common/dwarf/dwarf2reader.o \
+	third_party/breakpad/common/dwarf/elf_reader.o \
+	third_party/breakpad/common/linux/crc32.o \
+	third_party/breakpad/common/linux/dump_symbols.o \
+	third_party/breakpad/common/linux/elf_symbols_to_module.o \
+	third_party/breakpad/common/linux/elfutils.o \
+	third_party/breakpad/common/linux/file_id.o \
+	third_party/breakpad/common/linux/linux_libc_support.o \
+	third_party/breakpad/common/linux/memory_mapped_file.o \
+	third_party/breakpad/common/linux/safe_readlink.o \
 	cpp/linux/symbols.o \
 	$(NULL)
 
