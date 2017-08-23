@@ -1,6 +1,10 @@
 language: rust
 dist: trusty
 
+os:
+  - linux
+  - osx
+
 rust:
   - stable
   - beta
@@ -9,13 +13,3 @@ rust:
 matrix:
   allow_failures:
     - rust: nightly
-
-env:
-  - CXX=g++-7
-
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - g++-7
