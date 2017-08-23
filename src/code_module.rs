@@ -1,7 +1,9 @@
-use std::{cmp, fmt, hash};
+use std::fmt;
+use std::cmp::Ordering;
+use std::hash::{Hash, Hasher};
 use std::os::raw::{c_char, c_void};
 
-use utils::ptr_to_string;
+use utils;
 
 /// Carries information about a code module loaded into the process during the
 /// crash. The `debug_identifier` uniquely identifies this module.
@@ -20,7 +22,7 @@ impl CodeModule {
     pub fn code_file(&self) -> String {
         unsafe {
             let ptr = code_module_code_file(self);
-            ptr_to_string(ptr)
+            utils::ptr_to_string(ptr)
         }
     }
 
@@ -31,7 +33,7 @@ impl CodeModule {
     pub fn code_identifier(&self) -> String {
         unsafe {
             let ptr = code_module_code_identifier(self);
-            ptr_to_string(ptr)
+            utils::ptr_to_string(ptr)
         }
     }
 
@@ -44,7 +46,7 @@ impl CodeModule {
     pub fn debug_file(&self) -> String {
         unsafe {
             let ptr = code_module_debug_file(self);
-            ptr_to_string(ptr)
+            utils::ptr_to_string(ptr)
         }
     }
 
@@ -59,7 +61,7 @@ impl CodeModule {
     pub fn debug_identifier(&self) -> String {
         unsafe {
             let ptr = code_module_debug_identifier(self);
-            ptr_to_string(ptr)
+            utils::ptr_to_string(ptr)
         }
     }
 }
@@ -72,20 +74,20 @@ impl PartialEq for CodeModule {
     }
 }
 
-impl hash::Hash for CodeModule {
-    fn hash<H: hash::Hasher>(&self, state: &mut H) {
+impl Hash for CodeModule {
+    fn hash<H: Hasher>(&self, state: &mut H) {
         self.debug_identifier().hash(state)
     }
 }
 
 impl Ord for CodeModule {
-    fn cmp(&self, other: &Self) -> cmp::Ordering {
+    fn cmp(&self, other: &Self) -> Ordering {
         self.debug_identifier().cmp(&other.debug_identifier())
     }
 }
 
 impl PartialOrd for CodeModule {
-    fn partial_cmp(&self, other: &Self) -> Option<cmp::Ordering> {
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
         Some(self.cmp(other))
     }
 }

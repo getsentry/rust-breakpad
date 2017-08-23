@@ -1,4 +1,7 @@
-use std::{borrow, ffi, fmt, ops};
+use std::fmt;
+use std::borrow::Cow;
+use std::ffi::CStr;
+use std::ops::Deref;
 use std::os::raw::{c_char, c_int};
 
 use stack_frame::StackFrame;
@@ -30,20 +33,20 @@ impl ResolvedStackFrame {
 
     /// Returns the function name that contains the instruction. Can be empty
     /// before running the `Resolver` or if debug symbols are missing.
-    pub fn function_name(&self) -> borrow::Cow<str> {
+    pub fn function_name(&self) -> Cow<str> {
         unsafe {
             let ptr = stack_frame_function_name(self.internal);
-            ffi::CStr::from_ptr(ptr).to_string_lossy()
+            CStr::from_ptr(ptr).to_string_lossy()
         }
     }
 
     /// Returns the source code line at which the instruction was declared.
     /// Can be empty before running the `Resolver` or if debug symbols are
     /// missing.
-    pub fn source_file_name(&self) -> borrow::Cow<str> {
+    pub fn source_file_name(&self) -> Cow<str> {
         unsafe {
             let ptr = stack_frame_source_file_name(self.internal);
-            ffi::CStr::from_ptr(ptr).to_string_lossy()
+            CStr::from_ptr(ptr).to_string_lossy()
         }
     }
 
@@ -54,7 +57,7 @@ impl ResolvedStackFrame {
     }
 }
 
-impl ops::Deref for ResolvedStackFrame {
+impl Deref for ResolvedStackFrame {
     type Target = StackFrame;
 
     fn deref(&self) -> &StackFrame {
