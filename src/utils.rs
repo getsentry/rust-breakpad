@@ -35,3 +35,9 @@ pub fn path_to_bytes<P: AsRef<Path> + ?Sized>(path: &P) -> &[u8] {
     use std::os::unix::ffi::OsStrExt;
     path.as_ref().as_os_str().as_bytes()
 }
+
+/// Directly converts a path to a C string without allocating memory.
+pub unsafe fn path_to_cstr<P: AsRef<Path> + ?Sized>(path: &P) -> &CStr {
+    let bytes = path_to_bytes(path.as_ref());
+    CStr::from_bytes_with_nul_unchecked(bytes)
+}
