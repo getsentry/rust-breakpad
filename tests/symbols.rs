@@ -16,3 +16,13 @@ fn convert_macos_symbols() {
 
     assert_snapshot("symbols_macos.txt", &symbols);
 }
+
+#[test]
+#[cfg(target_os = "linux")]
+fn convert_linux_symbols() {
+    let primary = fixture_path("hello_linux");
+    let symbols = convert_symbols(primary, None)
+        .unwrap_or("None".into());
+
+    assert_snapshot("symbols_linux.txt", &symbols);
+}

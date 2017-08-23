@@ -21,6 +21,7 @@ CFLAGS += \
 CXXFLAGS += \
 	$(FLAGS) \
 	-Ibreakpad \
+	-Iexternal \
 	-std=c++11 \
 	-DBPLOG_MINIMUM_SEVERITY=SEVERITY_ERROR \
 	$(NULL)
@@ -39,6 +40,7 @@ else ifneq (, $(findstring freebsd, $(TARGET)))
 else ifneq (, $(findstring linux, $(TARGET)))
 	PLATFORM = Linux
 	LIBSTD = stdc++
+	CXXFLAGS += -DHAVE_A_OUT_H
 else
 	PLATFORM = Windows
 	LIBSTD = ""
@@ -132,6 +134,29 @@ libsymbols_Darwin_OBJ = \
 	breakpad/common/mac/macho_utilities.o \
 	breakpad/common/mac/macho_walker.o \
 	cpp/mac/symbols.o \
+	$(NULL)
+
+libsymbols_Linux_OBJ = \
+	breakpad/common/dwarf_cfi_to_module.o \
+	breakpad/common/dwarf_cu_to_module.o \
+	breakpad/common/dwarf_line_to_module.o \
+	breakpad/common/language.o \
+	breakpad/common/module.o \
+	breakpad/common/stabs_reader.o \
+	breakpad/common/stabs_to_module.o \
+	breakpad/common/dwarf/bytereader.o \
+	breakpad/common/dwarf/dwarf2diehandler.o \
+	breakpad/common/dwarf/dwarf2reader.o \
+	breakpad/common/dwarf/elf_reader.o \
+	breakpad/common/linux/crc32.o \
+	breakpad/common/linux/dump_symbols.o \
+	breakpad/common/linux/elf_symbols_to_module.o \
+	breakpad/common/linux/elfutils.o \
+	breakpad/common/linux/file_id.o \
+	breakpad/common/linux/linux_libc_support.o \
+	breakpad/common/linux/memory_mapped_file.o \
+	breakpad/common/linux/safe_readlink.o \
+	cpp/linux/symbols.o \
 	$(NULL)
 
 cargo: $(LIBRARIES)
