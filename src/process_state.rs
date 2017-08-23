@@ -1,10 +1,13 @@
-use std::{collections, ffi, fmt, mem, path, slice};
+use std::{fmt, mem, slice};
+use std::collections::HashSet;
+use std::ffi::CString;
 use std::os::raw::{c_char, c_void};
+use std::path::Path;
 
 use call_stack::CallStack;
-use errors::*;
 use code_module::CodeModule;
-use utils::path_to_bytes;
+use errors::*;
+use utils;
 
 /// Result of processing a Minidump or Microdump file.
 /// Usually included in `ProcessError` when the file cannot be processed.
@@ -76,9 +79,9 @@ impl ProcessState {
     /// Reads a minidump from the filesystem into memory and processes it.
     /// Returns a `ProcessState` that contains information about the crashed
     /// process.
-    pub fn from_minidump<P: AsRef<path::Path>>(file_path: P) -> Result<ProcessState> {
-        let bytes = path_to_bytes(file_path.as_ref());
-        let cstr = ffi::CString::new(bytes).unwrap();
+    pub fn from_minidump<P: AsRef<Path>>(file_path: P) -> Result<ProcessState> {
+        let bytes = utils::path_to_bytes(file_path.as_ref());
+        let cstr = CString::new(bytes).unwrap();
 
         let mut result: ProcessResult = ProcessResult::Ok;
         let internal = unsafe { process_minidump(cstr.as_ptr(), &mut result) };
@@ -101,7 +104,7 @@ impl ProcessState {
     }
 
     /// Returns a list of all `CodeModule`s referenced in one of the `CallStack`s.
-    pub fn referenced_modules(&self) -> collections::HashSet<&CodeModule> {
+    pub fn referenced_modules(&self) -> HashSet<&CodeModule> {
         self.threads()
             .iter()
             .flat_map(|stack| stack.frames().iter())

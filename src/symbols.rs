@@ -1,5 +1,7 @@
-use std::{ffi, path, ptr};
+use std::ffi::CString;
 use std::os::raw::c_char;
+use std::path::Path;
+use std::ptr;
 
 use errors::*;
 use utils::{path_to_bytes, ptr_to_string};
@@ -12,17 +14,14 @@ extern "C" {
 /// ASCII format. On some systems, debug symbols are extracted into a
 /// secondary file (e.g. dSYM on Darwin). In this case, specify this file
 /// in `secondary_path`.
-pub fn convert_symbols<P: AsRef<path::Path>>(
-    file_path: P,
-    secondary_path: Option<P>,
-) -> Result<String> {
+pub fn convert_symbols<P: AsRef<Path>>(file_path: P, secondary_path: Option<P>) -> Result<String> {
     let file_bytes = path_to_bytes(file_path.as_ref());
-    let file_cstr = ffi::CString::new(file_bytes).unwrap();
+    let file_cstr = CString::new(file_bytes).unwrap();
 
     let secondary_cstr = match secondary_path {
         Some(path) => {
             let bytes = path_to_bytes(path.as_ref());
-            ffi::CString::new(bytes).unwrap().as_ptr()
+            CString::new(bytes).unwrap().as_ptr()
         }
         None => ptr::null(),
     };

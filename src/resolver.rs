@@ -1,5 +1,6 @@
-use std::{ffi, path};
+use std::ffi::CString;
 use std::os::raw::{c_char, c_void};
+use std::path::Path;
 
 use code_module::CodeModule;
 use errors::*;
@@ -49,9 +50,9 @@ impl Resolver {
 
     /// Adds symbols for the given `CodeModule` from a Breakpad symbol file in
     /// the file system.
-    pub fn load_symbols<P: AsRef<path::Path>>(&self, module: &CodeModule, file_path: P) -> Result<()> {
+    pub fn load_symbols<P: AsRef<Path>>(&self, module: &CodeModule, file_path: P) -> Result<()> {
         let bytes = path_to_bytes(file_path.as_ref());
-        let cstr = ffi::CString::new(bytes).unwrap();
+        let cstr = CString::new(bytes).unwrap();
 
         if unsafe { resolver_load_symbols(self.internal, module, cstr.as_ptr()) } {
             Ok(())
