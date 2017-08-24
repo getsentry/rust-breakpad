@@ -4,7 +4,7 @@ extern crate difference;
 mod common;
 
 use breakpad::{convert_symbols};
-use common::{assert_snapshot, fixture_path};
+use common::{assert_snapshot_plain, fixture_path};
 
 #[test]
 #[cfg(target_os = "macos")]
@@ -14,7 +14,7 @@ fn convert_macos_symbols() {
     let symbols = convert_symbols(primary, Some(secondary))
         .unwrap_or("None".into());
 
-    assert_snapshot("symbols_macos.txt", &symbols);
+    assert_snapshot_plain("symbols_macos.txt", &symbols);
 }
 
 #[test]
@@ -24,5 +24,5 @@ fn convert_linux_symbols() {
     let symbols = convert_symbols(primary, None)
         .unwrap_or("None".into());
 
-    assert_snapshot("symbols_linux.txt", &symbols);
+    assert_snapshot_plain("symbols_linux.txt", &symbols);
 }
