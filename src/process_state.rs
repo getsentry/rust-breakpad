@@ -80,10 +80,8 @@ impl ProcessState {
     /// process.
     pub fn from_minidump<P: AsRef<Path>>(file_path: P) -> Result<ProcessState> {
         let mut result: ProcessResult = ProcessResult::Ok;
-        let internal = unsafe {
-            let cstr = utils::path_to_cstr(file_path.as_ref());
-            process_minidump(cstr.as_ptr(), &mut result)
-        };
+        let cstr = utils::path_to_str(file_path);
+        let internal = unsafe { process_minidump(cstr.as_ptr(), &mut result) };
 
         if result == ProcessResult::Ok && !internal.is_null() {
             Ok(ProcessState { internal })

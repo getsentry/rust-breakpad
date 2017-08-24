@@ -50,7 +50,7 @@ impl Resolver {
     /// Adds symbols for the given `CodeModule` from a Breakpad symbol file in
     /// the file system.
     pub fn load_symbols<P: AsRef<Path>>(&self, module: &CodeModule, file_path: P) -> Result<()> {
-        let cstr = unsafe { utils::path_to_cstr(file_path.as_ref()) };
+        let cstr = utils::path_to_str(file_path);
         if unsafe { resolver_load_symbols(self.internal, module, cstr.as_ptr()) } {
             Ok(())
         } else {

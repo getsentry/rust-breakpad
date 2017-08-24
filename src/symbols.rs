@@ -14,21 +14,16 @@ extern "C" {
 /// secondary file (e.g. dSYM on Darwin). In this case, specify this file
 /// in `secondary_path`.
 pub fn convert_symbols<P: AsRef<Path>>(file_path: P, secondary_path: Option<P>) -> Result<String> {
-    let file_cstr = unsafe { utils::path_to_cstr(file_path.as_ref()).as_ptr() };
-
-    let secondary_cstr = match secondary_path {
-        Some(path) => unsafe { utils::path_to_cstr(path.as_ref()).as_ptr() },
-        None => ptr::null(),
-    };
+    let file_cstr = utils::path_to_str(file_path);
+    let secondary_cstr = secondary_path.map(|p| utils::path_to_str(p));
 
     unsafe {
-        let ptr = create_symbols(file_cstr, secondary_cstr);
+        let ptr = create_symbols(file_cstr.as_ptr(), secondary_cstr.as_ref().map_or(ptr::null(), |s| s.as_ptr()));
         if ptr.is_null() {
             let err = ErrorKind::ConversionError("Files not found or invalid".into());
             Err(err.into())
         } else {
             Ok(utils::ptr_to_string(ptr))
         }
-
     }
 }
