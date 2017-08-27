@@ -192,25 +192,17 @@ char *code_module_debug_identifier(const code_module_t *module);
 
 /**
  * Creates a new source line resolver instance and returns an owning pointer
- * to it.
+ * to it. Symbols are loaded from a Breakpad symbol file in the file system.
+ * The file name is given as a weak pointer in the symbol_file parameter.
  *
  * Release memory of this resolver with the resolver_delete function.
  */
-resolver_t *resolver_new();
+resolver_t *resolver_new(const char *symbol_file);
 
 /**
  * Releases memory of a resolver object. Assumes ownership of the pointer.
  */
 void resolver_delete(resolver_t *resolver);
-
-/**
- * Adds new symbols for the given code module from a Breakpad symbol file in
- * the file system. The file name is given as a weak pointer in the symbol_file
- * parameter. Returns whether the symbol map was built successfully.
- */
-bool resolver_load_symbols(resolver_t *resolver,
-                           const code_module_t *module,
-                           const char *symbol_file);
 
 /**
  * Tries to locate the frame's instruction in the loaded code modules. Returns
@@ -220,7 +212,7 @@ bool resolver_load_symbols(resolver_t *resolver,
  * This method expects a weak pointer to a frame. Release memory of this frame
  * with the stack_frame_delete function.
  */
-stack_frame_t *resolver_resolve_frame(resolver_t *resolver, const stack_frame_t *frame);
+stack_frame_t *resolver_resolve_frame(const resolver_t *resolver, const stack_frame_t *frame);
 
 #ifdef __cplusplus
 }
