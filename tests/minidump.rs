@@ -40,3 +40,10 @@ fn resolve_electron_stack_frame() {
     let resolved_frame = resolver.resolve_frame(&frame);
     assert_snapshot("resolved_frame.txt", &resolved_frame);
 }
+
+#[test]
+fn create_corrupt_resolver() {
+    let resolver = Resolver::new(fixture_path("Corrupt.sym"))
+        .expect("Could not load symbols for Corrupt.");
+    assert!(resolver.corrupt());
+}

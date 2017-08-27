@@ -205,6 +205,12 @@ resolver_t *resolver_new(const char *symbol_file);
 void resolver_delete(resolver_t *resolver);
 
 /**
+ * Returns whether the loaded symbol file was corrupt or can be used for
+ * symbol resolution.
+ */
+bool resolver_is_corrupt(const resolver_t *resolver);
+
+/**
  * Tries to locate the frame's instruction in the loaded code modules. Returns
  * an owning pointer to a new resolved stack frame instance. If no  symbols can
  * be found for the frame, a clone of the input is returned.

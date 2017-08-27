@@ -11,6 +11,7 @@ pub type Internal = c_void;
 extern "C" {
     fn resolver_new(file_path: *const c_char) -> *mut Internal;
     fn resolver_delete(resolver: *mut Internal);
+    fn resolver_is_corrupt(resolver: *const Internal) -> bool;
     fn resolver_resolve_frame(resolver: *const Internal, frame: *const StackFrame)
         -> *mut StackFrame;
 }
@@ -41,6 +42,12 @@ impl Resolver {
         } else {
             Ok(Resolver { internal })
         }
+    }
+
+    /// Returns whether this `Resolver` is corrupt or it can be used to
+    /// resolve source line locations of `StackFrames`.
+    pub fn corrupt(&self) -> bool {
+        unsafe { resolver_is_corrupt(self.internal) }
     }
 
     /// Tries to locate the frame's instruction in the loaded code modules.

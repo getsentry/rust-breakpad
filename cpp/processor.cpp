@@ -205,6 +205,10 @@ void resolver_delete(resolver_t *resolver) {
     }
 }
 
+bool resolver_is_corrupt(const resolver_t *resolver) {
+    return resolver_t::cast(resolver)->IsCorrupt();
+}
+
 static StackFrame *clone_stack_frame(const StackFrame *frame) {
     if (frame == nullptr) {
         return nullptr;
