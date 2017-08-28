@@ -1,7 +1,6 @@
 use std::os::raw::{c_char, c_void};
 use std::path::Path;
 
-use code_module::CodeModule;
 use errors::*;
 use resolved_stack_frame::ResolvedStackFrame;
 use stack_frame::StackFrame;
@@ -10,14 +9,10 @@ use utils;
 pub type Internal = c_void;
 
 extern "C" {
-    fn resolver_new() -> *mut Internal;
+    fn resolver_new(file_path: *const c_char) -> *mut Internal;
     fn resolver_delete(resolver: *mut Internal);
-    fn resolver_load_symbols(
-        resolver: *mut Internal,
-        module: *const CodeModule,
-        symbol_file: *const c_char,
-    ) -> bool;
-    fn resolver_resolve_frame(resolver: *mut Internal, frame: *const StackFrame)
+    fn resolver_is_corrupt(resolver: *const Internal) -> bool;
+    fn resolver_resolve_frame(resolver: *const Internal, frame: *const StackFrame)
         -> *mut StackFrame;
 }
 
@@ -35,28 +30,24 @@ pub struct Resolver {
 }
 
 impl Resolver {
-    /// Creates a new `Resolver` instance.
-    pub fn new() -> Result<Resolver> {
-        let internal = unsafe { resolver_new() };
+    /// Creates a new `Resolver` instance from a Breakpad symbol file in the
+    /// file system.
+    pub fn new<P: AsRef<Path>>(file_path: P) -> Result<Resolver> {
+        let cstr = utils::path_to_str(file_path);
+        let internal = unsafe { resolver_new(cstr.as_ptr()) };
 
         if internal.is_null() {
-            let err = ErrorKind::ResolverError("Could not create resolver".into());
+            let err = ErrorKind::ResolverError("Could not load symbols".into());
             Err(err.into())
         } else {
             Ok(Resolver { internal })
         }
     }
 
-    /// Adds symbols for the given `CodeModule` from a Breakpad symbol file in
-    /// the file system.
-    pub fn load_symbols<P: AsRef<Path>>(&self, module: &CodeModule, file_path: P) -> Result<()> {
-        let cstr = utils::path_to_str(file_path);
-        if unsafe { resolver_load_symbols(self.internal, module, cstr.as_ptr()) } {
-            Ok(())
-        } else {
-            let err = ErrorKind::ResolverError("Could not load symbols".into());
-            Err(err.into())
-        }
+    /// Returns whether this `Resolver` is corrupt or it can be used to
+    /// resolve source line locations of `StackFrames`.
+    pub fn corrupt(&self) -> bool {
+        unsafe { resolver_is_corrupt(self.internal) }
     }
 
     /// Tries to locate the frame's instruction in the loaded code modules.

@@ -1,24 +1,37 @@
-#include "google_breakpad/processor/basic_source_line_resolver.h"
+#include <fstream>
+#include <type_traits>
+#include <vector>
+
 #include "google_breakpad/processor/call_stack.h"
 #include "google_breakpad/processor/minidump_processor.h"
 #include "google_breakpad/processor/process_state.h"
 #include "google_breakpad/processor/stack_frame.h"
+#include "processor/module_factory.h"
 
 #include "c_mapping.h"
 #include "c_string.h"
 #include "processor.h"
 
+using google_breakpad::BasicModuleFactory;
 using google_breakpad::CallStack;
 using google_breakpad::CodeModule;
-using google_breakpad::BasicSourceLineResolver;
 using google_breakpad::MinidumpProcessor;
 using google_breakpad::ProcessState;
 using google_breakpad::StackFrame;
 
+// Factory for modules to resolve stack frames.
+BasicModuleFactory factory;
+
+// Processor used for minidumps.
+MinidumpProcessor processor(nullptr, nullptr);
+
+// Defines the private nested type BasicSourceLineResolver::Module
+using ResolverModule = typename std::remove_pointer<decltype(factory.CreateModule(""))>::type;
+
 typedef_extern_c(call_stack_t, CallStack);
 typedef_extern_c(code_module_t, CodeModule);
 typedef_extern_c(process_state_t, ProcessState);
-typedef_extern_c(resolver_t, BasicSourceLineResolver);
+typedef_extern_c(resolver_t, ResolverModule);
 typedef_extern_c(stack_frame_t, StackFrame);
 
 process_state_t *process_minidump(const char *file_path, int *result_out) {
@@ -27,7 +40,6 @@ process_state_t *process_minidump(const char *file_path, int *result_out) {
         return nullptr;
     }
 
-    MinidumpProcessor processor(nullptr, nullptr);
     ProcessState *state = new ProcessState();
     if (state == nullptr) {
         *result_out = -1; // Memory allocation issue
@@ -165,8 +177,26 @@ char *code_module_debug_identifier(const code_module_t *module) {
     return string_from(code_module_t::cast(module)->debug_identifier());
 }
 
-resolver_t *resolver_new() {
-    return resolver_t::cast(new BasicSourceLineResolver());
+resolver_t *resolver_new(const char *symbol_file) {
+    std::ifstream in(symbol_file);
+    if (!in.good()) {
+        return nullptr;
+    }
+
+    in.seekg(0,std::ios::end);
+    std::streampos length = in.tellg();
+    std::vector<char> buffer(length);
+
+    in.seekg(0,std::ios::beg);
+    in.read(&buffer[0],length);
+
+    auto *module = factory.CreateModule("");
+    if (module == nullptr) {
+        return nullptr;
+    }
+
+    module->LoadMapFromMemory(&buffer[0], length);
+    return resolver_t::cast(module);
 }
 
 void resolver_delete(resolver_t *resolver) {
@@ -175,12 +205,8 @@ void resolver_delete(resolver_t *resolver) {
     }
 }
 
-bool resolver_load_symbols(resolver_t *resolver, const code_module_t *module, const char *symbol_file) {
-    if (resolver == nullptr || module == nullptr || symbol_file == nullptr) {
-        return false;
-    }
-
-    return resolver_t::cast(resolver)->LoadModule(code_module_t::cast(module), symbol_file);
+bool resolver_is_corrupt(const resolver_t *resolver) {
+    return resolver_t::cast(resolver)->IsCorrupt();
 }
 
 static StackFrame *clone_stack_frame(const StackFrame *frame) {
@@ -202,7 +228,7 @@ static StackFrame *clone_stack_frame(const StackFrame *frame) {
     return clone;
 }
 
-stack_frame_t *resolver_resolve_frame(resolver_t *resolver, const stack_frame_t *frame) {
+stack_frame_t *resolver_resolve_frame(const resolver_t *resolver, const stack_frame_t *frame) {
     if (resolver == nullptr || frame == nullptr) {
         return nullptr;
     }
@@ -212,6 +238,6 @@ stack_frame_t *resolver_resolve_frame(resolver_t *resolver, const stack_frame_t 
         return nullptr;
     }
 
-    resolver_t::cast(resolver)->FillSourceLineInfo(clone);
+    resolver_t::cast(resolver)->LookupAddress(clone);
     return stack_frame_t::cast(clone);
 }

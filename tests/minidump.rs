@@ -33,14 +33,17 @@ fn resolve_electron_stack_frame() {
     let state = process_minidump("electron.dmp");
     let thread = state.threads().first().unwrap();
     let frame = thread.frames()[1];
-    let module = frame.module().unwrap();
 
-    let resolver = Resolver::new()
-        .expect("Could not allocate the resolver.");
-
-    resolver.load_symbols(&module, fixture_path("Electron Framework.sym"))
-        .expect("Could not load symbols for Electron Framework");
+    let resolver = Resolver::new(fixture_path("Electron Framework.sym"))
+        .expect("Could not load symbols for Electron Framework.");
 
     let resolved_frame = resolver.resolve_frame(&frame);
     assert_snapshot("resolved_frame.txt", &resolved_frame);
+}
+
+#[test]
+fn create_corrupt_resolver() {
+    let resolver = Resolver::new(fixture_path("Corrupt.sym"))
+        .expect("Could not load symbols for Corrupt.");
+    assert!(resolver.corrupt());
 }
