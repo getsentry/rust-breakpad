@@ -1,6 +1,5 @@
 use std::{fmt, mem, slice};
 use std::collections::HashSet;
-use std::ffi::CString;
 use std::os::raw::{c_char, c_void};
 use std::path::Path;
 
@@ -80,10 +79,8 @@ impl ProcessState {
     /// Returns a `ProcessState` that contains information about the crashed
     /// process.
     pub fn from_minidump<P: AsRef<Path>>(file_path: P) -> Result<ProcessState> {
-        let bytes = utils::path_to_bytes(file_path.as_ref());
-        let cstr = CString::new(bytes).unwrap();
-
         let mut result: ProcessResult = ProcessResult::Ok;
+        let cstr = utils::path_to_str(file_path);
         let internal = unsafe { process_minidump(cstr.as_ptr(), &mut result) };
 
         if result == ProcessResult::Ok && !internal.is_null() {

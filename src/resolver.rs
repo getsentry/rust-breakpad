@@ -1,4 +1,3 @@
-use std::ffi::CString;
 use std::os::raw::{c_char, c_void};
 use std::path::Path;
 
@@ -6,7 +5,7 @@ use code_module::CodeModule;
 use errors::*;
 use resolved_stack_frame::ResolvedStackFrame;
 use stack_frame::StackFrame;
-use utils::path_to_bytes;
+use utils;
 
 pub type Internal = c_void;
 
@@ -51,9 +50,7 @@ impl Resolver {
     /// Adds symbols for the given `CodeModule` from a Breakpad symbol file in
     /// the file system.
     pub fn load_symbols<P: AsRef<Path>>(&self, module: &CodeModule, file_path: P) -> Result<()> {
-        let bytes = path_to_bytes(file_path.as_ref());
-        let cstr = CString::new(bytes).unwrap();
-
+        let cstr = utils::path_to_str(file_path);
         if unsafe { resolver_load_symbols(self.internal, module, cstr.as_ptr()) } {
             Ok(())
         } else {

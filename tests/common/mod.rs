@@ -29,10 +29,20 @@ pub fn fixture_path<S: AsRef<str>>(file_name: S) -> path::PathBuf {
 ///
 /// If the value differs from the snapshot, the assertion fails and prints
 /// a colored diff output.
+#[allow(dead_code)]
 pub fn assert_snapshot<S: AsRef<str>, T: fmt::Debug>(snapshot_name: S, val: &T) {
+    assert_snapshot_plain(snapshot_name, &format!("{:#?}", val));
+}
+
+/// Assets that the given string matches the snapshot saved in the snapshot
+/// file. The given string will be used as plain output and directly compared
+/// with the stored snapshot.
+///
+/// If the value differs from the snapshot, the assertion fails and prints
+/// a colored diff output.
+pub fn assert_snapshot_plain<S: AsRef<str>>(snapshot_name: S, output: &str) {
     let name = snapshot_name.as_ref();
 
-    let output = format!("{:#?}", val);
     let output_path = path::Path::new("tests").join("outputs").join(name);
     save_file(output_path, &output).unwrap_or_default();
 

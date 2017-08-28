@@ -1,4 +1,4 @@
-use std::ffi::CStr;
+use std::ffi::{CStr, CString};
 use std::os::raw::c_char;
 use std::path::Path;
 
@@ -34,4 +34,10 @@ pub fn path_to_bytes<P: AsRef<Path> + ?Sized>(path: &P) -> &[u8] {
 pub fn path_to_bytes<P: AsRef<Path> + ?Sized>(path: &P) -> &[u8] {
     use std::os::unix::ffi::OsStrExt;
     path.as_ref().as_os_str().as_bytes()
+}
+
+/// Directly converts a path to a C string without allocating memory.
+pub fn path_to_str<P: AsRef<Path>>(path: P) -> CString {
+    let bytes = path_to_bytes(path.as_ref());
+    CString::new(bytes).unwrap()
 }
