@@ -3,7 +3,7 @@ extern crate difference;
 
 mod common;
 
-use breakpad::{convert_symbols};
+use breakpad::convert_symbols;
 use common::{assert_snapshot_plain, fixture_path};
 
 #[test]

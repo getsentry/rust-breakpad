@@ -3,7 +3,7 @@ extern crate difference;
 
 mod common;
 
-use std::collections;
+use std::collections::BTreeSet;
 
 use breakpad::{CodeModule, ProcessState, Resolver};
 use common::{assert_snapshot, fixture_path};
@@ -22,7 +22,7 @@ fn get_minidump_process_state() {
 #[test]
 fn obtain_referenced_modules() {
     let state = process_minidump("electron.dmp");
-    let modules: collections::BTreeSet<&CodeModule> =
+    let modules: BTreeSet<&CodeModule> =
         state.referenced_modules().iter().cloned().collect();
 
     assert_snapshot("referenced_modules.txt", &modules);

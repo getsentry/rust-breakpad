@@ -1,25 +1,29 @@
+#![allow(dead_code)]
+
 use difference::Changeset;
-use std::{fmt, fs, io, path};
+use std::{fmt, io};
+use std::fs::File;
+use std::path::{Path, PathBuf};
 use std::io::prelude::*;
 
 /// Loads the file at the given location and returns its contents as string.
-fn load_file<P: AsRef<path::Path>>(path: P) -> io::Result<String> {
-    let mut file = fs::File::open(path)?;
+fn load_file<P: AsRef<Path>>(path: P) -> io::Result<String> {
+    let mut file = File::open(path)?;
     let mut buffer = String::new();
     file.read_to_string(&mut buffer)?;
     Ok(buffer)
 }
 
 /// Saves the given string into the specified file path.
-fn save_file<P: AsRef<path::Path>, S: AsRef<str>>(path: P, contents: S) -> io::Result<()> {
-    let mut file = fs::File::create(path)?;
+fn save_file<P: AsRef<Path>, S: AsRef<str>>(path: P, contents: S) -> io::Result<()> {
+    let mut file = File::create(path)?;
     file.write_all(contents.as_ref().as_bytes())?;
     Ok(())
 }
 
 /// Resolves the full path to a fixture file.
-pub fn fixture_path<S: AsRef<str>>(file_name: S) -> path::PathBuf {
-    path::Path::new("tests")
+pub fn fixture_path<S: AsRef<str>>(file_name: S) -> PathBuf {
+    Path::new("tests")
         .join("fixtures")
         .join(file_name.as_ref())
 }
@@ -29,7 +33,6 @@ pub fn fixture_path<S: AsRef<str>>(file_name: S) -> path::PathBuf {
 ///
 /// If the value differs from the snapshot, the assertion fails and prints
 /// a colored diff output.
-#[allow(dead_code)]
 pub fn assert_snapshot<S: AsRef<str>, T: fmt::Debug>(snapshot_name: S, val: &T) {
     assert_snapshot_plain(snapshot_name, &format!("{:#?}", val));
 }
@@ -43,10 +46,10 @@ pub fn assert_snapshot<S: AsRef<str>, T: fmt::Debug>(snapshot_name: S, val: &T) 
 pub fn assert_snapshot_plain<S: AsRef<str>>(snapshot_name: S, output: &str) {
     let name = snapshot_name.as_ref();
 
-    let output_path = path::Path::new("tests").join("outputs").join(name);
+    let output_path = Path::new("tests").join("outputs").join(name);
     save_file(output_path, &output).unwrap_or_default();
 
-    let snapshot_path = path::Path::new("tests").join("snapshots").join(name);
+    let snapshot_path = Path::new("tests").join("snapshots").join(name);
     let snapshot = load_file(snapshot_path).unwrap_or("".into());
     assert!(
         snapshot == output,
