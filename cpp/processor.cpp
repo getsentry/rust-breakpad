@@ -2,28 +2,34 @@
 #include <type_traits>
 #include <vector>
 
+#include "google_breakpad/processor/basic_source_line_resolver.h"
 #include "google_breakpad/processor/call_stack.h"
 #include "google_breakpad/processor/minidump_processor.h"
 #include "google_breakpad/processor/process_state.h"
 #include "google_breakpad/processor/stack_frame.h"
 #include "processor/module_factory.h"
+#include "processor/simple_symbol_supplier.h"
 
 #include "c_mapping.h"
 #include "c_string.h"
 #include "processor.h"
 
 using google_breakpad::BasicModuleFactory;
+using google_breakpad::BasicSourceLineResolver;
 using google_breakpad::CallStack;
 using google_breakpad::CodeModule;
 using google_breakpad::MinidumpProcessor;
 using google_breakpad::ProcessState;
+using google_breakpad::SimpleSymbolSupplier;
 using google_breakpad::StackFrame;
 
 // Factory for modules to resolve stack frames.
 BasicModuleFactory factory;
 
 // Processor used for minidumps.
-MinidumpProcessor processor(nullptr, nullptr);
+BasicSourceLineResolver resolver;
+SimpleSymbolSupplier supplier("/Users/jauer/Coding/breakpad/examples/target/symbols");
+MinidumpProcessor processor(&supplier, &resolver);
 
 // Defines the private nested type BasicSourceLineResolver::Module
 using ResolverModule = typename std::remove_pointer<decltype(factory.CreateModule(""))>::type;
