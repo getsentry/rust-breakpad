@@ -8,7 +8,7 @@ use breakpad::convert_symbols;
 use breakpad::ProcessState;
 use breakpad::Resolver;
 
-#[test]
+// #[test]
 fn test_example() {
     let state = ProcessState::from_minidump(Path::new("examples/target/example.dmp"))
         .expect("Couldn't process minidump");
