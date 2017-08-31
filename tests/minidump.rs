@@ -15,13 +15,13 @@ fn process_minidump<S: AsRef<str>>(file_name: S) -> ProcessState {
 
 #[test]
 fn get_minidump_process_state() {
-    let state = process_minidump("electron.dmp");
+    let state = process_minidump("crash_macos.dmp");
     assert_snapshot("process_state.txt", &state);
 }
 
 #[test]
 fn obtain_referenced_modules() {
-    let state = process_minidump("electron.dmp");
+    let state = process_minidump("crash_macos.dmp");
     let modules: BTreeSet<_> = state.referenced_modules().iter().cloned().collect();
 
     assert_snapshot("referenced_modules.txt", &modules);
