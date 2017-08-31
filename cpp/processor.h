@@ -218,7 +218,8 @@ bool resolver_is_corrupt(const resolver_t *resolver);
  * This method expects a weak pointer to a frame. Release memory of this frame
  * with the stack_frame_delete function.
  */
-stack_frame_t *resolver_resolve_frame(const resolver_t *resolver, const stack_frame_t *frame);
+stack_frame_t *resolver_resolve_frame(const resolver_t *resolver,
+                                      const stack_frame_t *frame);
 
 #ifdef __cplusplus
 }
