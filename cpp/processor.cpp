@@ -148,6 +148,14 @@ int stack_frame_trust(const stack_frame_t *frame) {
   return stack_frame_t::cast(frame)->trust;
 }
 
+uint64_t code_module_base_address(const code_module_t *module) {
+  return code_module_t::cast(module)->base_address();
+}
+
+uint64_t code_module_size(const code_module_t *module) {
+    return code_module_t::cast(module)->size();
+}
+
 char *code_module_code_file(const code_module_t *module) {
   if (module == nullptr) {
     return nullptr;

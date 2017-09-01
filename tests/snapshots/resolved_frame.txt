@@ -6,6 +6,8 @@ ResolvedStackFrame {
     trust: Context,
     module: Some(
         CodeModule {
+            base_address: 4554190848,
+            size: 176128,
             code_file: "/Users/jauer/Coding/breakpad/examples/./target/crash_macos",
             code_identifier: "id",
             debug_file: "crash_macos",

@@ -11,6 +11,8 @@ use utils;
 pub struct CodeModule(c_void);
 
 extern "C" {
+    fn code_module_base_address(module: *const CodeModule) -> u64;
+    fn code_module_size(module: *const CodeModule) -> u64;
     fn code_module_code_file(module: *const CodeModule) -> *mut c_char;
     fn code_module_code_identifier(module: *const CodeModule) -> *mut c_char;
     fn code_module_debug_file(module: *const CodeModule) -> *mut c_char;
@@ -18,6 +20,17 @@ extern "C" {
 }
 
 impl CodeModule {
+    /// Returns the base address of this code module as it was loaded by the
+    /// process. (uint64_t)-1 on error.
+    pub fn base_address(&self) -> u64 {
+        unsafe { code_module_base_address(self) }
+    }
+
+    /// The size of the code module. 0 on error.
+    pub fn size(&self) -> u64 {
+        unsafe { code_module_size(self) }
+    }
+
     // Returns the path or file name that the code module was loaded from.
     pub fn code_file(&self) -> String {
         unsafe {
@@ -95,6 +108,8 @@ impl PartialOrd for CodeModule {
 impl fmt::Debug for CodeModule {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         f.debug_struct("CodeModule")
+            .field("base_address", &self.base_address())
+            .field("size", &self.size())
             .field("code_file", &self.code_file())
             .field("code_identifier", &self.code_identifier())
             .field("debug_file", &self.debug_file())

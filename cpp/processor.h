@@ -148,6 +148,17 @@ int stack_frame_source_line(const stack_frame_t *frame);
 int stack_frame_trust(const stack_frame_t *frame);
 
 /**
+ * Returns the base address of this code module as it was loaded by the
+ * process. (uint64_t)-1 on error.
+ */
+uint64_t code_module_base_address(const code_module_t *module);
+
+/**
+ * The size of the code module. 0 on error.
+ */
+uint64_t code_module_size(const code_module_t *module);
+
+/**
  * Returns the path or file name that the code module was loaded from.
  *
  * The return value is an owning pointer. Release memory with string_delete.
