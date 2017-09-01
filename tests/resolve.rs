@@ -7,7 +7,7 @@ use breakpad::{ProcessState, Resolver};
 use common::{assert_snapshot, fixture_path};
 
 #[test]
-fn resolve_electron_stack_frame() {
+fn resolve_stack_frame() {
     let state = ProcessState::from_minidump(fixture_path("crash_macos.dmp")).unwrap();
     let thread = state.threads().first().unwrap();
     let frame = thread.frames()[0];
