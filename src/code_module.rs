@@ -18,8 +18,7 @@ pub struct CodeModuleId {
 impl CodeModuleId {
     pub fn parse(input: &str) -> Result<CodeModuleId> {
         if input.len() != 33 {
-            let err = ParseIdError("Invalid input string length".into());
-            return Err(err.into());
+            return Err(ParseIdError("Invalid input string length".into()).into());
         }
 
         let uuid = Uuid::parse_str(&input[..32])

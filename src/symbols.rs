@@ -2,7 +2,8 @@ use std::os::raw::c_char;
 use std::path::Path;
 use std::ptr;
 
-use errors::*;
+use errors::ErrorKind::ConversionError;
+use errors::Result;
 use utils;
 
 extern "C" {
@@ -18,10 +19,13 @@ pub fn convert_symbols<P: AsRef<Path>>(file_path: P, secondary_path: Option<P>) 
     let secondary_cstr = secondary_path.map(|p| utils::path_to_str(p));
 
     unsafe {
-        let ptr = create_symbols(file_cstr.as_ptr(), secondary_cstr.as_ref().map_or(ptr::null(), |s| s.as_ptr()));
+        let ptr = create_symbols(
+            file_cstr.as_ptr(),
+            secondary_cstr.as_ref().map_or(ptr::null(), |s| s.as_ptr()),
+        );
+
         if ptr.is_null() {
-            let err = ErrorKind::ConversionError("Files not found or invalid".into());
-            Err(err.into())
+            Err(ConversionError("Files not found or invalid".into()).into())
         } else {
             Ok(utils::ptr_to_string(ptr))
         }

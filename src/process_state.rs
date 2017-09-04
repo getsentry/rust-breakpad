@@ -7,7 +7,8 @@ use std::path::Path;
 
 use call_stack::CallStack;
 use code_module::{CodeModule, CodeModuleId};
-use errors::*;
+use errors::ErrorKind::ProcessError;
+use errors::Result;
 use utils;
 
 /// Result of processing a Minidump or Microdump file.
@@ -141,7 +142,7 @@ impl ProcessState {
         if result == ProcessResult::Ok && !internal.is_null() {
             Ok(ProcessState { internal })
         } else {
-            Err(ErrorKind::ProcessError(result).into())
+            Err(ProcessError(result).into())
         }
     }
 
