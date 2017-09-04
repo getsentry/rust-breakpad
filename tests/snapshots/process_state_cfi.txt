@@ -1,0 +1,63 @@
+ProcessState {
+    threads: [
+        CallStack {
+            thread_id: 775,
+            frames: [
+                StackFrame {
+                    instruction: 4554197441,
+                    trust: Context,
+                    module: Some(
+                        CodeModule {
+                            id: CodeModuleId {
+                                uuid: Uuid("dfb8e43a-f242-3d73-a453-aeb6a777ef75"),
+                                age: 0
+                            },
+                            base_address: 4554190848,
+                            size: 176128,
+                            code_file: "/Users/jauer/Coding/breakpad/examples/./target/crash_macos",
+                            code_identifier: "id",
+                            debug_file: "crash_macos",
+                            debug_identifier: "DFB8E43AF2423D73A453AEB6A777EF750"
+                        }
+                    )
+                },
+                StackFrame {
+                    instruction: 4554197413,
+                    trust: CFI,
+                    module: Some(
+                        CodeModule {
+                            id: CodeModuleId {
+                                uuid: Uuid("dfb8e43a-f242-3d73-a453-aeb6a777ef75"),
+                                age: 0
+                            },
+                            base_address: 4554190848,
+                            size: 176128,
+                            code_file: "/Users/jauer/Coding/breakpad/examples/./target/crash_macos",
+                            code_identifier: "id",
+                            debug_file: "crash_macos",
+                            debug_identifier: "DFB8E43AF2423D73A453AEB6A777EF750"
+                        }
+                    )
+                },
+                StackFrame {
+                    instruction: 4554197204,
+                    trust: CFI,
+                    module: Some(
+                        CodeModule {
+                            id: CodeModuleId {
+                                uuid: Uuid("dfb8e43a-f242-3d73-a453-aeb6a777ef75"),
+                                age: 0
+                            },
+                            base_address: 4554190848,
+                            size: 176128,
+                            code_file: "/Users/jauer/Coding/breakpad/examples/./target/crash_macos",
+                            code_identifier: "id",
+                            debug_file: "crash_macos",
+                            debug_identifier: "DFB8E43AF2423D73A453AEB6A777EF750"
+                        }
+                    )
+                }
+            ]
+        }
+    ]
+}

@@ -23,9 +23,7 @@ fn save_file<P: AsRef<Path>, S: AsRef<str>>(path: P, contents: S) -> io::Result<
 
 /// Resolves the full path to a fixture file.
 pub fn fixture_path<S: AsRef<str>>(file_name: S) -> PathBuf {
-    Path::new("tests")
-        .join("fixtures")
-        .join(file_name.as_ref())
+    Path::new("tests").join("fixtures").join(file_name.as_ref())
 }
 
 /// Assets that the given object matches the snapshot saved in the snapshot
@@ -57,4 +55,10 @@ pub fn assert_snapshot_plain<S: AsRef<str>>(snapshot_name: S, output: &str) {
         name,
         Changeset::new(&snapshot, &output, "\n")
     );
+}
+
+/// Loads the fixture file with the given name and returns its contents
+/// as String
+pub fn load_fixture<S: AsRef<str>>(file_name: S) -> io::Result<String> {
+    load_file(fixture_path(file_name))
 }

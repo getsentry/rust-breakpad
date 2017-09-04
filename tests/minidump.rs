@@ -5,24 +5,37 @@ mod common;
 
 use std::collections::BTreeSet;
 
-use breakpad::ProcessState;
-use common::{assert_snapshot, fixture_path};
-
-/// Process a minidump file
-fn process_minidump<S: AsRef<str>>(file_name: S) -> ProcessState {
-    ProcessState::from_minidump(fixture_path(file_name)).unwrap()
-}
+use breakpad::{CodeModuleId, FrameInfoMap, ProcessState};
+use common::{assert_snapshot, fixture_path, load_fixture};
 
 #[test]
 fn get_minidump_process_state() {
-    let state = process_minidump("crash_macos.dmp");
+    let state = ProcessState::from_minidump(fixture_path("crash_macos.dmp"), None)
+        .expect("Could not process minidump");
+
     assert_snapshot("process_state.txt", &state);
 }
 
 #[test]
 fn obtain_referenced_modules() {
-    let state = process_minidump("crash_macos.dmp");
-    let modules: BTreeSet<_> = state.referenced_modules().iter().cloned().collect();
+    let state = ProcessState::from_minidump(fixture_path("crash_macos.dmp"), None)
+        .expect("Could not process minidump");
 
+    let modules: BTreeSet<_> = state.referenced_modules().iter().cloned().collect();
     assert_snapshot("referenced_modules.txt", &modules);
+}
+
+#[test]
+fn get_minidump_process_state_cfi() {
+    let module_id = CodeModuleId::parse("DFB8E43AF2423D73A453AEB6A777EF750")
+        .expect("Could not parse CodeModule ID");
+    let module_cfi = load_fixture("crash_macos_cfi.sym").expect("Could not load CFI symbols");
+
+    let mut symbols = FrameInfoMap::new();
+    symbols.insert(module_id, module_cfi.as_bytes());
+
+    let state = ProcessState::from_minidump(fixture_path("crash_macos.dmp"), Some(&symbols))
+        .expect("Could not process minidump");
+
+    assert_snapshot("process_state_cfi.txt", &state);
 }

@@ -1,10 +1,12 @@
 use std::{fmt, mem, ptr, slice};
+use std::collections::BTreeMap;
 use std::collections::HashSet;
+use std::ffi::CString;
 use std::os::raw::{c_char, c_void};
 use std::path::Path;
 
 use call_stack::CallStack;
-use code_module::CodeModule;
+use code_module::{CodeModule, CodeModuleId};
 use errors::*;
 use utils;
 
@@ -59,11 +61,19 @@ impl fmt::Display for ProcessResult {
 
 type Internal = c_void;
 
+/// Internal type used to transfer Breakpad symbols over FFI
+#[repr(C)]
+struct SymbolEntry {
+    debug_identifier: *const c_char,
+    symbol_size: usize,
+    symbol_data: *const u8,
+}
+
 extern "C" {
     fn process_minidump(
         file_path: *const c_char,
         symbol_count: usize,
-        symbols: *const c_char,
+        symbols: *const SymbolEntry,
         result: *mut ProcessResult,
     ) -> *mut Internal;
     fn process_state_delete(state: *mut Internal);
@@ -83,14 +93,50 @@ pub struct ProcessState {
     internal: *mut Internal,
 }
 
+/// Contains stack frame information for `CodeModules`
+///
+/// This information is required by the stackwalker in case framepointers are
+/// missing in the raw stacktraces. Frame information is given as plain ASCII
+/// text as specified in the Breakpad symbol file specification.
+pub type FrameInfoMap<'a> = BTreeMap<CodeModuleId, &'a [u8]>;
+
 impl ProcessState {
-    /// Reads a minidump from the filesystem into memory and processes it.
+    /// Reads a minidump from the filesystem into memory and processes it
+    ///
     /// Returns a `ProcessState` that contains information about the crashed
-    /// process.
-    pub fn from_minidump<P: AsRef<Path>>(file_path: P) -> Result<ProcessState> {
-        let mut result: ProcessResult = ProcessResult::Ok;
+    /// process. The parameter `frame_infos` expects a map of Breakpad symbols
+    /// containing STACK CFI and STACK WIN records to allow stackwalking with
+    /// omitted frame pointers.
+    pub fn from_minidump<P: AsRef<Path>>(
+        file_path: P,
+        frame_infos: Option<&FrameInfoMap>,
+    ) -> Result<ProcessState> {
         let cstr = utils::path_to_str(file_path);
-        let internal = unsafe { process_minidump(cstr.as_ptr(), 0, ptr::null(), &mut result) };
+        let cfi_count = frame_infos.map_or(0, |s| s.len());
+        let mut result: ProcessResult = ProcessResult::Ok;
+
+        // Keep a reference to all CStrings to extend their lifetime
+        let cfi_vec: Vec<_> = frame_infos.map_or(Vec::new(), |s| {
+            s.iter()
+                .map(|(k, v)| (CString::new(k.to_string()), v.len(), v.as_ptr()))
+                .collect()
+        });
+
+        // Keep a reference to all symbol entries to extend their lifetime
+        let cfi_entries: Vec<_> = cfi_vec
+            .iter()
+            .map(|&(ref id, size, data)| {
+                SymbolEntry {
+                    debug_identifier: id.as_ref().map(|i| i.as_ptr()).unwrap_or(ptr::null()),
+                    symbol_size: size,
+                    symbol_data: data,
+                }
+            })
+            .collect();
+
+        let internal = unsafe {
+            process_minidump(cstr.as_ptr(), cfi_count, cfi_entries.as_ptr(), &mut result)
+        };
 
         if result == ProcessResult::Ok && !internal.is_null() {
             Ok(ProcessState { internal })

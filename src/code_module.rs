@@ -16,7 +16,7 @@ pub struct CodeModuleId {
 }
 
 impl CodeModuleId {
-    pub(crate) fn parse(input: &str) -> Result<CodeModuleId> {
+    pub fn parse(input: &str) -> Result<CodeModuleId> {
         let uuid = Uuid::parse_str(&input[..32])
             .map_err(|_| Error::from(ParseIdError("Could not parse UUID".into())))?;
         let age = u32::from_str_radix(&input[32..], 16)
