@@ -1,5 +1,9 @@
 {
     CodeModule {
+        id: CodeModuleId {
+            uuid: Uuid("dfb8e43a-f242-3d73-a453-aeb6a777ef75"),
+            age: 0
+        },
         base_address: 4554190848,
         size: 176128,
         code_file: "/Users/jauer/Coding/breakpad/examples/./target/crash_macos",

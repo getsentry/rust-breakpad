@@ -19,5 +19,11 @@ error_chain! {
             description("Conversion Error")
             display("Symbol Conversion Error: {}", &desc)
         }
+
+        // An error raised when parsing `CodeModuleId`.
+        ParseIdError(desc: String) {
+            description("CodeModule ID Parse Error")
+            display("CodeModule ID Parse Error: {}", &desc)
+        }
     }
 }
