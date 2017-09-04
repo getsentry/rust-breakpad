@@ -9,7 +9,7 @@ use errors::ErrorKind::ParseIdError;
 use utils;
 
 /// Unique identifier of a `CodeModule`
-#[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Hash)]
+#[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Clone, Copy)]
 pub struct CodeModuleId {
     uuid: Uuid,
     age: u32,
