@@ -22,12 +22,35 @@ using google_breakpad::MinidumpProcessor;
 using google_breakpad::ProcessState;
 using google_breakpad::StackFrame;
 
+namespace {
+
 // Factory for modules to resolve stack frames.
 BasicModuleFactory factory;
 
 // Defines the private nested type BasicSourceLineResolver::Module
 using ResolverModule =
     typename std::remove_pointer<decltype(factory.CreateModule(""))>::type;
+
+StackFrame *clone_stack_frame(const StackFrame *frame) {
+  if (frame == nullptr) {
+    return nullptr;
+  }
+
+  auto *clone = new StackFrame();
+  if (clone == nullptr) {
+    return nullptr;
+  }
+
+  // We only need to clone instructions that are not later overwritten by
+  // the resolver. Therefore, we assume this is a pristine unresolved frame.
+  clone->instruction = frame->instruction;
+  clone->module = frame->module;
+  clone->trust = frame->trust;
+
+  return clone;
+}
+
+} // namespace
 
 typedef_extern_c(call_stack_t, CallStack);
 typedef_extern_c(code_module_t, CodeModule);
@@ -223,25 +246,6 @@ void resolver_delete(resolver_t *resolver) {
 
 bool resolver_is_corrupt(const resolver_t *resolver) {
   return resolver_t::cast(resolver)->IsCorrupt();
-}
-
-static StackFrame *clone_stack_frame(const StackFrame *frame) {
-  if (frame == nullptr) {
-    return nullptr;
-  }
-
-  auto *clone = new StackFrame();
-  if (clone == nullptr) {
-    return nullptr;
-  }
-
-  // We only need to clone instructions that are not later overwritten by
-  // the resolver. Therefore, we assume this is a pristine unresolved frame.
-  clone->instruction = frame->instruction;
-  clone->module = frame->module;
-  clone->trust = frame->trust;
-
-  return clone;
 }
 
 stack_frame_t *resolver_resolve_frame(const resolver_t *resolver,
