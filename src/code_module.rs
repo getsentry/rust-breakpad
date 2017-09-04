@@ -17,6 +17,11 @@ pub struct CodeModuleId {
 
 impl CodeModuleId {
     pub fn parse(input: &str) -> Result<CodeModuleId> {
+        if input.len() != 33 {
+            let err = ParseIdError("Invalid input string length".into());
+            return Err(err.into());
+        }
+
         let uuid = Uuid::parse_str(&input[..32])
             .map_err(|_| Error::from(ParseIdError("Could not parse UUID".into())))?;
         let age = u32::from_str_radix(&input[32..], 16)
@@ -193,5 +198,5 @@ fn test_to_string() {
 
 #[test]
 fn test_parse_error() {
-    assert!(CodeModuleId::parse("DFB8E43AF2423D73A453AEB6A777EF75").is_err());
+    assert!(CodeModuleId::parse("DFB8E43AF2423D73A").is_err());
 }
