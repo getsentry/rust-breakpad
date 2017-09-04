@@ -14,18 +14,19 @@ MmapSymbolSupplier::MmapSymbolSupplier(size_t symbol_count,
   }
 }
 
-MmapSymbolSupplier::SymbolResult
-MmapSymbolSupplier::GetSymbolFile(const CodeModule *module,
-                                  const SystemInfo *system_info,
-                                  string *symbol_file) {
+MmapSymbolSupplier::SymbolResult MmapSymbolSupplier::GetSymbolFile(
+    const CodeModule *module,
+    const SystemInfo *system_info,
+    string *symbol_file) {
   string symbol_data;
   return GetSymbolFile(module, system_info, symbol_file, &symbol_data);
 }
 
-MmapSymbolSupplier::SymbolResult
-MmapSymbolSupplier::GetSymbolFile(const CodeModule *module,
-                                  const SystemInfo *system_info,
-                                  string *symbol_file, string *symbol_data) {
+MmapSymbolSupplier::SymbolResult MmapSymbolSupplier::GetSymbolFile(
+    const CodeModule *module,
+    const SystemInfo *system_info,
+    string *symbol_file,
+    string *symbol_data) {
   char *raw_data;
   size_t data_size;
 
@@ -40,8 +41,11 @@ MmapSymbolSupplier::GetSymbolFile(const CodeModule *module,
 }
 
 MmapSymbolSupplier::SymbolResult MmapSymbolSupplier::GetCStringSymbolData(
-    const CodeModule *module, const SystemInfo *system_info,
-    string *symbol_file, char **symbol_data, size_t *symbol_size) {
+    const CodeModule *module,
+    const SystemInfo *system_info,
+    string *symbol_file,
+    char **symbol_data,
+    size_t *symbol_size) {
   auto it = cache.find(module->debug_identifier());
   if (it == cache.end()) {
     return NOT_FOUND;

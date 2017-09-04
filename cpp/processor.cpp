@@ -41,8 +41,8 @@ StackFrame *clone_stack_frame(const StackFrame *frame) {
     return nullptr;
   }
 
-  // We only need to clone instructions that are not later overwritten by
-  // the resolver. Therefore, we assume this is a pristine unresolved frame.
+  // We only need to clone instructions that are not later overwritten by the
+  // resolver. Therefore, we assume this is a pristine unresolved frame.
   clone->instruction = frame->instruction;
   clone->module = frame->module;
   clone->trust = frame->trust;
@@ -50,7 +50,7 @@ StackFrame *clone_stack_frame(const StackFrame *frame) {
   return clone;
 }
 
-} // namespace
+}  // namespace
 
 typedef_extern_c(call_stack_t, CallStack);
 typedef_extern_c(code_module_t, CodeModule);
@@ -58,8 +58,10 @@ typedef_extern_c(process_state_t, ProcessState);
 typedef_extern_c(resolver_t, ResolverModule);
 typedef_extern_c(stack_frame_t, StackFrame);
 
-process_state_t *process_minidump(const char *file_path, size_t symbol_count,
-                                  symbol_entry_t *symbols, int *result_out) {
+process_state_t *process_minidump(const char *file_path,
+                                  size_t symbol_count,
+                                  symbol_entry_t *symbols,
+                                  int *result_out) {
   if (file_path == nullptr) {
     *result_out = google_breakpad::PROCESS_ERROR_MINIDUMP_NOT_FOUND;
     return nullptr;
@@ -67,7 +69,7 @@ process_state_t *process_minidump(const char *file_path, size_t symbol_count,
 
   ProcessState *state = new ProcessState();
   if (state == nullptr) {
-    *result_out = -1; // Memory allocation issue
+    *result_out = -1;  // Memory allocation issue
     return nullptr;
   }
 
