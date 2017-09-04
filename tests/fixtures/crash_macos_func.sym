@@ -1,0 +1,8 @@
+MODULE mac x86_64 DFB8E43AF2423D73A453AEB6A777EF750 crash_macos
+FILE 14 /Users/jauer/Coding/breakpad/examples/../examples/crash_macos.cpp
+FUNC 19b0 18 0 (anonymous namespace)::CrashFunction()
+19b0 7 9 14
+19b7 5 10 14
+19bc 5 11 14
+19c1 6 11 14
+19c7 1 12 14

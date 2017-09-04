@@ -11,8 +11,7 @@ use common::{assert_snapshot_plain, fixture_path};
 fn convert_macos_symbols() {
     let primary = fixture_path("hello_macos");
     let secondary = fixture_path("hello_macos.dSYM");
-    let symbols = convert_symbols(primary, Some(secondary))
-        .unwrap_or("None".into());
+    let symbols = convert_symbols(primary, Some(secondary)).unwrap_or("None".into());
 
     assert_snapshot_plain("symbols_macos.txt", &symbols);
 }
@@ -21,8 +20,7 @@ fn convert_macos_symbols() {
 #[cfg(target_os = "linux")]
 fn convert_linux_symbols() {
     let primary = fixture_path("hello_linux");
-    let symbols = convert_symbols(primary, None)
-        .unwrap_or("None".into());
+    let symbols = convert_symbols(primary, None).unwrap_or("None".into());
 
     assert_snapshot_plain("symbols_linux.txt", &symbols);
 }

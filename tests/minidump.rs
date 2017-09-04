@@ -5,45 +5,37 @@ mod common;
 
 use std::collections::BTreeSet;
 
-use breakpad::{CodeModule, ProcessState, Resolver};
-use common::{assert_snapshot, fixture_path};
-
-/// Process a minidump file
-fn process_minidump<S: AsRef<str>>(file_name: S) -> ProcessState {
-    ProcessState::from_minidump(fixture_path(file_name)).unwrap()
-}
+use breakpad::{CodeModuleId, FrameInfoMap, ProcessState};
+use common::{assert_snapshot, fixture_path, load_fixture};
 
 #[test]
 fn get_minidump_process_state() {
-    let state = process_minidump("electron.dmp");
+    let state = ProcessState::from_minidump(fixture_path("crash_macos.dmp"), None)
+        .expect("Could not process minidump");
+
     assert_snapshot("process_state.txt", &state);
 }
 
 #[test]
 fn obtain_referenced_modules() {
-    let state = process_minidump("electron.dmp");
-    let modules: BTreeSet<&CodeModule> =
-        state.referenced_modules().iter().cloned().collect();
+    let state = ProcessState::from_minidump(fixture_path("crash_macos.dmp"), None)
+        .expect("Could not process minidump");
 
+    let modules: BTreeSet<_> = state.referenced_modules().iter().cloned().collect();
     assert_snapshot("referenced_modules.txt", &modules);
 }
 
 #[test]
-fn resolve_electron_stack_frame() {
-    let state = process_minidump("electron.dmp");
-    let thread = state.threads().first().unwrap();
-    let frame = thread.frames()[1];
+fn get_minidump_process_state_cfi() {
+    let module_id = CodeModuleId::parse("DFB8E43AF2423D73A453AEB6A777EF750")
+        .expect("Could not parse CodeModule ID");
+    let module_cfi = load_fixture("crash_macos_cfi.sym").expect("Could not load CFI symbols");
 
-    let resolver = Resolver::new(fixture_path("Electron Framework.sym"))
-        .expect("Could not load symbols for Electron Framework.");
+    let mut symbols = FrameInfoMap::new();
+    symbols.insert(module_id, module_cfi.as_bytes());
 
-    let resolved_frame = resolver.resolve_frame(&frame);
-    assert_snapshot("resolved_frame.txt", &resolved_frame);
-}
+    let state = ProcessState::from_minidump(fixture_path("crash_macos.dmp"), Some(&symbols))
+        .expect("Could not process minidump");
 
-#[test]
-fn create_corrupt_resolver() {
-    let resolver = Resolver::new(fixture_path("Corrupt.sym"))
-        .expect("Could not load symbols for Corrupt.");
-    assert!(resolver.corrupt());
+    assert_snapshot("process_state_cfi.txt", &state);
 }

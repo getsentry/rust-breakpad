@@ -1,74 +1,14 @@
 {
     CodeModule {
-        code_file: "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation",
+        id: CodeModuleId {
+            uuid: Uuid("dfb8e43a-f242-3d73-a453-aeb6a777ef75"),
+            age: 0
+        },
+        base_address: 4554190848,
+        size: 176128,
+        code_file: "/Users/jauer/Coding/breakpad/examples/./target/crash_macos",
         code_identifier: "id",
-        debug_file: "CoreFoundation",
-        debug_identifier: "09ED473E5DE8307FB55C16F6419236D50"
-    },
-    CodeModule {
-        code_file: "/Users/jauer/Downloads/sentry/electron-quick-start-master/node_modules/electron/dist/Electron.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Libraries/libnode.dylib",
-        code_identifier: "id",
-        debug_file: "libnode.dylib",
-        debug_identifier: "0A26942D623E3D1097034A29A00DA71A0"
-    },
-    CodeModule {
-        code_file: "/Users/jauer/Downloads/sentry/electron-quick-start-master/node_modules/electron/dist/Electron.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Electron Framework",
-        code_identifier: "id",
-        debug_file: "Electron Framework",
-        debug_identifier: "35D48131F39F30CA8BD9BA5A8CF775300"
-    },
-    CodeModule {
-        code_file: "/Users/jauer/Downloads/sentry/electron-quick-start-master/node_modules/electron/dist/Electron.app/Contents/MacOS/Electron",
-        code_identifier: "id",
-        debug_file: "Electron",
-        debug_identifier: "645381EB354A37408CDDDF9F333944EE0"
-    },
-    CodeModule {
-        code_file: "/usr/lib/system/libdispatch.dylib",
-        code_identifier: "id",
-        debug_file: "libdispatch.dylib",
-        debug_identifier: "6582BAD6ED273B30B62090B1C5A4AE3C0"
-    },
-    CodeModule {
-        code_file: "/usr/lib/system/libsystem_kernel.dylib",
-        code_identifier: "id",
-        debug_file: "libsystem_kernel.dylib",
-        debug_identifier: "6E9E485F91F636B7A125AE91DC978BCC0"
-    },
-    CodeModule {
-        code_file: "/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation",
-        code_identifier: "id",
-        debug_file: "Foundation",
-        debug_identifier: "730B7944BB4335D5A5469F6CCED4B9F30"
-    },
-    CodeModule {
-        code_file: "/usr/lib/system/libsystem_malloc.dylib",
-        code_identifier: "id",
-        debug_file: "libsystem_malloc.dylib",
-        debug_identifier: "A3D15F1799A633678C7E4280E8619C950"
-    },
-    CodeModule {
-        code_file: "/usr/lib/system/libsystem_pthread.dylib",
-        code_identifier: "id",
-        debug_file: "libsystem_pthread.dylib",
-        debug_identifier: "B8FB5E20329539E2B5EBB464D1D4B1040"
-    },
-    CodeModule {
-        code_file: "/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/HIToolbox.framework/Versions/A/HIToolbox",
-        code_identifier: "id",
-        debug_file: "HIToolbox",
-        debug_identifier: "CAB143FEAEAF3EDEAD7BC04E1B7C56150"
-    },
-    CodeModule {
-        code_file: "/usr/lib/system/libdyld.dylib",
-        code_identifier: "id",
-        debug_file: "libdyld.dylib",
-        debug_identifier: "EC3D88D23D4032748E26362C2D7352C80"
-    },
-    CodeModule {
-        code_file: "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
-        code_identifier: "id",
-        debug_file: "AppKit",
-        debug_identifier: "EC7BD195F9E13E43820A5FDD0B2B0B670"
+        debug_file: "crash_macos",
+        debug_identifier: "DFB8E43AF2423D73A453AEB6A777EF750"
     }
 }

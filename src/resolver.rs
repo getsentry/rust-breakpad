@@ -1,7 +1,8 @@
 use std::os::raw::{c_char, c_void};
 use std::path::Path;
 
-use errors::*;
+use errors::Result;
+use errors::ErrorKind::ResolverError;
 use resolved_stack_frame::ResolvedStackFrame;
 use stack_frame::StackFrame;
 use utils;
@@ -12,8 +13,10 @@ extern "C" {
     fn resolver_new(file_path: *const c_char) -> *mut Internal;
     fn resolver_delete(resolver: *mut Internal);
     fn resolver_is_corrupt(resolver: *const Internal) -> bool;
-    fn resolver_resolve_frame(resolver: *const Internal, frame: *const StackFrame)
-        -> *mut StackFrame;
+    fn resolver_resolve_frame(
+        resolver: *const Internal,
+        frame: *const StackFrame,
+    ) -> *mut StackFrame;
 }
 
 /// Source line resolver for stack frames. Handles Breakpad symbol files and
@@ -37,8 +40,7 @@ impl Resolver {
         let internal = unsafe { resolver_new(cstr.as_ptr()) };
 
         if internal.is_null() {
-            let err = ErrorKind::ResolverError("Could not load symbols".into());
-            Err(err.into())
+            Err(ResolverError("Could not load symbols".into()).into())
         } else {
             Ok(Resolver { internal })
         }

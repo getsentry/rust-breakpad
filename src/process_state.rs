@@ -1,11 +1,14 @@
-use std::{fmt, mem, slice};
+use std::{fmt, mem, ptr, slice};
+use std::collections::BTreeMap;
 use std::collections::HashSet;
+use std::ffi::CString;
 use std::os::raw::{c_char, c_void};
 use std::path::Path;
 
 use call_stack::CallStack;
-use code_module::CodeModule;
-use errors::*;
+use code_module::{CodeModule, CodeModuleId};
+use errors::ErrorKind::ProcessError;
+use errors::Result;
 use utils;
 
 /// Result of processing a Minidump or Microdump file.
@@ -40,23 +43,40 @@ pub enum ProcessResult {
 
 impl fmt::Display for ProcessResult {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "{}", match self {
+        let formatted = match self {
             &ProcessResult::Ok => "Dump processed successfully",
             &ProcessResult::MinidumpNotFound => "Minidump file was not found",
             &ProcessResult::NoMinidumpHeader => "Minidump file had no header",
             &ProcessResult::ErrorNoThreadList => "Minidump file has no thread list",
             &ProcessResult::ErrorGettingThread => "Error getting one thread's data",
             &ProcessResult::ErrorGettingThreadId => "Error getting a thread id",
-            &ProcessResult::DuplicateRequestingThreads => "There was more than one requesting thread",
+            &ProcessResult::DuplicateRequestingThreads => {
+                "There was more than one requesting thread"
+            }
             &ProcessResult::SymbolSupplierInterrupted => "Processing was interrupted (not fatal)",
-        })
+        };
+
+        write!(f, "{}", formatted)
     }
 }
 
 type Internal = c_void;
 
+/// Internal type used to transfer Breakpad symbols over FFI
+#[repr(C)]
+struct SymbolEntry {
+    debug_identifier: *const c_char,
+    symbol_size: usize,
+    symbol_data: *const u8,
+}
+
 extern "C" {
-    fn process_minidump(file_path: *const c_char, result: *mut ProcessResult) -> *mut Internal;
+    fn process_minidump(
+        file_path: *const c_char,
+        symbol_count: usize,
+        symbols: *const SymbolEntry,
+        result: *mut ProcessResult,
+    ) -> *mut Internal;
     fn process_state_delete(state: *mut Internal);
     fn process_state_threads(
         state: *const Internal,
@@ -74,19 +94,55 @@ pub struct ProcessState {
     internal: *mut Internal,
 }
 
+/// Contains stack frame information for `CodeModules`
+///
+/// This information is required by the stackwalker in case framepointers are
+/// missing in the raw stacktraces. Frame information is given as plain ASCII
+/// text as specified in the Breakpad symbol file specification.
+pub type FrameInfoMap<'a> = BTreeMap<CodeModuleId, &'a [u8]>;
+
 impl ProcessState {
-    /// Reads a minidump from the filesystem into memory and processes it.
+    /// Reads a minidump from the filesystem into memory and processes it
+    ///
     /// Returns a `ProcessState` that contains information about the crashed
-    /// process.
-    pub fn from_minidump<P: AsRef<Path>>(file_path: P) -> Result<ProcessState> {
-        let mut result: ProcessResult = ProcessResult::Ok;
+    /// process. The parameter `frame_infos` expects a map of Breakpad symbols
+    /// containing STACK CFI and STACK WIN records to allow stackwalking with
+    /// omitted frame pointers.
+    pub fn from_minidump<P: AsRef<Path>>(
+        file_path: P,
+        frame_infos: Option<&FrameInfoMap>,
+    ) -> Result<ProcessState> {
         let cstr = utils::path_to_str(file_path);
-        let internal = unsafe { process_minidump(cstr.as_ptr(), &mut result) };
+        let cfi_count = frame_infos.map_or(0, |s| s.len());
+        let mut result: ProcessResult = ProcessResult::Ok;
+
+        // Keep a reference to all CStrings to extend their lifetime
+        let cfi_vec: Vec<_> = frame_infos.map_or(Vec::new(), |s| {
+            s.iter()
+                .map(|(k, v)| (CString::new(k.to_string()), v.len(), v.as_ptr()))
+                .collect()
+        });
+
+        // Keep a reference to all symbol entries to extend their lifetime
+        let cfi_entries: Vec<_> = cfi_vec
+            .iter()
+            .map(|&(ref id, size, data)| {
+                SymbolEntry {
+                    debug_identifier: id.as_ref().map(|i| i.as_ptr()).unwrap_or(ptr::null()),
+                    symbol_size: size,
+                    symbol_data: data,
+                }
+            })
+            .collect();
+
+        let internal = unsafe {
+            process_minidump(cstr.as_ptr(), cfi_count, cfi_entries.as_ptr(), &mut result)
+        };
 
         if result == ProcessResult::Ok && !internal.is_null() {
             Ok(ProcessState { internal })
         } else {
-            Err(ErrorKind::ProcessError(result).into())
+            Err(ProcessError(result).into())
         }
     }
 

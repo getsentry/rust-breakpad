@@ -1,15 +1,21 @@
 ResolvedStackFrame {
-    instruction: 4415005541,
-    function_name: "void base::internal::FunctorTraits<void (*)(), void>::Invoke<>(void (*)())",
-    source_file_name: "/Users/jenkins/Home/workspace/electron-osx-x64/vendor/brightray/vendor/download/libchromiumcontent/src/base/bind_internal.h",
-    source_line: 164,
-    trust: FP,
+    instruction: 4554197441,
+    function_name: "(anonymous namespace)::CrashFunction()",
+    source_file_name: "/Users/jauer/Coding/breakpad/examples/../examples/crash_macos.cpp",
+    source_line: 11,
+    trust: Context,
     module: Some(
         CodeModule {
-            code_file: "/Users/jauer/Downloads/sentry/electron-quick-start-master/node_modules/electron/dist/Electron.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Electron Framework",
+            id: CodeModuleId {
+                uuid: Uuid("dfb8e43a-f242-3d73-a453-aeb6a777ef75"),
+                age: 0
+            },
+            base_address: 4554190848,
+            size: 176128,
+            code_file: "/Users/jauer/Coding/breakpad/examples/./target/crash_macos",
             code_identifier: "id",
-            debug_file: "Electron Framework",
-            debug_identifier: "35D48131F39F30CA8BD9BA5A8CF775300"
+            debug_file: "crash_macos",
+            debug_identifier: "DFB8E43AF2423D73A453AEB6A777EF750"
         }
     )
 }
