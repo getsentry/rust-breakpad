@@ -1,4 +1,4 @@
-use std::{fmt, mem, slice};
+use std::{fmt, mem, ptr, slice};
 use std::collections::HashSet;
 use std::os::raw::{c_char, c_void};
 use std::path::Path;
@@ -40,23 +40,32 @@ pub enum ProcessResult {
 
 impl fmt::Display for ProcessResult {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "{}", match self {
+        let formatted = match self {
             &ProcessResult::Ok => "Dump processed successfully",
             &ProcessResult::MinidumpNotFound => "Minidump file was not found",
             &ProcessResult::NoMinidumpHeader => "Minidump file had no header",
             &ProcessResult::ErrorNoThreadList => "Minidump file has no thread list",
             &ProcessResult::ErrorGettingThread => "Error getting one thread's data",
             &ProcessResult::ErrorGettingThreadId => "Error getting a thread id",
-            &ProcessResult::DuplicateRequestingThreads => "There was more than one requesting thread",
+            &ProcessResult::DuplicateRequestingThreads => {
+                "There was more than one requesting thread"
+            }
             &ProcessResult::SymbolSupplierInterrupted => "Processing was interrupted (not fatal)",
-        })
+        };
+
+        write!(f, "{}", formatted)
     }
 }
 
 type Internal = c_void;
 
 extern "C" {
-    fn process_minidump(file_path: *const c_char, result: *mut ProcessResult) -> *mut Internal;
+    fn process_minidump(
+        file_path: *const c_char,
+        symbol_count: usize,
+        symbols: *const c_char,
+        result: *mut ProcessResult,
+    ) -> *mut Internal;
     fn process_state_delete(state: *mut Internal);
     fn process_state_threads(
         state: *const Internal,
@@ -81,7 +90,7 @@ impl ProcessState {
     pub fn from_minidump<P: AsRef<Path>>(file_path: P) -> Result<ProcessState> {
         let mut result: ProcessResult = ProcessResult::Ok;
         let cstr = utils::path_to_str(file_path);
-        let internal = unsafe { process_minidump(cstr.as_ptr(), &mut result) };
+        let internal = unsafe { process_minidump(cstr.as_ptr(), 0, ptr::null(), &mut result) };
 
         if result == ProcessResult::Ok && !internal.is_null() {
             Ok(ProcessState { internal })

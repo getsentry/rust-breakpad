@@ -2,17 +2,20 @@
 #include <type_traits>
 #include <vector>
 
+#include "google_breakpad/processor/basic_source_line_resolver.h"
 #include "google_breakpad/processor/call_stack.h"
 #include "google_breakpad/processor/minidump_processor.h"
 #include "google_breakpad/processor/process_state.h"
 #include "google_breakpad/processor/stack_frame.h"
 #include "processor/module_factory.h"
 
-#include "c_mapping.h"
-#include "c_string.h"
-#include "processor.h"
+#include "cpp/c_mapping.h"
+#include "cpp/c_string.h"
+#include "cpp/mmap_symbol_supplier.h"
+#include "cpp/processor.h"
 
 using google_breakpad::BasicModuleFactory;
+using google_breakpad::BasicSourceLineResolver;
 using google_breakpad::CallStack;
 using google_breakpad::CodeModule;
 using google_breakpad::MinidumpProcessor;
@@ -21,9 +24,6 @@ using google_breakpad::StackFrame;
 
 // Factory for modules to resolve stack frames.
 BasicModuleFactory factory;
-
-// Processor used for minidumps.
-MinidumpProcessor processor(nullptr, nullptr);
 
 // Defines the private nested type BasicSourceLineResolver::Module
 using ResolverModule =
@@ -35,7 +35,8 @@ typedef_extern_c(process_state_t, ProcessState);
 typedef_extern_c(resolver_t, ResolverModule);
 typedef_extern_c(stack_frame_t, StackFrame);
 
-process_state_t *process_minidump(const char *file_path, int *result_out) {
+process_state_t *process_minidump(const char *file_path, size_t symbol_count,
+                                  symbol_entry_t *symbols, int *result_out) {
   if (file_path == nullptr) {
     *result_out = google_breakpad::PROCESS_ERROR_MINIDUMP_NOT_FOUND;
     return nullptr;
@@ -46,6 +47,10 @@ process_state_t *process_minidump(const char *file_path, int *result_out) {
     *result_out = -1; // Memory allocation issue
     return nullptr;
   }
+
+  BasicSourceLineResolver resolver;
+  MmapSymbolSupplier supplier(symbol_count, symbols);
+  MinidumpProcessor processor(&supplier, &resolver);
 
   *result_out = processor.Process(file_path, state);
   if (*result_out != google_breakpad::PROCESS_OK) {
@@ -153,7 +158,7 @@ uint64_t code_module_base_address(const code_module_t *module) {
 }
 
 uint64_t code_module_size(const code_module_t *module) {
-    return code_module_t::cast(module)->size();
+  return code_module_t::cast(module)->size();
 }
 
 char *code_module_code_file(const code_module_t *module) {

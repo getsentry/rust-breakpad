@@ -45,6 +45,26 @@ struct resolver_t;
 struct stack_frame_t;
 
 /**
+ * Data transfer object for symbols in memory
+ */
+struct symbol_entry_t {
+  /**
+   * The debug identifier of the code module these symbols are for
+   */
+  const char *debug_identifier;
+
+  /**
+   * Size of the buffer inside symbol_data
+   */
+  const size_t symbol_size;
+
+  /**
+   * Raw data of the symbol file passed to the symbolizer
+   */
+  const char *symbol_data;
+};
+
+/**
  * Reads a minidump from the file system into memory and processes it. Returns
  * an owning pointer to a process_state_t struct that contains loaded code
  * modules and call stacks of all threads of the process during the crash.
@@ -54,7 +74,8 @@ struct stack_frame_t;
  *
  * Release memory of the process state with process_state_delete.
  */
-process_state_t *process_minidump(const char *file_path, int *result_out);
+process_state_t *process_minidump(const char *file_path, size_t symbol_count,
+                                  symbol_entry_t *symbols, int *result_out);
 
 /**
  * Releases memory of a process state struct. Assumes ownership of the pointer.

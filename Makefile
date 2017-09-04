@@ -110,6 +110,7 @@ libprocessor_OBJ = \
 	third_party/breakpad/processor/minidump.o \
 	third_party/breakpad/processor/minidump_processor.o \
 	third_party/breakpad/processor/symbolic_constants_win.o \
+	cpp/mmap_symbol_supplier.o \
 	cpp/processor.o \
 	$(NULL)
 
