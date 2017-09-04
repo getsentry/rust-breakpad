@@ -16,6 +16,7 @@ pub struct CodeModuleId {
 }
 
 impl CodeModuleId {
+    /// Parses a CodeModuleId from a 33 character `String`
     pub fn parse(input: &str) -> Result<CodeModuleId> {
         if input.len() != 33 {
             return Err(ParseIdError("Invalid input string length".into()).into());
