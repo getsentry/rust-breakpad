@@ -4,7 +4,7 @@ use std::hash::{Hash, Hasher};
 use std::os::raw::{c_char, c_void};
 use uuid::Uuid;
 
-use errors::{Error, Result};
+use errors::Result;
 use errors::ErrorKind::ParseIdError;
 use utils;
 
@@ -22,10 +22,8 @@ impl CodeModuleId {
             return Err(ParseIdError("Invalid input string length".into()).into());
         }
 
-        let uuid = Uuid::parse_str(&input[..32])
-            .map_err(|_| Error::from(ParseIdError("Could not parse UUID".into())))?;
-        let age = u32::from_str_radix(&input[32..], 16)
-            .map_err(|_| Error::from(ParseIdError("Could not parse age".into())))?;
+        let uuid = Uuid::parse_str(&input[..32])?;
+        let age = u32::from_str_radix(&input[32..], 16)?;
         Ok(CodeModuleId { uuid, age })
     }
 

@@ -1,6 +1,11 @@
 use process_state::ProcessResult;
 
 error_chain! {
+    foreign_links {
+        UuidParseError(::uuid::ParseError);
+        ParseIntError(::std::num::ParseIntError);
+    }
+
     errors {
         /// An error raised when processing a dump by `ProcessState`.
         ProcessError(result: ProcessResult) {
