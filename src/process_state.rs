@@ -2,15 +2,13 @@ use std::{fmt, mem, ptr, slice};
 use std::collections::BTreeMap;
 use std::collections::HashSet;
 use std::ffi::CString;
-use std::io::prelude::*;
-use std::fs::File;
 use std::os::raw::{c_char, c_void};
 use std::path::Path;
 
 use call_stack::CallStack;
 use code_module::{CodeModule, CodeModuleId};
 use errors::ErrorKind::ProcessError;
-use errors::{Error, Result};
+use errors::Result;
 use utils;
 
 /// Result of processing a Minidump or Microdump file.
