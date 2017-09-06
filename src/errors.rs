@@ -1,4 +1,4 @@
-use process_state::ProcessResult;
+use processor::ProcessResult;
 
 error_chain! {
     foreign_links {
@@ -20,13 +20,7 @@ error_chain! {
             display("Resolver Error: {}", &desc)
         }
 
-        // An error raised by `convert_symbols` when generating Breakpad symbols.
-        ConversionError(desc: String) {
-            description("Conversion Error")
-            display("Symbol Conversion Error: {}", &desc)
-        }
-
-        // An error raised when parsing `CodeModuleId`.
+        /// An error raised when parsing `CodeModuleId`.
         ParseIdError(desc: String) {
             description("CodeModule ID Parse Error")
             display("CodeModule ID Parse Error: {}", &desc)
