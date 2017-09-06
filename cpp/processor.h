@@ -46,17 +46,18 @@ struct symbol_entry_t {
   const char *symbol_data;
 };
 
-/// Reads a minidump from the file system into memory and processes it. Returns
-/// an owning pointer to a process_state_t struct that contains loaded code
-/// modules and call stacks of all threads of the process during the crash.
+/// Reads a minidump from a memory buffer and processes it. Returns an owning
+/// pointer to a process_state_t struct that contains loaded code modules and
+/// call stacks of all threads of the process during the crash.
 ///
-/// Processing the minidump can fail if the file is corrupted or does not exit.
-/// The function will return NULL and an error code in result_out.
+/// Processing the minidump can fail if the buffer is corrupted or does not
+/// exit. The function will return NULL and an error code in result_out.
 ///
 /// Release memory of the process state with process_state_delete.
-process_state_t *process_minidump(const char *file_path,
-                                  size_t symbol_count,
+process_state_t *process_minidump(const char *buffer,
+                                  size_t buffer_size,
                                   symbol_entry_t *symbols,
+                                  size_t symbol_count,
                                   int *result_out);
 
 /// Releases memory of a process state struct. Assumes ownership of the pointer.
@@ -171,11 +172,10 @@ char *code_module_debug_file(const code_module_t *module);
 char *code_module_debug_identifier(const code_module_t *module);
 
 /// Creates a new source line resolver instance and returns an owning pointer
-/// to it. Symbols are loaded from a Breakpad symbol file in the file system.
-/// The file name is given as a weak pointer in the symbol_file parameter.
+/// to it. Symbols are loaded from a buffer containing symbols in ASCII format.
 ///
 /// Release memory of this resolver with the resolver_delete function.
-resolver_t *resolver_new(const char *symbol_file);
+resolver_t *resolver_new(const char *symbol_buffer, size_t buffer_size);
 
 /// Releases memory of a resolver object. Assumes ownership of the pointer.
 void resolver_delete(resolver_t *resolver);

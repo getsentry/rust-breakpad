@@ -2,6 +2,7 @@ use process_state::ProcessResult;
 
 error_chain! {
     foreign_links {
+        IoError(::std::io::Error);
         UuidParseError(::uuid::ParseError);
         ParseIntError(::std::num::ParseIntError);
     }
