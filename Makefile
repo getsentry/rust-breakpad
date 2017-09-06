@@ -43,13 +43,8 @@ ifneq ($(DEBUG), false)
 endif
 
 LIBRARIES = \
-	common \
 	disasm \
-	processor \
-	$(NULL)
-
-libcommon_OBJ = \
-	cpp/c_string.o \
+	breakpad \
 	$(NULL)
 
 libdisasm_OBJ = \
@@ -69,7 +64,7 @@ libdisasm_OBJ = \
 	third_party/breakpad/third_party/libdisasm/x86_operand_list.o \
 	$(NULL)
 
-libprocessor_OBJ = \
+libbreakpad_OBJ = \
 	third_party/breakpad/processor/basic_code_modules.o \
 	third_party/breakpad/processor/basic_source_line_resolver.o \
 	third_party/breakpad/processor/call_stack.o \
@@ -101,8 +96,11 @@ libprocessor_OBJ = \
 	third_party/breakpad/processor/minidump.o \
 	third_party/breakpad/processor/minidump_processor.o \
 	third_party/breakpad/processor/symbolic_constants_win.o \
+	cpp/c_string.o \
+	cpp/data_structures.o \
 	cpp/mmap_symbol_supplier.o \
 	cpp/processor.o \
+	cpp/resolver.o \
 	$(NULL)
 
 cargo: $(LIBRARIES)
