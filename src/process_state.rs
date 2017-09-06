@@ -2,13 +2,15 @@ use std::{fmt, mem, ptr, slice};
 use std::collections::BTreeMap;
 use std::collections::HashSet;
 use std::ffi::CString;
+use std::io::prelude::*;
+use std::fs::File;
 use std::os::raw::{c_char, c_void};
 use std::path::Path;
 
 use call_stack::CallStack;
 use code_module::{CodeModule, CodeModuleId};
 use errors::ErrorKind::ProcessError;
-use errors::Result;
+use errors::{Error, Result};
 use utils;
 
 /// Result of processing a Minidump or Microdump file.
@@ -72,9 +74,10 @@ struct SymbolEntry {
 
 extern "C" {
     fn process_minidump(
-        file_path: *const c_char,
-        symbol_count: usize,
+        buffer: *const c_char,
+        buffer_size: usize,
         symbols: *const SymbolEntry,
+        symbol_count: usize,
         result: *mut ProcessResult,
     ) -> *mut Internal;
     fn process_state_delete(state: *mut Internal);
@@ -108,11 +111,24 @@ impl ProcessState {
     /// process. The parameter `frame_infos` expects a map of Breakpad symbols
     /// containing STACK CFI and STACK WIN records to allow stackwalking with
     /// omitted frame pointers.
-    pub fn from_minidump<P: AsRef<Path>>(
+    pub fn from_minidump_path<P: AsRef<Path>>(
         file_path: P,
         frame_infos: Option<&FrameInfoMap>,
     ) -> Result<ProcessState> {
-        let cstr = utils::path_to_str(file_path);
+        let buffer = utils::read_buffer(file_path)?;
+        Self::from_minidump_buffer(buffer.as_slice(), frame_infos)
+    }
+
+    /// Processes a minidump supplied via raw binary data
+    ///
+    /// Returns a `ProcessState` that contains information about the crashed
+    /// process. The parameter `frame_infos` expects a map of Breakpad symbols
+    /// containing STACK CFI and STACK WIN records to allow stackwalking with
+    /// omitted frame pointers.
+    pub fn from_minidump_buffer(
+        dump: &[u8],
+        frame_infos: Option<&FrameInfoMap>,
+    ) -> Result<ProcessState> {
         let cfi_count = frame_infos.map_or(0, |s| s.len());
         let mut result: ProcessResult = ProcessResult::Ok;
 
@@ -136,7 +152,13 @@ impl ProcessState {
             .collect();
 
         let internal = unsafe {
-            process_minidump(cstr.as_ptr(), cfi_count, cfi_entries.as_ptr(), &mut result)
+            process_minidump(
+                dump.as_ptr() as *const c_char,
+                dump.len(),
+                cfi_entries.as_ptr(),
+                cfi_count,
+                &mut result,
+            )
         };
 
         if result == ProcessResult::Ok && !internal.is_null() {

@@ -46,17 +46,18 @@ struct symbol_entry_t {
   const char *symbol_data;
 };
 
-/// Reads a minidump from the file system into memory and processes it. Returns
-/// an owning pointer to a process_state_t struct that contains loaded code
-/// modules and call stacks of all threads of the process during the crash.
+/// Reads a minidump from a memory buffer and processes it. Returns an owning
+/// pointer to a process_state_t struct that contains loaded code modules and
+/// call stacks of all threads of the process during the crash.
 ///
-/// Processing the minidump can fail if the file is corrupted or does not exit.
-/// The function will return NULL and an error code in result_out.
+/// Processing the minidump can fail if the buffer is corrupted or does not
+/// exit. The function will return NULL and an error code in result_out.
 ///
 /// Release memory of the process state with process_state_delete.
-process_state_t *process_minidump(const char *file_path,
-                                  size_t symbol_count,
+process_state_t *process_minidump(const char *buffer,
+                                  size_t buffer_size,
                                   symbol_entry_t *symbols,
+                                  size_t symbol_count,
                                   int *result_out);
 
 /// Releases memory of a process state struct. Assumes ownership of the pointer.

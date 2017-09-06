@@ -4,6 +4,7 @@
 
 #include "google_breakpad/processor/basic_source_line_resolver.h"
 #include "google_breakpad/processor/call_stack.h"
+#include "google_breakpad/processor/minidump.h"
 #include "google_breakpad/processor/minidump_processor.h"
 #include "google_breakpad/processor/process_state.h"
 #include "google_breakpad/processor/stack_frame.h"
@@ -11,6 +12,7 @@
 
 #include "cpp/c_mapping.h"
 #include "cpp/c_string.h"
+#include "cpp/memstream.h"
 #include "cpp/mmap_symbol_supplier.h"
 #include "cpp/processor.h"
 
@@ -18,6 +20,7 @@ using google_breakpad::BasicModuleFactory;
 using google_breakpad::BasicSourceLineResolver;
 using google_breakpad::CallStack;
 using google_breakpad::CodeModule;
+using google_breakpad::Minidump;
 using google_breakpad::MinidumpProcessor;
 using google_breakpad::ProcessState;
 using google_breakpad::StackFrame;
@@ -58,11 +61,12 @@ typedef_extern_c(process_state_t, ProcessState);
 typedef_extern_c(resolver_t, ResolverModule);
 typedef_extern_c(stack_frame_t, StackFrame);
 
-process_state_t *process_minidump(const char *file_path,
-                                  size_t symbol_count,
+process_state_t *process_minidump(const char *buffer,
+                                  size_t buffer_size,
                                   symbol_entry_t *symbols,
+                                  size_t symbol_count,
                                   int *result_out) {
-  if (file_path == nullptr) {
+  if (buffer == nullptr) {
     *result_out = google_breakpad::PROCESS_ERROR_MINIDUMP_NOT_FOUND;
     return nullptr;
   }
@@ -77,7 +81,14 @@ process_state_t *process_minidump(const char *file_path,
   MmapSymbolSupplier supplier(symbol_count, symbols);
   MinidumpProcessor processor(&supplier, &resolver);
 
-  *result_out = processor.Process(file_path, state);
+  imemstream in(buffer, buffer_size);
+  Minidump minidump(in);
+  if (!minidump.Read()) {
+    *result_out = google_breakpad::PROCESS_ERROR_MINIDUMP_NOT_FOUND;
+    return nullptr;
+  }
+
+  *result_out = processor.Process(&minidump, state);
   if (*result_out != google_breakpad::PROCESS_OK) {
     delete state;
     return nullptr;
