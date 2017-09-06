@@ -1,9 +1,6 @@
 language: rust
 dist: trusty
-
-os:
-  - linux
-  - osx
+os: linux
 
 rust:
   - stable
