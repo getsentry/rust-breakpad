@@ -8,7 +8,7 @@ use common::{assert_snapshot, fixture_path};
 
 #[test]
 fn resolve_stack_frame() {
-    let state = ProcessState::from_minidump_path(fixture_path("crash_macos.dmp"), None).unwrap();
+    let state = ProcessState::from_minidump_file(fixture_path("crash_macos.dmp"), None).unwrap();
     let thread = state.threads().first().unwrap();
     let frame = thread.frames()[0];
 

@@ -12,7 +12,7 @@ use common::{assert_snapshot, fixture_path, load_fixture};
 
 #[test]
 fn process_minidump_from_path() {
-    let state = ProcessState::from_minidump_path(fixture_path("crash_macos.dmp"), None)
+    let state = ProcessState::from_minidump_file(fixture_path("crash_macos.dmp"), None)
         .expect("Could not process minidump");
 
     assert_snapshot("process_state.txt", &state);
@@ -33,7 +33,7 @@ fn process_minidump_from_buffer() {
 
 #[test]
 fn obtain_referenced_modules() {
-    let state = ProcessState::from_minidump_path(fixture_path("crash_macos.dmp"), None)
+    let state = ProcessState::from_minidump_file(fixture_path("crash_macos.dmp"), None)
         .expect("Could not process minidump");
 
     let modules: BTreeSet<_> = state.referenced_modules().iter().cloned().collect();
@@ -49,7 +49,7 @@ fn get_minidump_process_state_cfi() {
     let mut symbols = FrameInfoMap::new();
     symbols.insert(module_id, module_cfi.as_bytes());
 
-    let state = ProcessState::from_minidump_path(fixture_path("crash_macos.dmp"), Some(&symbols))
+    let state = ProcessState::from_minidump_file(fixture_path("crash_macos.dmp"), Some(&symbols))
         .expect("Could not process minidump");
 
     assert_snapshot("process_state_cfi.txt", &state);

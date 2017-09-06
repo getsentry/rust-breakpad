@@ -109,7 +109,7 @@ impl ProcessState {
     /// process. The parameter `frame_infos` expects a map of Breakpad symbols
     /// containing STACK CFI and STACK WIN records to allow stackwalking with
     /// omitted frame pointers.
-    pub fn from_minidump_path<P: AsRef<Path>>(
+    pub fn from_minidump_file<P: AsRef<Path>>(
         file_path: P,
         frame_infos: Option<&FrameInfoMap>,
     ) -> Result<ProcessState> {
@@ -124,7 +124,7 @@ impl ProcessState {
     /// containing STACK CFI and STACK WIN records to allow stackwalking with
     /// omitted frame pointers.
     pub fn from_minidump_buffer(
-        dump: &[u8],
+        buffer: &[u8],
         frame_infos: Option<&FrameInfoMap>,
     ) -> Result<ProcessState> {
         let cfi_count = frame_infos.map_or(0, |s| s.len());
@@ -151,8 +151,8 @@ impl ProcessState {
 
         let internal = unsafe {
             process_minidump(
-                dump.as_ptr() as *const c_char,
-                dump.len(),
+                buffer.as_ptr() as *const c_char,
+                buffer.len(),
                 cfi_entries.as_ptr(),
                 cfi_count,
                 &mut result,
