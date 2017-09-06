@@ -20,7 +20,7 @@ error_chain! {
             display("Resolver Error: {}", &desc)
         }
 
-        // An error raised when parsing `CodeModuleId`.
+        /// An error raised when parsing `CodeModuleId`.
         ParseIdError(desc: String) {
             description("CodeModule ID Parse Error")
             display("CodeModule ID Parse Error: {}", &desc)
