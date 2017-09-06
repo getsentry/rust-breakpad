@@ -2,7 +2,7 @@ use process_state::ProcessResult;
 
 error_chain! {
     foreign_links {
-        Io(::std::io::Error);
+        IoError(::std::io::Error);
     }
 
     errors {
