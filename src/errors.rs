@@ -1,4 +1,4 @@
-use process_state::ProcessResult;
+use processor::ProcessResult;
 
 error_chain! {
     foreign_links {

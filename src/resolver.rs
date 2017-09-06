@@ -1,23 +1,102 @@
-use std::os::raw::{c_char, c_void};
+use std::fmt;
+use std::borrow::Cow;
+use std::ffi::CStr;
+use std::ops::Deref;
+use std::os::raw::{c_char, c_int, c_void};
 use std::path::Path;
 
 use errors::Result;
 use errors::ErrorKind::ResolverError;
-use resolved_stack_frame::ResolvedStackFrame;
-use stack_frame::StackFrame;
+use processor::StackFrame;
 use utils;
 
-pub type Internal = c_void;
-
 extern "C" {
-    fn resolver_new(buffer: *const c_char, buffer_size: usize) -> *mut Internal;
-    fn resolver_delete(resolver: *mut Internal);
-    fn resolver_is_corrupt(resolver: *const Internal) -> bool;
+    fn stack_frame_function_name(frame: *const StackFrame) -> *const c_char;
+    fn stack_frame_source_file_name(frame: *const StackFrame) -> *const c_char;
+    fn stack_frame_source_line(frame: *const StackFrame) -> c_int;
+    fn stack_frame_delete(frame: *mut StackFrame);
+
+    fn resolver_new(buffer: *const c_char, buffer_size: usize) -> *mut IResolver;
+    fn resolver_delete(resolver: *mut IResolver);
+    fn resolver_is_corrupt(resolver: *const IResolver) -> bool;
     fn resolver_resolve_frame(
-        resolver: *const Internal,
+        resolver: *const IResolver,
         frame: *const StackFrame,
     ) -> *mut StackFrame;
 }
+
+/// A resolved version of `StackFrame`. Contains source code locations and code
+/// offsets, if the resolver was able to locate symbols for this frame.
+/// Otherwise, the additional attributes are empty.
+///
+/// `ResolvedStackFrame` implements `Deref` for `StackFrame`, so that it can be used
+/// interchangibly. See `StackFrame` for additional accessors.
+pub struct ResolvedStackFrame {
+    internal: *mut StackFrame,
+}
+
+impl ResolvedStackFrame {
+    /// Creates a `ResolvedStackFrame` instance from a raw stack frame pointer.
+    /// The pointer is assumed to be owned, and the underlying memory will be
+    /// freed when this struct is dropped.
+    pub(crate) fn from_ptr(internal: *mut StackFrame) -> ResolvedStackFrame {
+        ResolvedStackFrame { internal }
+    }
+
+    /// Returns the function name that contains the instruction. Can be empty
+    /// before running the `Resolver` or if debug symbols are missing.
+    pub fn function_name(&self) -> Cow<str> {
+        unsafe {
+            let ptr = stack_frame_function_name(self.internal);
+            CStr::from_ptr(ptr).to_string_lossy()
+        }
+    }
+
+    /// Returns the source code line at which the instruction was declared.
+    /// Can be empty before running the `Resolver` or if debug symbols are
+    /// missing.
+    pub fn source_file_name(&self) -> Cow<str> {
+        unsafe {
+            let ptr = stack_frame_source_file_name(self.internal);
+            CStr::from_ptr(ptr).to_string_lossy()
+        }
+    }
+
+    /// Returns the source code line at which the instruction was declared. Can
+    /// be empty before running the `Resolver` or if debug symbols are missing.
+    pub fn source_line(&self) -> c_int {
+        unsafe { stack_frame_source_line(self.internal) }
+    }
+}
+
+impl Deref for ResolvedStackFrame {
+    type Target = StackFrame;
+
+    fn deref(&self) -> &StackFrame {
+        unsafe { &*self.internal }
+    }
+}
+
+impl Drop for ResolvedStackFrame {
+    fn drop(&mut self) {
+        unsafe { stack_frame_delete(self.internal) };
+    }
+}
+
+impl fmt::Debug for ResolvedStackFrame {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        f.debug_struct("ResolvedStackFrame")
+            .field("instruction", &self.instruction())
+            .field("function_name", &self.function_name())
+            .field("source_file_name", &self.source_file_name())
+            .field("source_line", &self.source_line())
+            .field("trust", &self.trust())
+            .field("module", &self.module())
+            .finish()
+    }
+}
+
+type IResolver = c_void;
 
 /// Source line resolver for stack frames. Handles Breakpad symbol files and
 /// searches them for instructions.
@@ -29,7 +108,7 @@ extern "C" {
 ///
 /// See `ResolvedStackFrame` for all available information.
 pub struct Resolver {
-    internal: *mut Internal,
+    internal: *mut IResolver,
 }
 
 impl Resolver {
