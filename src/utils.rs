@@ -1,6 +1,10 @@
 use std::ffi::{CStr, CString};
+use std::fs::File;
+use std::io::prelude::*;
 use std::os::raw::c_char;
 use std::path::Path;
+
+use errors::Result;
 
 extern "C" {
     fn string_delete(string: *mut c_char);
@@ -40,4 +44,12 @@ pub fn path_to_bytes<P: AsRef<Path> + ?Sized>(path: &P) -> &[u8] {
 pub fn path_to_str<P: AsRef<Path>>(path: P) -> CString {
     let bytes = path_to_bytes(path.as_ref());
     CString::new(bytes).unwrap()
+}
+
+/// Reads an entire file into a memory buffer
+pub fn read_buffer<P: AsRef<Path>>(path: P) -> Result<Vec<u8>> {
+    let mut buffer = Vec::new();
+    let mut file = File::open(path)?;
+    file.read_to_end(&mut buffer)?;
+    Ok(buffer)
 }
