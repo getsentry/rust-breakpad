@@ -10,7 +10,7 @@ use utils;
 pub type Internal = c_void;
 
 extern "C" {
-    fn resolver_new(file_path: *const c_char) -> *mut Internal;
+    fn resolver_new(buffer: *const c_char, buffer_size: usize) -> *mut Internal;
     fn resolver_delete(resolver: *mut Internal);
     fn resolver_is_corrupt(resolver: *const Internal) -> bool;
     fn resolver_resolve_frame(
@@ -34,10 +34,15 @@ pub struct Resolver {
 
 impl Resolver {
     /// Creates a new `Resolver` instance from a Breakpad symbol file in the
-    /// file system.
-    pub fn new<P: AsRef<Path>>(file_path: P) -> Result<Resolver> {
-        let cstr = utils::path_to_str(file_path);
-        let internal = unsafe { resolver_new(cstr.as_ptr()) };
+    /// file system
+    pub fn from_file<P: AsRef<Path>>(file_path: P) -> Result<Resolver> {
+        let buffer = utils::read_buffer(file_path)?;
+        Self::from_buffer(buffer.as_slice())
+    }
+
+    /// Creates a new `Resolver` instance from a buffer containing Breakpad symbols
+    pub fn from_buffer(buffer: &[u8]) -> Result<Resolver> {
+        let internal = unsafe { resolver_new(buffer.as_ptr() as *const c_char, buffer.len()) };
 
         if internal.is_null() {
             Err(ResolverError("Could not load symbols".into()).into())

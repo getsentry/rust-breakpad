@@ -172,11 +172,10 @@ char *code_module_debug_file(const code_module_t *module);
 char *code_module_debug_identifier(const code_module_t *module);
 
 /// Creates a new source line resolver instance and returns an owning pointer
-/// to it. Symbols are loaded from a Breakpad symbol file in the file system.
-/// The file name is given as a weak pointer in the symbol_file parameter.
+/// to it. Symbols are loaded from a buffer containing symbols in ASCII format.
 ///
 /// Release memory of this resolver with the resolver_delete function.
-resolver_t *resolver_new(const char *symbol_file);
+resolver_t *resolver_new(const char *symbol_buffer, size_t buffer_size);
 
 /// Releases memory of a resolver object. Assumes ownership of the pointer.
 void resolver_delete(resolver_t *resolver);

@@ -229,25 +229,17 @@ char *code_module_debug_identifier(const code_module_t *module) {
   return string_from(code_module_t::cast(module)->debug_identifier());
 }
 
-resolver_t *resolver_new(const char *symbol_file) {
-  std::ifstream in(symbol_file);
-  if (!in.good()) {
+resolver_t *resolver_new(const char *symbol_buffer, size_t buffer_size) {
+  if (symbol_buffer == nullptr || buffer_size == 0) {
     return nullptr;
   }
-
-  in.seekg(0, std::ios::end);
-  std::streampos length = in.tellg();
-  std::vector<char> buffer(length);
-
-  in.seekg(0, std::ios::beg);
-  in.read(&buffer[0], length);
 
   auto *module = factory.CreateModule("");
   if (module == nullptr) {
     return nullptr;
   }
 
-  module->LoadMapFromMemory(&buffer[0], length);
+  module->LoadMapFromMemory(const_cast<char *>(symbol_buffer), buffer_size);
   return resolver_t::cast(module);
 }
 
