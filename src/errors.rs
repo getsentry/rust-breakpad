@@ -20,12 +20,6 @@ error_chain! {
             display("Resolver Error: {}", &desc)
         }
 
-        // An error raised by `convert_symbols` when generating Breakpad symbols.
-        ConversionError(desc: String) {
-            description("Conversion Error")
-            display("Symbol Conversion Error: {}", &desc)
-        }
-
         // An error raised when parsing `CodeModuleId`.
         ParseIdError(desc: String) {
             description("CodeModule ID Parse Error")

@@ -9,7 +9,6 @@ mod process_state;
 mod resolved_stack_frame;
 mod resolver;
 mod stack_frame;
-mod symbols;
 mod utils;
 
 pub use call_stack::CallStack;
@@ -19,4 +18,3 @@ pub use process_state::{FrameInfoMap, ProcessResult, ProcessState};
 pub use resolved_stack_frame::ResolvedStackFrame;
 pub use resolver::Resolver;
 pub use stack_frame::{FrameTrust, StackFrame};
-pub use symbols::convert_symbols;
