@@ -1,8 +1,14 @@
 [package]
 name = "breakpad"
 version = "0.1.0"
-authors = ["Jan Michael Auer"]
 build = "build.rs"
+authors = ["Jan Michael Auer <jan.auer@sentry.io>"]
+keywords = ["breakpad", "crashpad", "minidump"]
+description = "Basic breakpad/crashpad wrapper for Rust"
+documentation = "https://docs.rs/breakpad"
+homepage = "https://github.com/getsentry/breakpad"
+license = "BSD-3-Clause"
+readme = "README.md"
 
 [dependencies]
 error-chain = "0.11"
