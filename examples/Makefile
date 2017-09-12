@@ -18,15 +18,43 @@ CFLAGS += \
 
 CXXFLAGS += \
 	$(FLAGS) \
+	-std=c++11 \
 	-I$(TOP_DIR) \
 	-I$(TOP_DIR)/third_party/breakpad \
 	$(NULL)
 
 LIBRARIES = \
-	client \
+	client_linux \
+	client_mac \
 	$(NULL)
 
-libclient_OBJ = \
+libclient_linux_OBJ = \
+	third_party/breakpad/client/linux/crash_generation/crash_generation_client.o \
+	third_party/breakpad/client/linux/crash_generation/crash_generation_server.o \
+	third_party/breakpad/client/linux/dump_writer_common/thread_info.o \
+	third_party/breakpad/client/linux/dump_writer_common/ucontext_reader.o \
+	third_party/breakpad/client/linux/handler/exception_handler.o \
+	third_party/breakpad/client/linux/handler/minidump_descriptor.o \
+	third_party/breakpad/client/linux/log/log.o \
+	third_party/breakpad/client/linux/microdump_writer/microdump_writer.o \
+	third_party/breakpad/client/linux/minidump_writer/linux_core_dumper.o \
+	third_party/breakpad/client/linux/minidump_writer/linux_dumper.o \
+	third_party/breakpad/client/linux/minidump_writer/linux_ptrace_dumper.o \
+	third_party/breakpad/client/linux/minidump_writer/minidump_writer.o \
+	third_party/breakpad/client/minidump_file_writer.o \
+	third_party/breakpad/common/convert_UTF.o \
+	third_party/breakpad/common/md5.o \
+	third_party/breakpad/common/string_conversion.o \
+	third_party/breakpad/common/linux/elf_core_dump.o \
+	third_party/breakpad/common/linux/elfutils.o \
+	third_party/breakpad/common/linux/file_id.o \
+	third_party/breakpad/common/linux/guid_creator.o \
+	third_party/breakpad/common/linux/linux_libc_support.o \
+	third_party/breakpad/common/linux/memory_mapped_file.o \
+	third_party/breakpad/common/linux/safe_readlink.o \
+	$(NULL)
+
+libclient_mac_OBJ = \
 	third_party/breakpad/client/minidump_file_writer.o \
 	third_party/breakpad/client/mac/crash_generation/crash_generation_client.o \
 	third_party/breakpad/client/mac/handler/dynamic_images.o \
@@ -51,14 +79,17 @@ run: $(OUT_DIR)/crash_macos
 	cargo test --test example --color always -- --nocapture
 	$(RM) $(OUT_DIR)/example.dmp
 
-$(OUT_DIR)/crash_macos: $(OUT_DIR)/examples/crash_macos.o $(OUT_DIR)/libclient.a
+$(OUT_DIR)/crash_linux: $(OUT_DIR)/examples/crash_linux.o $(OUT_DIR)/libclient_linux.a
+	$(LINK.cpp) -o $@ $^ -lpthread
+
+$(OUT_DIR)/crash_macos: $(OUT_DIR)/examples/crash_macos.o $(OUT_DIR)/libclient_mac.a
 	$(LINK.cpp) -o $@ $^ -framework CoreFoundation
 	dsymutil $@
 
 $(LIBRARIES): %: $(OUT_DIR)/lib%.a
 
 .SECONDEXPANSION:
-$(LIBRARIES:%=$(OUT_DIR)/lib%.a): %.a: $$(addprefix $(OUT_DIR)/,$$($$(*F)_OBJ)) $$(addprefix $(OUT_DIR)/,$$($$(*F)_$$(PLATFORM)_OBJ))
+$(LIBRARIES:%=$(OUT_DIR)/lib%.a): %.a: $$(addprefix $(OUT_DIR)/,$$($$(*F)_OBJ))
 	$(AR) $(ARFLAGS) $@ $(filter %.o,$^)
 
 $(OUT_DIR)/%.o: $(TOP_DIR)/%.c

@@ -22,17 +22,21 @@ fn test_example() {
 
     let sym_path = Path::new("examples/target/crash_macos.sym");
     let mut file = File::create(sym_path).expect("Couldn't create sym");
-    file.write_all(symbols.as_bytes()).expect("Couldn't write sym");
+    file.write_all(symbols.as_bytes())
+        .expect("Couldn't write sym");
     file.sync_all().expect("Couldn't sync sym");
 
-    let resolver = Resolver::new(sym_path)
-        .expect("Couldn't create resolver");
+    let resolver = Resolver::new(sym_path).expect("Couldn't create resolver");
 
     let frames: Vec<_> = state
         .threads()
         .iter()
         .flat_map(|stack| stack.frames().iter())
-        .filter(|frame| frame.module().map_or(false, |m| m.debug_file() == "crash_macos"))
+        .filter(|frame| {
+            frame
+                .module()
+                .map_or(false, |m| m.debug_file() == "crash_macos")
+        })
         .map(|frame| resolver.resolve_frame(frame))
         .collect();
 
